@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp">
+
+        <ImageView
+            android:id="@+id/logoDaftar"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:id="@+id/edEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logoDaftar"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_edit_text"
+            android:hint="@string/hintEmail"
+            android:minHeight="45dp"
+            android:paddingLeft="24dip"
+            android:paddingRight="24dip"
+            android:textColor="@color/hitam"
+            android:textColorHint="@color/abu"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/edNamaLengkap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edEmail"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edit_text"
+            android:hint="@string/hintNamaLengkap"
+            android:minHeight="45dp"
+            android:paddingLeft="24dip"
+            android:paddingRight="24dip"
+            android:textColor="@color/hitam"
+            android:textColorHint="@color/abu"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/edUsernameDaftar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edNamaLengkap"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edit_text"
+            android:hint="@string/hintUsername"
+            android:minHeight="45dp"
+            android:paddingLeft="24dip"
+            android:paddingRight="24dip"
+            android:textColor="@color/hitam"
+            android:textColorHint="@color/abu"
+            android:textSize="12sp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layoutPasswordDaftar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edUsernameDaftar"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@drawable/selector_hint"
+
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/edPasswordDaftar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:background="@drawable/rounded_edit_text"
+                android:hint="@string/hintPassword"
+                android:inputType="textPassword"
+                android:minHeight="45dp"
+                android:paddingLeft="24dip"
+                android:paddingRight="24dip"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layoutPasswordDaftar"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/selector_button_login"
+            android:text="@string/daftarBaru"
+            android:textColor="@color/putih"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</ScrollView>

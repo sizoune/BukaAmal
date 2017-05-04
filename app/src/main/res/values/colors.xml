@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="merahBukaAmal">#B10045</color>
+    <color name="merahButton">#8A003E</color>
+    <color name="putih">#FFFFFF</color>
+    <color name="hitam">#000000</color>
+    <color name="abu">#9b9b9b</color>
 </resources>
