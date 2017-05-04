@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/beranda"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Beranda" />
+        <item
+            android:id="@+id/donasi"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Donasi" />
+        <item
+            android:id="@+id/dana"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Galang Dana" />
+    </group>
+
+    <group
+        android:id="@+id/menu_1"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/pengaturan"
+            android:icon="@drawable/pengaturan"
+            android:title="Pengaturan" />
+        <item
+            android:id="@+id/bantuan"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Bantuan" />
+        <item
+            android:id="@+id/tentang"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Tentang" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
+    </group>
+
+    <group
+        android:id="@+id/menu_2"
+        android:checkableBehavior="none">
+
+    </group>
+
+
+</menu>
