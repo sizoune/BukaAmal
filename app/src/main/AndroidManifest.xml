@@ -9,16 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen"></activity>
-        <activity android:name=".HalamanLogin"
-            >
+        <activity
+            android:name=".SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".HalamanLogin"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HalamanDaftar"></activity>
+        <activity
+            android:name=".HalamanDaftar"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".IntroductionApp"></activity>
+        <activity
+            android:name=".LandingPage"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

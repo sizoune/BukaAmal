@@ -18,7 +18,7 @@ public class IntroductionApp extends AppIntro {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addSlide(AppIntroFragment.newInstance("Donasi","ini deskripsi",R.drawable.donasiintro,getResources().getColor(R.color.introdonasibg)));
+        addSlide(AppIntroFragment.newInstance("Donasi","ini deskripsi",R.drawable.donasiintro,getResources().getColor(R.color.merahBukaAmal)));
     }
 
     @Override

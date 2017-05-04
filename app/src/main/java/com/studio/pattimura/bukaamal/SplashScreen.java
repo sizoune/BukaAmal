@@ -33,7 +33,7 @@ public class SplashScreen extends AppCompatActivity {
                 public void run() {
                     // This method will be executed once the timer is over
                     // Start your app main activity
-                    Intent i = new Intent(SplashScreen.this, IntroductionApp.class);
+                    Intent i = new Intent(SplashScreen.this, HalamanLogin.class);
                     startActivity(i);
 
                     // close this activity
@@ -42,7 +42,7 @@ public class SplashScreen extends AppCompatActivity {
             }, 3000);
             splashLoaded = true;
         } else {
-            Intent goToMainActivity = new Intent(SplashScreen.this, IntroductionApp.class);
+            Intent goToMainActivity = new Intent(SplashScreen.this, HalamanLogin.class);
             goToMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(goToMainActivity);
             finish();
