@@ -8,4 +8,6 @@
     <string name="hintNamaLengkap">Nama Lengkap</string>
     <string name="buttonLogin">Login</string>
     <string name="daftarBaru">Daftar Akun Baru</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
