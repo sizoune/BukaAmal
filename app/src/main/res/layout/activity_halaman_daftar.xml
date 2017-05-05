@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarDaftar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:theme="@style/ToolbarColoredBackArrow"
-        app:popupTheme="@style/AppTheme" >
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow">
 
     </android.support.v7.widget.Toolbar>
 
@@ -36,7 +37,10 @@
                 android:id="@+id/logoDaftar"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/logobukaamal" />
 
             <EditText
                 android:id="@+id/edEmail"

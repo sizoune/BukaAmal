@@ -19,6 +19,7 @@
 
     <style name="NavigationDrawerStyle">
         <item name="android:textSize">12sp</item><!-- text size in menu-->
+        <item name="android:textColor">@color/merahBukaAmal</item>
         <item name="android:listPreferredItemHeightSmall">35dp</item><!-- item size in menu-->
     </style>
 
