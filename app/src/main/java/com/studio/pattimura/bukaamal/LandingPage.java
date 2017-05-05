@@ -14,13 +14,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+import com.studio.pattimura.bukaamal.Fragment.BerandaFragment;
 
 public class LandingPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Fragment fragment;
     private FragmentTransaction tukar;
     private TextView txtJudul;
+    private ImageView logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +35,7 @@ public class LandingPage extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         txtJudul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-
+        logo = (ImageView) toolbar.findViewById(R.id.logobuka);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -41,8 +46,13 @@ public class LandingPage extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        txtJudul.setText("Beranda");
-
+        txtJudul.setText("");
+        Picasso.with(getApplicationContext()).load(R.drawable.logoberanda).into(logo);
+//        toolbar.setBackground(getResources().getDrawable(R.drawable.toolbarbg));
+        fragment = new BerandaFragment();
+        tukar = getSupportFragmentManager().beginTransaction();
+        tukar.replace(R.id.mainframe, fragment);
+        tukar.commit();
     }
 
     @Override
@@ -70,7 +80,6 @@ public class LandingPage extends AppCompatActivity
         int id = item.getItemId();
 
 
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -81,12 +90,15 @@ public class LandingPage extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.beranda) {
-            txtJudul.setText("Beranda");
+            logo.setVisibility(View.VISIBLE);
+            txtJudul.setText("");
 
         } else if (id == R.id.donasi) {
+            logo.setVisibility(View.GONE);
             txtJudul.setText("Donasi");
 
         } else if (id == R.id.dana) {
+            logo.setVisibility(View.GONE);
             txtJudul.setText("Dana");
 
         } else if (id == R.id.pengaturan) {

@@ -15,4 +15,7 @@
     </font> <font color="white">dan</font> <font color="black"><u>kebijakan privasi</u>
     </font> <font color="white">Bukalapak.com</font>
   ]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
