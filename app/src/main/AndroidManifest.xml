@@ -25,10 +25,12 @@
         </activity>
         <activity
             android:name=".HalamanDaftar"
-            android:theme="@style/AppTheme.NoActionBar"
             android:label=""
-            android:parentActivityName=".HalamanLogin"></activity>
-        <activity android:name=".IntroductionApp"></activity>
+            android:parentActivityName=".HalamanLogin"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".IntroductionApp"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".LandingPage"
             android:label=""
