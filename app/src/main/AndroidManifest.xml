@@ -11,9 +11,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".HalamanLogin"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +19,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".HalamanLogin"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
             android:name=".HalamanDaftar"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label=""
+            android:parentActivityName=".HalamanLogin"></activity>
         <activity android:name=".IntroductionApp"></activity>
         <activity
             android:name=".LandingPage"

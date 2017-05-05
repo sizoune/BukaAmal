@@ -10,4 +10,9 @@
     <string name="daftarBaru">Daftar Akun Baru</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="disclaimer"> <![CDATA[
+    <font color="white">Dengan mendaftar kamu telah menyetujui</font> <font color="black"><u>aturan penggunaan</u>
+    </font> <font color="white">dan</font> <font color="black"><u>kebijakan privasi</u>
+    </font> <font color="white">Bukalapak.com</font>
+  ]]></string>
 </resources>

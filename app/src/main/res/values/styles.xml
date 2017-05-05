@@ -22,5 +22,10 @@
         <item name="android:listPreferredItemHeightSmall">35dp</item><!-- item size in menu-->
     </style>
 
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/putih</item>
+    </style>
+
+
 
 </resources>

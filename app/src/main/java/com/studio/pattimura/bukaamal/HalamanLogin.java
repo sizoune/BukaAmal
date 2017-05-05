@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class HalamanLogin extends AppCompatActivity implements View.OnClickListener {
-    private Button logi;
+    private Button logi,daftar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +15,9 @@ public class HalamanLogin extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_halaman_login);
 
         logi = (Button) findViewById(R.id.btnLogin);
+        daftar = (Button) findViewById(R.id.btnHalDaftar);
         logi.setOnClickListener(this);
+        daftar.setOnClickListener(this);
     }
 
     @Override
@@ -23,6 +25,10 @@ public class HalamanLogin extends AppCompatActivity implements View.OnClickListe
         if (v == logi) {
             startActivity(new Intent(getApplicationContext(), IntroductionApp.class));
             finish();
+        }
+        else if (v == daftar){
+            startActivity(new Intent(getApplicationContext(), HalamanDaftar.class));
+
         }
     }
 }
