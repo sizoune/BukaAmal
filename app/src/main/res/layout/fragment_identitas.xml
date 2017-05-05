@@ -1,0 +1,156 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.studio.pattimura.bukaamal.Fragment.IdentitasFragment">
+
+    <ScrollView
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/titleIdentitas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="55dp"
+                android:gravity="center"
+                android:text="Identitas"
+                android:textColor="@color/hitam"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edNamaLengkap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleIdentitas"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_pinggir_merah"
+                android:hint="@string/hintNamaLengkap"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edTempatLahir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edNamaLengkap"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="180dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_pinggir_merah"
+                android:hint="@string/hintTempatLahir"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edTanggalLahir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edNamaLengkap"
+                android:layout_marginLeft="210dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_pinggir_merah"
+                android:hint="@string/hintTanggalLahir"
+                android:inputType="date"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edTempatLahir"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_textmulti"
+                android:gravity="top|left"
+                android:hint="@string/hintAlamat"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:scrollHorizontally="false"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp">
+
+            </EditText>
+
+            <Button
+                android:id="@+id/btnFoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edAlamat"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/selector_button_pinggirmerah"
+                android:drawable="@mipmap/ic_plus"
+                android:drawablePadding="-70dp"
+                android:drawableLeft="@mipmap/ic_plus"
+                android:gravity="center"
+                android:paddingLeft="80dp"
+                android:text="@string/tambahFoto"
+                android:textColor="@color/merahBukaAmal" />
+
+            <Button
+                android:id="@+id/btnSimpanLanjut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnFoto"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/selector_button_login"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:text="@string/simpanlanjut"
+                android:textColor="@color/putih" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>

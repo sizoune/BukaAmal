@@ -1,0 +1,201 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.studio.pattimura.bukaamal.Fragment.BuatberitaFragment">
+
+    <ScrollView
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/judulBerita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/tabs"
+                android:layout_marginTop="55dp"
+                android:gravity="center"
+                android:text="Buat Berita"
+                android:textColor="@color/hitam"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edJudulBerita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/judulBerita"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_pinggir_merah"
+                android:hint="@string/hintJudulBerita"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edDana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edJudulBerita"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="180dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_pinggir_merah"
+                android:hint="@string/hintDana"
+                android:inputType="number"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edDeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edJudulBerita"
+                android:layout_marginLeft="210dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_pinggir_merah"
+                android:hint="@string/hintDeadline"
+                android:inputType="date"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp">
+
+            </EditText>
+
+            <Spinner
+                android:id="@+id/spinKategori"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edDana"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_pinggir_merah"
+                android:hint="@string/hintKategori"
+                android:inputType="date"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp">
+
+            </Spinner>
+
+            <EditText
+                android:id="@+id/edLokasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinKategori"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_pinggir_merah"
+                android:hint="@string/hintLokasi"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edCerita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edLokasi"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_textmulti"
+                android:gravity="top|left"
+                android:hint="@string/hintCeritaGalang"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:scrollHorizontally="false"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="12sp">
+
+            </EditText>
+
+            <Button
+                android:id="@+id/btnFoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edCerita"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/selector_button_pinggirmerah"
+                android:drawable="@mipmap/ic_plus"
+                android:drawablePadding="-70dp"
+                android:drawableLeft="@mipmap/ic_plus"
+                android:gravity="center"
+                android:paddingLeft="80dp"
+                android:text="@string/tambahFoto"
+                android:textColor="@color/merahBukaAmal" />
+
+            <Button
+                android:id="@+id/btnSimpanLanjut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnFoto"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/selector_button_login"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:text="@string/simpanlanjut"
+                android:textColor="@color/putih" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>

@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Fragment.BerandaFragment;
+import com.studio.pattimura.bukaamal.Fragment.BuatGalangDanaFragment;
+import com.studio.pattimura.bukaamal.Fragment.GalangDanaFragment;
 
 public class LandingPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,6 +47,7 @@ public class LandingPage extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         txtJudul.setText("");
         Picasso.with(getApplicationContext()).load(R.drawable.logoberanda).into(logo);
@@ -92,6 +95,10 @@ public class LandingPage extends AppCompatActivity
         if (id == R.id.beranda) {
             logo.setVisibility(View.VISIBLE);
             txtJudul.setText("");
+            fragment = new BerandaFragment();
+            tukar = getSupportFragmentManager().beginTransaction();
+            tukar.replace(R.id.mainframe, fragment);
+            tukar.commit();
 
         } else if (id == R.id.donasi) {
             logo.setVisibility(View.GONE);
@@ -99,7 +106,11 @@ public class LandingPage extends AppCompatActivity
 
         } else if (id == R.id.dana) {
             logo.setVisibility(View.GONE);
-            txtJudul.setText("Dana");
+            txtJudul.setText("Galang Dana");
+            fragment = new GalangDanaFragment();
+            tukar = getSupportFragmentManager().beginTransaction();
+            tukar.replace(R.id.mainframe, fragment);
+            tukar.commit();
 
         } else if (id == R.id.pengaturan) {
 
@@ -113,6 +124,7 @@ public class LandingPage extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 }

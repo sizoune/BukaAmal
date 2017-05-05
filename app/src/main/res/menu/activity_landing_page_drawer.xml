@@ -25,11 +25,11 @@
             android:title="Pengaturan" />
         <item
             android:id="@+id/bantuan"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/bantuan"
             android:title="Bantuan" />
         <item
             android:id="@+id/tentang"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/tentang"
             android:title="Tentang" />
         <item
             android:id="@+id/logout"

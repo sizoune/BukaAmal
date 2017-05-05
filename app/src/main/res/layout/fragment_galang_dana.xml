@@ -1,0 +1,232 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.studio.pattimura.bukaamal.Fragment.GalangDanaFragment">
+
+    <ScrollView
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/titleDisclaimerGalang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Langkah-langkah untuk Galang Dana."
+                android:textColor="@color/hitam"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/layoutLangkah1"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_below="@id/titleDisclaimerGalang"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_card_galangdana"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/nomor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1. Buat berita untuk menggalang dana"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/deskripsi1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nomor1"
+                    android:layout_marginTop="8dp"
+                    android:text="Isi form online dengan menceritakan tujuan anda menggalang dana."
+                    android:textColor="@color/hitam"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutLangkah2"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_below="@id/layoutLangkah1"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape_card_galangdana"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/nomor2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2. Identitas Penggalang dana"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/deskripsi2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nomor2"
+                    android:layout_marginTop="8dp"
+                    android:text="Unggah foto KTP atau identitas anda."
+                    android:textColor="@color/hitam"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutLangkah3"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_below="@id/layoutLangkah2"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape_card_galangdana"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/nomor3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3. Verifikasi oleh Bukalapak"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/deskripsi3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nomor3"
+                    android:layout_marginTop="8dp"
+                    android:text="Permintaan akan diverifikasi terlebih dahulu oleh Bukalapak."
+                    android:textColor="@color/hitam"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutLangkah4"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_below="@id/layoutLangkah3"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape_card_galangdana"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/nomor4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4. Bagikan berita anda"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/deskripsi4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nomor4"
+                    android:layout_marginTop="8dp"
+                    android:text="Ajak kerabat anda berdonasi untuk membantu dengan metode pembayaran BukaDompet atau transfer bank."
+                    android:textColor="@color/hitam"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutLangkah5"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_below="@id/layoutLangkah4"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape_card_galangdana"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/nomor5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5. Cairkan dana"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/deskripsi5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nomor5"
+                    android:layout_marginTop="8dp"
+                    android:text="Cairkan dana dari hasil donasi."
+                    android:textColor="@color/hitam"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <RadioButton
+                android:id="@+id/rbDisclaim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutLangkah5"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:buttonTint="@color/merahBukaAmal"
+                android:text="Saya telah menyetujui langkah-langkah untuk menggalang dana di BukaAmal"
+                android:textColor="@color/hitam"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/btnGalangDana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rbDisclaim"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/selector_button_login"
+                android:gravity="center"
+                android:text="Galang Dana Sekarang"
+                android:textColor="@color/putih" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>

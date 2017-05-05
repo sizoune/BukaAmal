@@ -1,0 +1,52 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.studio.pattimura.bukaamal.Fragment.VerifikasiFragment">
+
+    <ScrollView
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/titleVerifikasi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="55dp"
+                android:gravity="center"
+                android:text="Menunggu Verfikasi dari BukaAmal"
+                android:textColor="@color/hitam"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+
+            <Button
+                android:id="@+id/btnSimpanLanjut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleVerifikasi"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/selector_button_login"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:text="@string/simpanlanjut"
+                android:textColor="@color/putih" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>
