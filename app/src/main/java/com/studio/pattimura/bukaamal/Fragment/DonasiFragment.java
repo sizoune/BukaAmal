@@ -58,9 +58,9 @@ public class DonasiFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new BuatberitaFragment();
+                    return new DaftarUKMFragment();
                 case 1:
-                    return new IdentitasFragment();
+                    return new BantuanLainFragment();
 
             }
             return null;
