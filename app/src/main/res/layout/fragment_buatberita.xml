@@ -179,6 +179,7 @@
                 android:gravity="center"
                 android:paddingLeft="80dp"
                 android:text="@string/tambahFoto"
+                android:textAllCaps="false"
                 android:textColor="@color/merahBukaAmal" />
 
             <Button
@@ -195,6 +196,7 @@
                 android:elevation="2dp"
                 android:gravity="center"
                 android:text="@string/simpanlanjut"
+                android:textAllCaps="false"
                 android:textColor="@color/putih" />
 
         </RelativeLayout>

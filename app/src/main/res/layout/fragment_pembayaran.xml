@@ -1,0 +1,206 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.studio.pattimura.bukaamal.Fragment.PembayaranFragment">
+
+    <ScrollView
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/titleDonasi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Anak Yatim Membutuhkan Dana"
+                android:textColor="@color/hitam"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mohon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleDonasi"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Mohon Lakukan Pembayaran"
+                android:textColor="@color/merahBukaAmal"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+            <RelativeLayout
+                android:id="@+id/layoutJumlah"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_below="@id/mohon"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_card_galangdana"
+                android:paddingBottom="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp">
+
+                <TextView
+                    android:id="@+id/txtTrans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:text="Transfer"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imgMetode"
+                    android:layout_width="190dp"
+                    android:layout_height="70dp"
+                    android:layout_below="@id/txtTrans"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/mandiri_logo" />
+
+                <TextView
+                    android:id="@+id/namaPenerima"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgMetode"
+                    android:layout_marginLeft="10dp"
+                    android:text="Nama Penerima"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/titik1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgMetode"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/namaPenerima"
+                    android:text=":"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/txtNamaPenerima"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgMetode"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/titik1"
+                    android:text="PT BukaAmal Indonesia"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/bank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtNamaPenerima"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Bank"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/titik2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtNamaPenerima"
+                    android:layout_marginLeft="78dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/bank"
+                    android:text=":"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/txtBank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtNamaPenerima"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/titik2"
+                    android:text="Bank Mandiri"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/norek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtBank"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="No. Rekening"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/titik3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtBank"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/norek"
+                    android:text=":"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/txtNoRek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtBank"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/titik3"
+                    android:text="165 000 089 3748"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnSudahBayar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutJumlah"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="90dp"
+                android:background="@drawable/selector_button_login"
+                android:gravity="center"
+                android:text="Sudah Membayar"
+                android:textAllCaps="false"
+                android:textColor="@color/putih" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>

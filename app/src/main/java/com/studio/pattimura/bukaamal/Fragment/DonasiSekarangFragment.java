@@ -58,11 +58,11 @@ public class DonasiSekarangFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new BuatberitaFragment();
+                    return new DonasiSekarangFragment();
                 case 1:
-                    return new IdentitasFragment();
+                    return new MetodePembayaranFragment();
                 case 2:
-                    return new VerifikasiFragment();
+                    return new PembayaranFragment();
 
             }
             return null;
