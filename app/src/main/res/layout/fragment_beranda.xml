@@ -4,30 +4,132 @@
     android:layout_height="match_parent"
     tools:context="com.studio.pattimura.bukaamal.Fragment.BerandaFragment">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="216dp">
-
-        <ImageView
-            android:id="@+id/coverBeranda"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_alignBottom="@+id/coverBeranda"
-            android:background="#d51f1f1f">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/vober"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="216dp">
+
+                <ImageView
+                    android:id="@+id/coverBeranda"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_alignBottom="@+id/coverBeranda"
+                    android:background="#d51f1f1f">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
 
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
 
-            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/layoutukm"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_below="@+id/vober"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/bb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="Modal UKM"
+                    android:textColor="@color/hitam"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnSelengkapnyaUKM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_button_selengkapnya"
+                    android:minHeight="25dp"
+                    android:text="selengkapnya"
+                    android:textColor="@color/putih"
+                    android:textSize="10dp" />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layoutukm"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="2dp"
+                android:scrollbars="horizontal" />
+
+            <RelativeLayout
+                android:id="@+id/layoutBencana"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/recyclerView"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/bbc"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="Bencana Alam, Penyakit, dan Yatim Piatu"
+                    android:textColor="@color/hitam"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnSelengkapnyabencana"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_button_selengkapnya"
+                    android:minHeight="25dp"
+                    android:text="selengkapnya"
+                    android:textColor="@color/putih"
+                    android:textSize="10dp" />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layoutBencana"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="2dp"
+                android:scrollbars="horizontal" />
+
+
         </RelativeLayout>
-    </RelativeLayout>
+
+
+    </ScrollView>
 
 </FrameLayout>
