@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Fragment.BerandaFragment;
 import com.studio.pattimura.bukaamal.Fragment.BuatGalangDanaFragment;
+import com.studio.pattimura.bukaamal.Fragment.DonasiFragment;
 import com.studio.pattimura.bukaamal.Fragment.GalangDanaFragment;
 
 public class LandingPage extends AppCompatActivity
@@ -108,8 +109,12 @@ public class LandingPage extends AppCompatActivity
 
         } else if (id == R.id.donasi) {
             logo.setVisibility(View.GONE);
-            tabLayout.setVisibility(View.GONE);
+            tabLayout.setVisibility(View.VISIBLE);
             txtJudul.setText("Donasi");
+            fragment = new DonasiFragment();
+            tukar = getSupportFragmentManager().beginTransaction();
+            tukar.replace(R.id.mainframe, fragment);
+            tukar.commit();
 
         } else if (id == R.id.dana) {
             logo.setVisibility(View.GONE);
