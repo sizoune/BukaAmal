@@ -21,9 +21,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Langkah-langkah untuk Galang Dana."
+                android:text="Langkah-langkah untuk Galang Dana"
                 android:textColor="@color/hitam"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -31,11 +31,11 @@
             <RelativeLayout
                 android:id="@+id/layoutLangkah1"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="85dp"
                 android:layout_below="@id/titleDisclaimerGalang"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/shape_card_galangdana"
                 android:paddingBottom="8dp"
                 android:paddingLeft="15dp"
@@ -59,13 +59,13 @@
                     android:layout_marginTop="8dp"
                     android:text="Isi form online dengan menceritakan tujuan anda menggalang dana."
                     android:textColor="@color/hitam"
-                    android:textSize="12dp" />
+                    android:textSize="14dp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/layoutLangkah2"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="65dp"
                 android:layout_below="@id/layoutLangkah1"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
@@ -93,13 +93,13 @@
                     android:layout_marginTop="8dp"
                     android:text="Unggah foto KTP atau identitas anda."
                     android:textColor="@color/hitam"
-                    android:textSize="12dp" />
+                    android:textSize="14dp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/layoutLangkah3"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="85dp"
                 android:layout_below="@id/layoutLangkah2"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
@@ -127,13 +127,13 @@
                     android:layout_marginTop="8dp"
                     android:text="Permintaan akan diverifikasi terlebih dahulu oleh Bukalapak."
                     android:textColor="@color/hitam"
-                    android:textSize="12dp" />
+                    android:textSize="14dp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/layoutLangkah4"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="95dp"
                 android:layout_below="@id/layoutLangkah3"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
@@ -161,13 +161,13 @@
                     android:layout_marginTop="8dp"
                     android:text="Ajak kerabat anda berdonasi untuk membantu dengan metode pembayaran BukaDompet atau transfer bank."
                     android:textColor="@color/hitam"
-                    android:textSize="12dp" />
+                    android:textSize="14dp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/layoutLangkah5"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="65dp"
                 android:layout_below="@id/layoutLangkah4"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
@@ -195,7 +195,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Cairkan dana dari hasil donasi."
                     android:textColor="@color/hitam"
-                    android:textSize="12dp" />
+                    android:textSize="14dp" />
             </RelativeLayout>
 
             <RadioButton
@@ -209,7 +209,7 @@
                 android:buttonTint="@color/merahBukaAmal"
                 android:text="Saya telah menyetujui langkah-langkah untuk menggalang dana di BukaAmal"
                 android:textColor="@color/hitam"
-                android:textSize="12dp" />
+                android:textSize="14dp" />
 
             <Button
                 android:id="@+id/btnGalangDana"

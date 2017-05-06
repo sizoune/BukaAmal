@@ -14,23 +14,24 @@ import android.view.ViewGroup;
 
 import com.studio.pattimura.bukaamal.R;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BuatGalangDanaFragment extends Fragment {
+public class DonasiSekarangFragment extends Fragment {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
-    public static int int_items = 4;
+    public static int int_items = 3;
 
-    public BuatGalangDanaFragment() {
+    public DonasiSekarangFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_buat_galang_dana, container, false);
-
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_donasi_sekarang, container, false);
         tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
@@ -41,10 +42,8 @@ public class BuatGalangDanaFragment extends Fragment {
                 tabLayout.setupWithViewPager(viewPager);
             }
         });
-
         return view;
     }
-
     class MyAdapter extends FragmentPagerAdapter {
 
         public MyAdapter(FragmentManager fm) {
@@ -64,8 +63,6 @@ public class BuatGalangDanaFragment extends Fragment {
                     return new IdentitasFragment();
                 case 2:
                     return new VerifikasiFragment();
-                case 3:
-                    return new BagikanFragment();
 
             }
             return null;
@@ -87,13 +84,11 @@ public class BuatGalangDanaFragment extends Fragment {
 
             switch (position) {
                 case 0:
-                    return "Berita";
+                    return "Donasi";
                 case 1:
-                    return "Identitas";
+                    return "Metode Pembayaran";
                 case 2:
-                    return "Verifikasi";
-                case 3:
-                    return "Bagikan";
+                    return "Pembayaran";
             }
             return null;
         }

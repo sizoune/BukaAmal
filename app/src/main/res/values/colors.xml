@@ -9,4 +9,6 @@
     <color name="hitam">#000000</color>
     <color name="abu">#9b9b9b</color>
     <color name="abuputih">#EEEEEE</color>
+    <color name="merah">#F44336</color>
+    <color name="hijau">#4CAF50</color>
 </resources>

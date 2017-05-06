@@ -1,0 +1,97 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.studio.pattimura.bukaamal.Fragment.JumlahDonasiFragment">
+
+    <ScrollView
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/titleDonasi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Anak Yatim Membutuhkan Dana"
+                android:textColor="@color/hitam"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/layoutDana"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_below="@id/titleDonasi"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_card_galangdana"
+                android:paddingBottom="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:paddingTop="15dp"
+                >
+
+                <TextView
+                    android:id="@+id/txtDanaTerkumpul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 1.740.000"
+                    android:textColor="@color/hitam"
+                    android:gravity="center_horizontal"
+                    android:textSize="14dp" />
+                <TextView
+                    android:id="@+id/txtText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dana yang telah terkumpul, dari total"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toRightOf="@id/txtDanaTerkumpul"
+                        android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/txtDanaTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 2.000.000"
+
+                    android:layout_toRightOf="@id/txtText"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+
+
+            <Button
+                android:id="@+id/btnGalangDana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rbDisclaim"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/selector_button_login"
+                android:gravity="center"
+                android:text="Galang Dana Sekarang"
+                android:textColor="@color/putih" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>

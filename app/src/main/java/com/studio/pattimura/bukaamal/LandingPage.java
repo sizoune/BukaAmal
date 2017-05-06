@@ -3,6 +3,7 @@ package com.studio.pattimura.bukaamal;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -28,6 +29,7 @@ public class LandingPage extends AppCompatActivity
     private FragmentTransaction tukar;
     private TextView txtJudul;
     private ImageView logo;
+    public static TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class LandingPage extends AppCompatActivity
         txtJudul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
         logo = (ImageView) toolbar.findViewById(R.id.logobuka);
 
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -49,7 +53,7 @@ public class LandingPage extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-
+        tabLayout.setVisibility(View.GONE);
         txtJudul.setText("");
         Picasso.with(getApplicationContext()).load(R.drawable.logoberanda).into(logo);
 //        toolbar.setBackground(getResources().getDrawable(R.drawable.toolbarbg));
@@ -95,6 +99,7 @@ public class LandingPage extends AppCompatActivity
 
         if (id == R.id.beranda) {
             logo.setVisibility(View.VISIBLE);
+            tabLayout.setVisibility(View.GONE);
             txtJudul.setText("");
             fragment = new BerandaFragment();
             tukar = getSupportFragmentManager().beginTransaction();
@@ -103,10 +108,12 @@ public class LandingPage extends AppCompatActivity
 
         } else if (id == R.id.donasi) {
             logo.setVisibility(View.GONE);
+            tabLayout.setVisibility(View.GONE);
             txtJudul.setText("Donasi");
 
         } else if (id == R.id.dana) {
             logo.setVisibility(View.GONE);
+            tabLayout.setVisibility(View.GONE);
             txtJudul.setText("Galang Dana");
             fragment = new GalangDanaFragment();
             tukar = getSupportFragmentManager().beginTransaction();
