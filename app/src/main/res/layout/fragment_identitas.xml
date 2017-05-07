@@ -79,9 +79,9 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/rounded_pinggir_merah"
+                android:focusable="false"
                 android:hint="@string/hintTanggalLahir"
                 android:inputType="date"
-                android:focusable="false"
                 android:minHeight="45dp"
                 android:paddingBottom="8dp"
                 android:paddingLeft="15dp"
@@ -128,11 +128,12 @@
                 android:layout_marginTop="25dp"
                 android:background="@drawable/selector_button_pinggirmerah"
                 android:drawable="@mipmap/ic_plus"
-                android:drawablePadding="-67dp"
                 android:drawableLeft="@mipmap/ic_plus"
+                android:drawablePadding="-67dp"
                 android:gravity="center"
                 android:paddingLeft="80dp"
                 android:text="@string/tambahFoto"
+                android:textAllCaps="false"
                 android:textColor="@color/merahBukaAmal" />
 
             <Button
@@ -149,6 +150,7 @@
                 android:elevation="2dp"
                 android:gravity="center"
                 android:text="@string/simpanlanjut"
+                android:textAllCaps="false"
                 android:textColor="@color/putih" />
 
         </RelativeLayout>

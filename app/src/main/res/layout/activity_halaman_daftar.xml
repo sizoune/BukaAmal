@@ -54,7 +54,7 @@
                 android:paddingRight="24dip"
                 android:textColor="@color/hitam"
                 android:textColorHint="@color/abu"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/edNamaLengkap"
@@ -69,7 +69,7 @@
                 android:paddingRight="24dip"
                 android:textColor="@color/hitam"
                 android:textColorHint="@color/abu"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/edUsernameDaftar"
@@ -84,7 +84,7 @@
                 android:paddingRight="24dip"
                 android:textColor="@color/hitam"
                 android:textColorHint="@color/abu"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/layoutPasswordDaftar"
@@ -111,33 +111,36 @@
                     android:paddingRight="24dip"
                     android:textColor="@color/hitam"
                     android:textColorHint="@drawable/selector_hint"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
             </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/btnDaftar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layoutPasswordDaftar"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/selector_button_login"
-                android:text="@string/daftarBaru"
-                android:textColor="@color/putih"
-                android:textSize="12sp" />
-
 
             <TextView
                 android:id="@+id/disclaim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btnDaftar"
+                android:layout_below="@id/layoutPasswordDaftar"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="disclaimer"
                 android:textColor="@color/putih"
                 android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnDaftar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/disclaim"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_button_login"
+                android:text="@string/daftarBaru"
+                android:textAllCaps="false"
+                android:textColor="@color/putih"
+                android:textSize="14sp" />
+
+
+
 
         </LinearLayout>
     </ScrollView>

@@ -37,58 +37,100 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/shape_card_galangdana"
+                android:gravity="center_horizontal|center_vertical"
                 android:paddingBottom="15dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:paddingTop="15dp"
-                >
+                android:paddingTop="15dp">
 
                 <TextView
-                    android:id="@+id/txtDanaTerkumpul"
+                    android:id="@+id/txtDanaDonasi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rp 1.740.000"
-                    android:textColor="@color/hitam"
                     android:gravity="center_horizontal"
-                    android:textSize="14dp" />
-                <TextView
-                    android:id="@+id/txtText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="dana yang telah terkumpul, dari total"
-                    android:layout_marginLeft="2dp"
-                    android:layout_toRightOf="@id/txtDanaTerkumpul"
-                        android:textColor="@color/hitam"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/txtDanaTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rp 2.000.000"
-
-                    android:layout_toRightOf="@id/txtText"
+                    android:text="Rp 1.740.000 dana telah terkumpul, dari total Rp 2.000.000"
                     android:textColor="@color/hitam"
                     android:textSize="14dp" />
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/layoutJumlah"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@id/layoutDana"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_card_galangdana"
+                android:paddingBottom="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp">
 
+                <TextView
+                    android:id="@+id/txtTitleJumlah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:text="Masukkan Jumlah Donasi"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edJumlahDonasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtTitleJumlah"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/rounded_pinggir_merah"
+                    android:focusable="false"
+
+                    android:hint="Jumlah"
+                    android:inputType="number"
+                    android:minHeight="45dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/hitam"
+                    android:textColorHint="@drawable/selector_hint"
+                    android:textSize="16sp">
+
+                </EditText>
+
+                <TextView
+                    android:id="@+id/txtMinimalDonasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edJumlahDonasi"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_horizontal"
+                    android:text="Minimal donasi Rp 10.000"
+                    android:textColor="@color/hitam"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
 
             <Button
-                android:id="@+id/btnGalangDana"
+                android:id="@+id/btnLanjutMetode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rbDisclaim"
+                android:layout_below="@id/layoutJumlah"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
+                android:layout_marginTop="90dp"
                 android:background="@drawable/selector_button_login"
                 android:gravity="center"
-                android:text="Galang Dana Sekarang"
+                android:text="Lanjut ke Metode Pembayaran"
+                android:textAllCaps="false"
                 android:textColor="@color/putih" />
 
         </RelativeLayout>
