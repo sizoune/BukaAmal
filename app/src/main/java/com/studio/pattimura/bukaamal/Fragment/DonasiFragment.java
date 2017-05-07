@@ -41,6 +41,11 @@ public class DonasiFragment extends Fragment {
                 tabLayout.setupWithViewPager(viewPager);
             }
         });
+        Bundle b = getArguments();
+        if (b != null) {
+            viewPager.setCurrentItem(1);
+        }
+
         return view;
     }
 

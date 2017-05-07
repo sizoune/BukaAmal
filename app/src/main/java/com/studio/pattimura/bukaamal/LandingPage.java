@@ -26,11 +26,12 @@ import com.studio.pattimura.bukaamal.Fragment.GalangDanaFragment;
 
 public class LandingPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public static TabLayout tabLayout;
+    NavigationView navigationView;
     private Fragment fragment;
     private FragmentTransaction tukar;
     private TextView txtJudul;
     private ImageView logo;
-    public static TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class LandingPage extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
@@ -140,4 +141,6 @@ public class LandingPage extends AppCompatActivity
 
         return true;
     }
+
+
 }

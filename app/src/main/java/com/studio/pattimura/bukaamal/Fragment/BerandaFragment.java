@@ -1,15 +1,24 @@
 package com.studio.pattimura.bukaamal.Fragment;
 
 
+import android.content.ClipData;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -29,6 +38,7 @@ public class BerandaFragment extends Fragment {
     private ModalUKMAdapter adapter;
     private ArrayList<BantuanLain> dataBantuan = new ArrayList<>();
     private BantuanLainAdapter adapter1;
+    private Button ukmlengkap, bantuanlengkap;
 
     public BerandaFragment() {
         // Required empty public constructor
@@ -39,12 +49,15 @@ public class BerandaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_beranda, container, false);
         ImageView cover = (ImageView) view.findViewById(R.id.coverBeranda);
         Picasso.with(BerandaFragment.this.getContext()).load(R.drawable.coverberanda).fit().into(cover);
         dummyData();
         RecyclerView rv = (RecyclerView) view.findViewById(R.id.recyclerView);
         RecyclerView rv1 = (RecyclerView) view.findViewById(R.id.recyclerView2);
+        ukmlengkap = (Button) view.findViewById(R.id.btnSelengkapnyaUKM);
+        bantuanlengkap = (Button) view.findViewById(R.id.btnSelengkapnyabencana);
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(BerandaFragment.this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManager1
@@ -65,6 +78,45 @@ public class BerandaFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 Toast.makeText(BerandaFragment.this.getContext(), dataBantuan.get(position).getDeskripsi(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        ukmlengkap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment f = new DonasiFragment();
+                FragmentTransaction ft = BerandaFragment.this.getFragmentManager().beginTransaction();
+                ft.replace(R.id.mainframe, f);
+                ft.commit();
+                TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
+                NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
+                navigationView.setCheckedItem(R.id.donasi);
+                Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
+                ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
+                TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
+                cover.setVisibility(View.GONE);
+                judul.setText("Donasi");
+                tabl.setVisibility(View.VISIBLE);
+            }
+        });
+        bantuanlengkap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = new Bundle();
+                b.putInt("1", 2);
+                Fragment f = new DonasiFragment();
+                FragmentTransaction ft = BerandaFragment.this.getFragmentManager().beginTransaction();
+                f.setArguments(b);
+                ft.replace(R.id.mainframe, f);
+                ft.commit();
+                TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
+                NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
+                navigationView.setCheckedItem(R.id.donasi);
+                Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
+                ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
+                TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
+                cover.setVisibility(View.GONE);
+                judul.setText("Donasi");
+                tabl.setVisibility(View.VISIBLE);
             }
         });
         return view;
