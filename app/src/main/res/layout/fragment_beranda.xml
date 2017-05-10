@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,16 +25,156 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="70dp"
                     android:layout_alignBottom="@+id/coverBeranda"
                     android:background="#d51f1f1f">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="fill_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/txtTop"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Top Donatur"
+                                    android:textColor="@color/putih"
+                                    android:textSize="12dp" />
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/profile_imageBeranda"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_below="@+id/txtTop"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="2dp"
+                                    android:src="@drawable/ic_user2" />
+
+                                <TextView
+                                    android:id="@+id/txtNamaDonatur1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/profile_imageBeranda"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="2dp"
+                                    android:maxLines="1"
+                                    android:text="Songko"
+                                    android:textColor="@color/putih"
+                                    android:textSize="10dp" />
+
+                                <View
+                                    android:id="@+id/view"
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#9E9E9E" />
+                            </RelativeLayout>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/txtTerkum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Donasi Terkumpul"
+                                    android:textColor="@color/putih"
+                                    android:textSize="12dp" />
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/iconduit"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_below="@+id/txtTerkum"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="2dp"
+                                    android:src="@drawable/donatesingle" />
+
+                                <TextView
+                                    android:id="@+id/txtallTotalDonate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/iconduit"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="2dp"
+                                    android:maxLines="1"
+                                    android:text="Rp. 1.000.000"
+                                    android:textColor="@color/putih"
+                                    android:textSize="10dp" />
+
+                                <View
+                                    android:id="@+id/view2"
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#9E9E9E" />
+                            </RelativeLayout>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/txtTopListdonasi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Top List Donasi"
+                                    android:textColor="@color/putih"
+                                    android:textSize="12dp" />
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/iconsalaman"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_below="@+id/txtTopListdonasi"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="2dp"
+                                    android:src="@drawable/partnership" />
+
+                                <TextView
+                                    android:id="@+id/txtTopDonasi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/iconsalaman"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="2dp"
+                                    android:maxLines="1"
+                                    android:text="Patah Hati"
+                                    android:textColor="@color/putih"
+                                    android:textSize="10dp" />
+
+                            </RelativeLayout>
+                        </FrameLayout>
                     </LinearLayout>
                 </RelativeLayout>
             </RelativeLayout>
