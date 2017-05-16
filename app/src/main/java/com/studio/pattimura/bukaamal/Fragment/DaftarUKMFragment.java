@@ -2,7 +2,9 @@ package com.studio.pattimura.bukaamal.Fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.studio.pattimura.bukaamal.Adapter.ModalUKMAdapter;
+import com.studio.pattimura.bukaamal.Model.Galeri;
 import com.studio.pattimura.bukaamal.Model.ModalUKM;
 import com.studio.pattimura.bukaamal.R;
 
@@ -42,32 +45,53 @@ public class DaftarUKMFragment extends Fragment {
         adapter.SetOnItemClickListener(new ModalUKMAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(DaftarUKMFragment.this.getContext(), dataUKM.get(position).getDeskripsi(), Toast.LENGTH_SHORT).show();
+                ModalUKM mu = dataUKM.get(position);
+                Bundle b = new Bundle();
+                b.putParcelable("ukm", mu);
+                Fragment f = new DetailDonasi();
+                f.setArguments(b);
+                FragmentTransaction ft = DaftarUKMFragment.this.getActivity().getSupportFragmentManager().beginTransaction();
+                TabLayout tabl = (TabLayout) DaftarUKMFragment.this.getActivity().findViewById(R.id.tabs);
+                tabl.setVisibility(View.GONE);
+                ft.replace(R.id.mainframe, f);
+                ft.commit();
             }
         });
         return v;
     }
 
     void dummyData() {
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih1", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih2", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih3", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih4", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
-                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih6", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
-                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih7", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
-                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih8", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
-                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih9", 8000000, 50));
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
+                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
+                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
+                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
+                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
 
+        dataUKM.get(0).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(0).getGambar().add(new Galeri("air bersih", "http://fujiro.com/wp-content/uploads/2014/01/82041-Galon-1-770x470.jpg"));
+        dataUKM.get(0).getGambar().add(new Galeri("air sehat", "http://www.nicofilter.co.id/wp-content/uploads/2014/11/Manfaat-Air-Minum-Sehat-Water-Filter-untuk-Kesehatan.jpg"));
+
+        dataUKM.get(1).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(2).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(3).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(4).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(5).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(6).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(7).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(8).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
 
 
     }

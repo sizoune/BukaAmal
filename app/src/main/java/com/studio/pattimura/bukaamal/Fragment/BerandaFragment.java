@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Adapter.BantuanLainAdapter;
 import com.studio.pattimura.bukaamal.Adapter.ModalUKMAdapter;
 import com.studio.pattimura.bukaamal.Model.BantuanLain;
+import com.studio.pattimura.bukaamal.Model.Galeri;
 import com.studio.pattimura.bukaamal.Model.ModalUKM;
 import com.studio.pattimura.bukaamal.R;
 
@@ -71,13 +72,46 @@ public class BerandaFragment extends Fragment {
         adapter.SetOnItemClickListener(new ModalUKMAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(BerandaFragment.this.getContext(), dataUKM.get(position).getDeskripsi(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(BerandaFragment.this.getContext(), dataUKM.get(position).getDeskripsi(), Toast.LENGTH_SHORT).show();
+                ModalUKM mu = dataUKM.get(position);
+                Bundle b = new Bundle();
+                b.putParcelable("ukm", mu);
+                Fragment f = new DetailDonasi();
+                f.setArguments(b);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.mainframe, f);
+                ft.commit();
+                TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
+                NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
+                navigationView.setCheckedItem(R.id.donasi);
+                Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
+                ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
+                TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
+                cover.setVisibility(View.GONE);
+                judul.setText("Donasi");
+//                tabl.setVisibility(View.VISIBLE);
             }
         });
         adapter1.SetOnItemClickListener(new BantuanLainAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(BerandaFragment.this.getContext(), dataBantuan.get(position).getDeskripsi(), Toast.LENGTH_SHORT).show();
+                BantuanLain mu = dataBantuan.get(position);
+                Bundle b = new Bundle();
+                b.putParcelable("bantuan", mu);
+                Fragment f = new DetailDonasi();
+                f.setArguments(b);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.mainframe, f);
+                ft.commit();
+                TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
+                NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
+                navigationView.setCheckedItem(R.id.donasi);
+                Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
+                ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
+                TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
+                cover.setVisibility(View.GONE);
+                judul.setText("Donasi");
+//                tabl.setVisibility(View.GONE);
             }
         });
         ukmlengkap.setOnClickListener(new View.OnClickListener() {
@@ -123,28 +157,44 @@ public class BerandaFragment extends Fragment {
     }
 
     void dummyData() {
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih1", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih2", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih3", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih4", 8000000, 50));
-        dataUKM.add(new ModalUKM("https://assets.kitabisa.com/images/banner-child.png", "10 Hari Lagi", "Bantuan Air Bersih",
+        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
 
-        dataBantuan.add(new BantuanLain("https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg", "10 Hari Lagi", "Bantuan Gunung Meletus",
+        dataUKM.get(0).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(0).getGambar().add(new Galeri("air bersih", "http://fujiro.com/wp-content/uploads/2014/01/82041-Galon-1-770x470.jpg"));
+        dataUKM.get(0).getGambar().add(new Galeri("air sehat", "http://www.nicofilter.co.id/wp-content/uploads/2014/11/Manfaat-Air-Minum-Sehat-Water-Filter-untuk-Kesehatan.jpg"));
+
+        dataUKM.get(1).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(2).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(3).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+        dataUKM.get(4).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
+
+        dataBantuan.add(new BantuanLain("10 Hari Lagi", "Bantuan Gunung Meletus",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman setelah terkena dampak gunung1", 5000000, 80));
-        dataBantuan.add(new BantuanLain("https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg", "10 Hari Lagi", "Bantuan Gunung Meletus",
+        dataBantuan.add(new BantuanLain("10 Hari Lagi", "Bantuan Gunung Meletus",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman setelah terkena dampak gunung2", 5000000, 80));
-        dataBantuan.add(new BantuanLain("https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg", "10 Hari Lagi", "Bantuan Gunung Meletus",
+        dataBantuan.add(new BantuanLain("10 Hari Lagi", "Bantuan Gunung Meletus",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman setelah terkena dampak gunung3", 5000000, 80));
-        dataBantuan.add(new BantuanLain("https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg", "10 Hari Lagi", "Bantuan Gunung Meletus",
+        dataBantuan.add(new BantuanLain("10 Hari Lagi", "Bantuan Gunung Meletus",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman setelah terkena dampak gunung4", 5000000, 80));
-        dataBantuan.add(new BantuanLain("https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg", "10 Hari Lagi", "Bantuan Gunung Meletus",
+        dataBantuan.add(new BantuanLain("10 Hari Lagi", "Bantuan Gunung Meletus",
                 "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman setelah terkena dampak gunung5", 5000000, 80));
 
+        dataBantuan.get(0).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
+        dataBantuan.get(0).getGambar().add(new Galeri("gunung", "https://cdn.sindonews.net/dyn/620/content/2015/07/14/149/1023483/gunung-berapi-dengan-letusan-paling-dahsyat-oD5.jpg"));
+
+        dataBantuan.get(1).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
+        dataBantuan.get(2).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
+        dataBantuan.get(3).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
+        dataBantuan.get(4).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
     }
 
 }

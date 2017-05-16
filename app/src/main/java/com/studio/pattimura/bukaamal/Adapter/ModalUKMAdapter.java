@@ -44,7 +44,7 @@ public class ModalUKMAdapter extends RecyclerView.Adapter<ModalUKMAdapter.ViewHo
         holder.persen.setText(Float.toString(listUKM.get(position).getPersen()) + " %");
         holder.tenggatwaktu.setText(listUKM.get(position).getTanggal());
         holder.desc.setText(listUKM.get(position).getDeskripsi());
-        Picasso.with(context).load(listUKM.get(position).getGambar()).fit().into(holder.gambar);
+        Picasso.with(context).load(listUKM.get(position).getGambar().get(0).getGambar()).fit().into(holder.gambar);
     }
 
     @Override
