@@ -58,7 +58,7 @@ public class DonasiSekarangFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new DonasiSekarangFragment();
+                    return new JumlahDonasiFragment();
                 case 1:
                     return new MetodePembayaranFragment();
                 case 2:

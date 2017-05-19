@@ -2,12 +2,16 @@ package com.studio.pattimura.bukaamal.Fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,10 +29,11 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailDonasi extends Fragment {
+public class DetailDonasi extends Fragment{
     private NumberProgressBar bnp;
     private AdapterGaleri adapter;
     private ArrayList<Galeri> dataGambar = new ArrayList<>();
+    private Button donasi;
 
     public DetailDonasi() {
         // Required empty public constructor
@@ -48,6 +53,7 @@ public class DetailDonasi extends Fragment {
             TextView sisahari = (TextView) v.findViewById(R.id.txtsisahari);
             TextView judul = (TextView) v.findViewById(R.id.txtJudulDonasi);
             TextView desc = (TextView) v.findViewById(R.id.txtDescDonasi);
+            donasi = (Button) v.findViewById(R.id.btnDonasiSekarang);
             bnp = (NumberProgressBar) v.findViewById(R.id.numberbar5);
             if (b.getParcelable("ukm") != null) {
                 ModalUKM mu = b.getParcelable("ukm");
@@ -75,9 +81,22 @@ public class DetailDonasi extends Fragment {
 //            Toast.makeText(DetailDonasi.this.getContext(), Integer.toString(adapter.getItemCount()), Toast.LENGTH_SHORT).show();
             rv.setAdapter(adapter);
             rv.setLayoutManager(layoutManager);
+            donasi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TabLayout tabl = (TabLayout) DetailDonasi.this.getActivity().findViewById(R.id.tabs);
+                    tabl.setVisibility(View.VISIBLE);
+                    Fragment fragment = new DonasiSekarangFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.mainframe, fragment);
+                    fragmentTransaction.commit();
+                }
+            });
         }
 
         return v;
     }
+
 
 }

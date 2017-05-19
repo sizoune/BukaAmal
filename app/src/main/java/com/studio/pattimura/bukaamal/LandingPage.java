@@ -1,11 +1,13 @@
 package com.studio.pattimura.bukaamal;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,12 +19,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Fragment.BerandaFragment;
 import com.studio.pattimura.bukaamal.Fragment.BuatGalangDanaFragment;
 import com.studio.pattimura.bukaamal.Fragment.DonasiFragment;
 import com.studio.pattimura.bukaamal.Fragment.GalangDanaFragment;
+import com.studio.pattimura.bukaamal.Model.userProfile;
 
 public class LandingPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,8 +35,11 @@ public class LandingPage extends AppCompatActivity
     NavigationView navigationView;
     private Fragment fragment;
     private FragmentTransaction tukar;
-    private TextView txtJudul;
-    private ImageView logo;
+    private TextView txtJudul,txtNama,txtAsal;
+    private ImageView logo,avatar;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private userProfile profileData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +48,15 @@ public class LandingPage extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        preferences = getSharedPreferences("prefProfile", MODE_PRIVATE);
+        editor = preferences.edit();
+        Gson gson = new Gson();
+        String json = preferences.getString("prefProfile", "");
+        profileData = gson.fromJson(json, userProfile.class);
+        Toast.makeText(this, profileData.getAlamat(), Toast.LENGTH_SHORT).show();
+
         txtJudul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
+
         logo = (ImageView) toolbar.findViewById(R.id.logobuka);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -55,8 +71,16 @@ public class LandingPage extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
+        final View header = navigationView.getHeaderView(0);
+        txtNama = (TextView) header.findViewById(R.id.namaProfile);
+        txtAsal = (TextView) header.findViewById(R.id.asalProfile);
+        avatar = (ImageView) header.findViewById(R.id.profile_image);
+
         tabLayout.setVisibility(View.GONE);
         txtJudul.setText("");
+        txtNama.setText(profileData.getNama());
+        txtAsal.setText(profileData.getAlamat());
+        Picasso.with(getApplicationContext()).load(profileData.getAvatar()).into(avatar);
         Picasso.with(getApplicationContext()).load(R.drawable.logoberanda).into(logo);
 //        toolbar.setBackground(getResources().getDrawable(R.drawable.toolbarbg));
         fragment = new BerandaFragment();
