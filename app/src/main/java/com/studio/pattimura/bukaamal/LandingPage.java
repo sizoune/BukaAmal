@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.studio.pattimura.bukaamal.Fragment.BerandaFragment;
 import com.studio.pattimura.bukaamal.Fragment.BuatGalangDanaFragment;
 import com.studio.pattimura.bukaamal.Fragment.DonasiFragment;
 import com.studio.pattimura.bukaamal.Fragment.GalangDanaFragment;
+import com.studio.pattimura.bukaamal.Fragment.LogoutDialogFragment;
 import com.studio.pattimura.bukaamal.Model.userProfile;
 
 public class LandingPage extends AppCompatActivity
@@ -34,6 +36,7 @@ public class LandingPage extends AppCompatActivity
     public static TabLayout tabLayout;
     NavigationView navigationView;
     private Fragment fragment;
+    private FragmentManager fm;
     private FragmentTransaction tukar;
     private TextView txtJudul,txtNama,txtAsal;
     private ImageView logo,avatar;
@@ -47,16 +50,15 @@ public class LandingPage extends AppCompatActivity
         setContentView(R.layout.activity_landing_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        fm = getSupportFragmentManager();
 
         preferences = getSharedPreferences("prefProfile", MODE_PRIVATE);
         editor = preferences.edit();
         Gson gson = new Gson();
         String json = preferences.getString("prefProfile", "");
         profileData = gson.fromJson(json, userProfile.class);
-        Toast.makeText(this, profileData.getAlamat(), Toast.LENGTH_SHORT).show();
 
         txtJudul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-
         logo = (ImageView) toolbar.findViewById(R.id.logobuka);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -157,7 +159,10 @@ public class LandingPage extends AppCompatActivity
         } else if (id == R.id.tentang) {
 
         } else if (id == R.id.logout) {
+            LogoutDialogFragment alertdFragment = new LogoutDialogFragment();
+            // Show Alert DialogFragment
 
+            alertdFragment.show(fm, "Alert Dialog Fragment");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

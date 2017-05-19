@@ -76,16 +76,14 @@ public class HalamanLogin extends AppCompatActivity implements View.OnClickListe
 
         preferences = getSharedPreferences("prefTok",MODE_PRIVATE);
         editor = preferences.edit();
-        editor.putString("prefTok", "kosong");
-        editor.commit();
-//        String loggedin = preferences.getString("tok", "kosong");
-//        if (!loggedin.equals("kosong")) {
-//            Log.d("PHP", "onCreate login: " + loggedin);
-//            //start main activity
-//            Intent ten = new Intent(this, LandingPage.class);
-//            ten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(ten);
-//        }
+        String loggedin = preferences.getString("prefTok", "kosong");
+        if (!loggedin.equals("kosong")) {
+            Log.d("PHP", "onCreate login: " + loggedin);
+            //start main activity
+            Intent ten = new Intent(this, LandingPage.class);
+            ten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(ten);
+        }
         login.setOnClickListener(this);
         daftar.setOnClickListener(this);
     }
