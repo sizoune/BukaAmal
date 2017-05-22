@@ -109,7 +109,6 @@ public class HalamanLogin extends AppCompatActivity implements View.OnClickListe
             }
         } else if (v == daftar) {
             startActivity(new Intent(getApplicationContext(), HalamanDaftar.class));
-
         }
     }
 

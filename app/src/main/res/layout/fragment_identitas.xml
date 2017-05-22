@@ -49,55 +49,55 @@
 
             </EditText>
 
-            <EditText
-                android:id="@+id/edTempatLahir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/edNamaLengkap"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="155dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/rounded_pinggir_merah"
-                android:hint="@string/hintTempatLahir"
-                android:minHeight="45dp"
-                android:paddingBottom="8dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/hitam"
-                android:textColorHint="@drawable/selector_hint"
-                android:textSize="16sp">
+            <!--<EditText-->
+            <!--android:id="@+id/edTempatLahir"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/edNamaLengkap"-->
+            <!--android:layout_marginLeft="25dp"-->
+            <!--android:layout_marginRight="155dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:background="@drawable/rounded_pinggir_merah"-->
+            <!--android:hint="@string/hintTempatLahir"-->
+            <!--android:minHeight="45dp"-->
+            <!--android:paddingBottom="8dp"-->
+            <!--android:paddingLeft="15dp"-->
+            <!--android:paddingRight="15dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:textColor="@color/hitam"-->
+            <!--android:textColorHint="@drawable/selector_hint"-->
+            <!--android:textSize="16sp">-->
 
-            </EditText>
+            <!--</EditText>-->
 
-            <EditText
-                android:id="@+id/edTanggalLahir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/edNamaLengkap"
-                android:layout_marginLeft="210dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/rounded_pinggir_merah"
-                android:focusable="false"
-                android:hint="@string/hintTanggalLahir"
-                android:inputType="date"
-                android:minHeight="45dp"
-                android:paddingBottom="8dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/hitam"
-                android:textColorHint="@drawable/selector_hint"
-                android:textSize="16sp">
+            <!--<EditText-->
+            <!--android:id="@+id/edTanggalLahir"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/edNamaLengkap"-->
+            <!--android:layout_marginLeft="210dp"-->
+            <!--android:layout_marginRight="25dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:background="@drawable/rounded_pinggir_merah"-->
+            <!--android:focusable="false"-->
+            <!--android:hint="@string/hintTanggalLahir"-->
+            <!--android:inputType="date"-->
+            <!--android:minHeight="45dp"-->
+            <!--android:paddingBottom="8dp"-->
+            <!--android:paddingLeft="15dp"-->
+            <!--android:paddingRight="15dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:textColor="@color/hitam"-->
+            <!--android:textColorHint="@drawable/selector_hint"-->
+            <!--android:textSize="16sp">-->
 
-            </EditText>
+            <!--</EditText>-->
 
             <EditText
                 android:id="@+id/edAlamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edTempatLahir"
+                android:layout_below="@id/edNamaLengkap"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="5dp"
@@ -117,11 +117,72 @@
 
             </EditText>
 
+            <EditText
+                android:id="@+id/edNoTelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edAlamat"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_pinggir_merah"
+                android:hint="@string/hintNoTel"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="16sp"></EditText>
+
+            <Spinner
+                android:id="@+id/spinBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edNoTelp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/selector_spinner"
+                android:hint="Bank"
+                android:inputType="date"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="16sp">
+
+            </Spinner>
+
+            <EditText
+                android:id="@+id/edNoRek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinBank"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_pinggir_merah"
+                android:hint="@string/hintNoRek"
+                android:inputType="number"
+                android:minHeight="45dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/hitam"
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="16sp"></EditText>
+
             <Button
                 android:id="@+id/btnFoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edAlamat"
+                android:layout_below="@id/edNoRek"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
@@ -132,15 +193,29 @@
                 android:drawablePadding="-67dp"
                 android:gravity="center"
                 android:paddingLeft="80dp"
-                android:text="@string/tambahFoto"
+                android:text="@string/tambahFotoKTP"
                 android:textAllCaps="false"
                 android:textColor="@color/merahBukaAmal" />
+
+            <ImageView
+                android:id="@+id/fotoKTP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnFoto"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="15dp"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:scaleType="matrix" />
 
             <Button
                 android:id="@+id/btnSimpanLanjut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btnFoto"
+                android:layout_below="@id/fotoKTP"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="25dp"
