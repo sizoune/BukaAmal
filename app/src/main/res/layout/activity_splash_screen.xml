@@ -9,19 +9,20 @@
 
     <ImageView
         android:id="@+id/logosplash"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp"
-        android:src="@drawable/logobukaamal"
-        android:layout_marginRight="16dp" />
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/logobukaamal" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center|bottom"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="22dp">
 
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/avi"

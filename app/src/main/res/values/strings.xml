@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">BukaAmal</string>
     <string name="messageLogin">Silahkan login menggunakan akun bukalapak anda</string>
+    <string name="messageDaftar">Silahkan buat akun baru anda</string>
     <string name="hintUsername">Username</string>
     <string name="hintPassword">Password</string>
     <string name="hintEmail">Email</string>
@@ -11,8 +12,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="disclaimer"> <![CDATA[
-    <font color="white">Dengan mendaftar kamu telah menyetujui</font> <font color="black"><u>aturan penggunaan</u>
-    </font> <font color="white">dan</font> <font color="black"><u>kebijakan privasi</u>
+    <font color="white">Dengan mendaftar kamu telah menyetujui</font> <font color="white"><u>aturan penggunaan</u>
+    </font> <font color="white">dan</font> <font color="white"><u>kebijakan privasi</u>
     </font> <font color="white">Bukalapak.com</font>
   ]]></string>
     <string name="hintJudulBerita">Judul Berita</string>
