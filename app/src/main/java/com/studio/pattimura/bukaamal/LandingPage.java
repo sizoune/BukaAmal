@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Fragment.BerandaFragment;
 import com.studio.pattimura.bukaamal.Fragment.BuatGalangDanaFragment;
+import com.studio.pattimura.bukaamal.Fragment.DetailProfileFragment;
 import com.studio.pattimura.bukaamal.Fragment.DonasiFragment;
 import com.studio.pattimura.bukaamal.Fragment.GalangDanaFragment;
 import com.studio.pattimura.bukaamal.Fragment.LogoutDialogFragment;
@@ -163,6 +164,14 @@ public class LandingPage extends AppCompatActivity
             // Show Alert DialogFragment
 
             alertdFragment.show(fm, "Alert Dialog Fragment");
+        } else if (id == R.id.profil) {
+            logo.setVisibility(View.GONE);
+            tabLayout.setVisibility(View.GONE);
+            txtJudul.setText("Profil");
+            fragment = new DetailProfileFragment();
+            tukar = getSupportFragmentManager().beginTransaction();
+            tukar.replace(R.id.mainframe, fragment);
+            tukar.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

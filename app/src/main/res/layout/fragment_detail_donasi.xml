@@ -40,7 +40,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:id="@+id/layoutcoverDetailDonasi"
@@ -263,7 +263,6 @@
                         android:id="@+id/profile_detailDonasi"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="2dp"
                         android:src="@drawable/ic_user2" />
 

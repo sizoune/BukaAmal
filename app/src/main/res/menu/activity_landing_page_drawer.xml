@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/profil"
+            android:icon="@drawable/iconberanda"
+            android:title="Profil" />
+        <item
             android:id="@+id/beranda"
             android:icon="@drawable/iconberanda"
             android:title="Beranda" />
@@ -14,6 +18,10 @@
             android:id="@+id/dana"
             android:icon="@drawable/dana"
             android:title="Galang Dana" />
+        <item
+            android:id="@+id/cairkan"
+            android:icon="@drawable/iconberanda"
+            android:title="Cairkan Dana" />
     </group>
 
     <group
