@@ -256,10 +256,12 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
                                         long val = dataSnapshot.getChildrenCount();
                                         berita = new Berita(id + val, judul.getText().toString(), deadline.getText().toString(), sp.getSelectedItem().toString(), lokasi.getText().toString(), cerita.getText().toString(), urlgambar, false, false, Long.parseLong(dana.getText().toString()), 0);
                                         mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(id + val)).child("berita").setValue(berita);
+                                        mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id + val)).child("berita").setValue(berita);
                                         progressdialog.dismiss();
                                     } else {
                                         berita = new Berita(id, judul.getText().toString(), deadline.getText().toString(), sp.getSelectedItem().toString(), lokasi.getText().toString(), cerita.getText().toString(), urlgambar, false, false, Long.parseLong(dana.getText().toString()), 0);
                                         mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(id)).child("berita").setValue(berita);
+                                        mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id)).child("berita").setValue(berita);
                                         progressdialog.dismiss();
                                     }
                                 }

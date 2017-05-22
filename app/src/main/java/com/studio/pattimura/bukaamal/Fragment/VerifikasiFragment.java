@@ -36,7 +36,7 @@ public class VerifikasiFragment extends Fragment {
     private com.studio.pattimura.bukaamal.Model.userProfile userProfile;
     private userAuth userData;
     private ProgressDialog progressdialog;
-    
+
 
     public VerifikasiFragment() {
         // Required empty public constructor

@@ -222,7 +222,7 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             @SuppressWarnings("VisibleForTests")
                             final String urlgambar = taskSnapshot.getMetadata().getPath();
-                            Toast.makeText(IdentitasFragment.this.getContext(), urlgambar, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(IdentitasFragment.this.getContext(), urlgambar, Toast.LENGTH_SHORT).show();
                         /*Glide.with(getApplicationContext())
                                 .using(new FirebaseImageLoader())
                                 .load(photoRef)
@@ -239,6 +239,7 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
                                             userProfile.setRekening(norek.getText().toString());
                                             userProfile.setKtp(urlgambar);
                                             mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(id)).child("identitas").setValue(userProfile);
+                                            mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id)).child("identitas").setValue(userProfile);
                                         }else{
 
                                         }
