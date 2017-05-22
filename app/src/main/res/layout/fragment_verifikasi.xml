@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Menunggu Verfikasi dari BukaAmal"
                 android:textColor="@color/hitam"
@@ -50,6 +51,7 @@
                         android:id="@+id/judul"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
                         android:text="Judul Berita"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -72,6 +74,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@id/titik1"
+                        android:fontFamily="sans-serif"
                         android:text="Anak yatim membutuhkan dana"
                         android:textColor="@color/hitam"
                         android:textSize="14dp" />
@@ -82,7 +85,9 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtJudul"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="sans-serif"
                         android:text="Dana"
+
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -108,6 +113,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/titik2"
+                        android:fontFamily="sans-serif"
                         android:text="Rp 2.000.000"
                         android:textColor="@color/hitam"
                         android:textSize="14dp" />
@@ -118,6 +124,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtDana"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="sans-serif"
                         android:text="Deadline"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -144,6 +151,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/titik3"
+                        android:fontFamily="sans-serif"
                         android:text="17/08/2017"
                         android:textColor="@color/hitam"
                         android:textSize="14dp" />
@@ -154,6 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtDeadline"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="sans-serif"
                         android:text="Kategori"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -180,6 +189,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/titik4"
+                        android:fontFamily="sans-serif"
                         android:text="Anak Yatim"
                         android:textColor="@color/hitam"
                         android:textSize="14dp" />
@@ -190,6 +200,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtKategori"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="sans-serif"
                         android:text="Lokasi"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -216,6 +227,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/titik5"
+                        android:fontFamily="sans-serif"
                         android:text="Buah Batu, Bandung"
                         android:textColor="@color/hitam"
                         android:textSize="14dp" />
@@ -226,6 +238,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtLokasi"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="sans-serif"
                         android:text="Status"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -239,6 +252,7 @@
                         android:layout_marginLeft="45dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/status"
+                        android:fontFamily="sans-serif"
                         android:text=":"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -252,6 +266,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/titik6"
+                        android:fontFamily="sans-serif"
                         android:text="Pending"
                         android:textColor="@color/merah"
                         android:textSize="14dp" />
@@ -270,9 +285,11 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="55dp"
+                android:fontFamily="sans-serif"
                 android:background="@drawable/selector_button_login"
                 android:elevation="2dp"
                 android:gravity="center"
+                android:textAllCaps="false"
                 android:text="@string/simpanlanjut"
                 android:textColor="@color/putih" />
 

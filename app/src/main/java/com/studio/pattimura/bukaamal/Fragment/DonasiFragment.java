@@ -88,6 +88,7 @@ public class DonasiFragment extends Fragment {
             switch (position) {
                 case 0:
                     return "Modal UKM";
+
                 case 1:
                     return "Bencana Alam, Penyakit, dan Yatim Piatu";
             }

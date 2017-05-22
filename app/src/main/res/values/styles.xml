@@ -21,15 +21,17 @@
         <item name="android:textSize">16sp</item><!-- text size in menu-->
         <item name="android:textColor">@color/merahBukaAmal</item>
         <item name="android:listPreferredItemHeightSmall">35dp</item><!-- item size in menu-->
-
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:fitsSystemWindows">true</item>
-
 
     </style>
 
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
         <item name="android:textColorSecondary">@color/putih</item>
+    </style>
+
+    <style name="ActionBarTabTextStyle.Tabtheme" parent="Widget.Design.TabLayout">
+        <item name="android:textAllCaps">false</item>
     </style>
 
 

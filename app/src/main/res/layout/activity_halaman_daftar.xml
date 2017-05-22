@@ -83,6 +83,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_edit_text"
+                android:capitalize="words"
                 android:drawableRight="@drawable/icon_user"
                 android:fontFamily="sans-serif"
                 android:hint="@string/hintNamaLengkap"
@@ -94,25 +95,28 @@
                 android:textColorHint="@color/abu"
                 android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/edJenisKelamin"
+            <Spinner
+                android:id="@+id/spinJenisKelamin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/edEmail"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/rounded_edit_text"
-                android:drawableRight="@drawable/icon_jeniskelamin"
-                android:fontFamily="sans-serif"
-                android:hint="@string/hintJenisKelamin"
-                android:inputType="textCapWords"
+                android:background="@drawable/selector_spinner"
+                android:hint="@string/hintKategori"
+                android:inputType="date"
                 android:minHeight="45dp"
-                android:paddingLeft="24dip"
-                android:paddingRight="24dip"
+                android:paddingBottom="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:spinnerMode="dropdown"
                 android:textColor="@color/hitam"
-                android:textColorHint="@color/abu"
-                android:textSize="14sp" />
+                android:textColorHint="@drawable/selector_hint"
+                android:textSize="14sp">
+
+            </Spinner>
 
             <EditText
                 android:id="@+id/edUsernameDaftar"

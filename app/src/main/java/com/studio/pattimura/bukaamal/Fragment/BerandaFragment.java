@@ -103,6 +103,7 @@ public class BerandaFragment extends Fragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.mainframe, f);
                 ft.commit();
+                ft.addToBackStack(null);
                 TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
                 NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
                 navigationView.setCheckedItem(R.id.donasi);

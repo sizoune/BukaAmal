@@ -49,7 +49,9 @@ public class IntroductionApp extends AppIntro {
         userData = gson.fromJson(json, userAuth.class);
         requestProfile(userData.getUser_id(), userData.getToken());
 
-        addSlide(AppIntroFragment.newInstance("Donasi", "ini deskripsi", R.drawable.donasiintro, getResources().getColor(R.color.merahBukaAmal)));
+        addSlide(AppIntroFragment.newInstance("Donasi", "Donasikan dana anda untuk membantu ukm yang ada di Indonesia", R.drawable.donasiintro, getResources().getColor(R.color.merahBukaAmal)));
+        addSlide(AppIntroFragment.newInstance("Galang Dana", "Kumpulkan dana anda untuk membantu saudar-saudara kita yang membutuhkan pertolongan", R.drawable.galangdanaintro, getResources().getColor(R.color.merahBukaAmal)));
+
     }
 
     @Override
