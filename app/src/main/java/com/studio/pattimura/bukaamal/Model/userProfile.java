@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 
 public class userProfile implements Serializable{
-    private String nama,avatar,badge,alamat,email,telepon,tglLahir;
+    private String nama,avatar,badge,alamat,email,telepon,tglLahir,rekening,ktp;
 
     public userProfile(String nama, String avatar, String badge, String alamat, String email, String telepon, String tglLahir) {
         this.nama = nama;
@@ -19,6 +19,14 @@ public class userProfile implements Serializable{
         this.tglLahir = tglLahir;
     }
 
+    public userProfile(String nama, String alamat, String telepon, String rekening, String ktp) {
+        this.nama = nama;
+        this.alamat = alamat;
+        this.telepon = telepon;
+        this.rekening = rekening;
+        this.ktp = ktp;
+    }
+
     public userProfile(String nama, String avatar, String alamat, String email, String telepon, String tglLahir) {
         this.nama = nama;
         this.avatar = avatar;
@@ -28,7 +36,23 @@ public class userProfile implements Serializable{
         this.tglLahir = tglLahir;
     }
 
+    public String getRekening() {
+        return rekening;
+    }
+
+    public void setRekening(String rekening) {
+        this.rekening = rekening;
+    }
+
     public userProfile() {
+    }
+
+    public String getKtp() {
+        return ktp;
+    }
+
+    public void setKtp(String ktp) {
+        this.ktp = ktp;
     }
 
     public String getNama() {

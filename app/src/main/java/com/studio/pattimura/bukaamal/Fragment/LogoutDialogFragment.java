@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.studio.pattimura.bukaamal.HalamanLogin;
 
 import java.util.HashMap;
@@ -24,11 +25,12 @@ public class LogoutDialogFragment extends DialogFragment {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     String tok;
+    private FirebaseAuth mAuth;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-
+        mAuth = FirebaseAuth.getInstance();
         return new AlertDialog.Builder(getActivity())
                 // Set Dialog Icon
 
@@ -46,6 +48,7 @@ public class LogoutDialogFragment extends DialogFragment {
                         editor = preferences.edit();
                         editor.putString("prefTok", "kosong");
                         editor.commit();
+                        mAuth.signOut();
                         Intent ten = new Intent(getActivity(), HalamanLogin.class);
                         ten.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(ten);

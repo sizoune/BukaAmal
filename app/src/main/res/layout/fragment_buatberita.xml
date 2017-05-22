@@ -5,7 +5,6 @@
     tools:context="com.studio.pattimura.bukaamal.Fragment.BuatberitaFragment">
 
     <ScrollView
-
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:fitsSystemWindows="true"
@@ -15,13 +14,11 @@
         <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <TextView
                 android:id="@+id/judulBerita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="Buat Berita"
@@ -182,11 +179,25 @@
                 android:textAllCaps="false"
                 android:textColor="@color/merahBukaAmal" />
 
+            <ImageView
+                android:id="@+id/foto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="matrix"
+                android:layout_below="@id/btnFoto"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="15dp"
+                android:adjustViewBounds="true"
+                android:gravity="center" />
+
             <Button
                 android:id="@+id/btnSimpanLanjut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btnFoto"
+                android:layout_below="@id/foto"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="25dp"
