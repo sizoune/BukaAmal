@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Identitas"
                 android:textColor="@color/hitam"
@@ -37,7 +38,9 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_pinggir_merah"
+                android:fontFamily="sans-serif"
                 android:hint="@string/hintNamaLengkap"
+                android:inputType="textPersonName"
                 android:minHeight="45dp"
                 android:paddingBottom="8dp"
                 android:paddingLeft="15dp"
@@ -45,7 +48,7 @@
                 android:paddingTop="10dp"
                 android:textColor="@color/hitam"
                 android:textColorHint="@drawable/selector_hint"
-                android:textSize="16sp">
+                android:textSize="14sp">
 
             </EditText>
 
@@ -102,6 +105,7 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/rounded_textmulti"
+                android:fontFamily="sans-serif"
                 android:gravity="top|left"
                 android:hint="@string/hintAlamat"
                 android:inputType="textMultiLine"
@@ -113,7 +117,7 @@
                 android:scrollHorizontally="false"
                 android:textColor="@color/hitam"
                 android:textColorHint="@drawable/selector_hint"
-                android:textSize="16sp">
+                android:textSize="14sp">
 
             </EditText>
 
@@ -126,7 +130,9 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_pinggir_merah"
+                android:fontFamily="sans-serif"
                 android:hint="@string/hintNoTel"
+                android:inputType="phone"
                 android:minHeight="45dp"
                 android:paddingBottom="8dp"
                 android:paddingLeft="15dp"
@@ -134,7 +140,7 @@
                 android:paddingTop="10dp"
                 android:textColor="@color/hitam"
                 android:textColorHint="@drawable/selector_hint"
-                android:textSize="16sp"></EditText>
+                android:textSize="14sp"></EditText>
 
             <Spinner
                 android:id="@+id/spinBank"
@@ -154,7 +160,7 @@
                 android:paddingTop="10dp"
                 android:textColor="@color/hitam"
                 android:textColorHint="@drawable/selector_hint"
-                android:textSize="16sp">
+                android:textSize="14sp">
 
             </Spinner>
 
@@ -167,6 +173,7 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_pinggir_merah"
+                android:fontFamily="sans-serif"
                 android:hint="@string/hintNoRek"
                 android:inputType="number"
                 android:minHeight="45dp"
@@ -176,7 +183,7 @@
                 android:paddingTop="10dp"
                 android:textColor="@color/hitam"
                 android:textColorHint="@drawable/selector_hint"
-                android:textSize="16sp"></EditText>
+                android:textSize="14sp"></EditText>
 
             <Button
                 android:id="@+id/btnFoto"
@@ -191,11 +198,13 @@
                 android:drawable="@mipmap/ic_plus"
                 android:drawableLeft="@mipmap/ic_plus"
                 android:drawablePadding="-67dp"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:paddingLeft="80dp"
                 android:text="@string/tambahFotoKTP"
                 android:textAllCaps="false"
-                android:textColor="@color/merahBukaAmal" />
+                android:textColor="@color/merahBukaAmal"
+                android:textSize="14sp" />
 
             <ImageView
                 android:id="@+id/fotoKTP"
@@ -206,7 +215,6 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginTop="15dp"
                 android:adjustViewBounds="true"
                 android:gravity="center"
                 android:scaleType="matrix" />

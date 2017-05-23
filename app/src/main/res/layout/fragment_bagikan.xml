@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Bagikan Berita Anda"
                 android:textColor="@color/hitam"
@@ -50,6 +51,7 @@
                         android:id="@+id/judul"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
                         android:text="Judul Berita"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -72,6 +74,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@id/titik1"
+                        android:fontFamily="sans-serif"
                         android:text="Anak yatim membutuhkan dana"
                         android:textColor="@color/hitam"
                         android:textSize="14dp" />
@@ -82,6 +85,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtJudul"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="sans-serif"
                         android:text="Dana"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -108,6 +112,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/titik2"
+                        android:fontFamily="sans-serif"
                         android:text="Rp 2.000.000"
                         android:textColor="@color/hitam"
                         android:textSize="14dp" />
@@ -118,6 +123,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtDana"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="sans-serif"
                         android:text="Deadline"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -144,6 +150,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/titik3"
+                        android:fontFamily="sans-serif"
                         android:text="17/08/2017"
                         android:textColor="@color/hitam"
                         android:textSize="14dp" />
@@ -154,6 +161,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtDeadline"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="sans-serif"
                         android:text="Kategori"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -180,6 +188,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/titik4"
+                        android:fontFamily="sans-serif"
                         android:text="Anak Yatim"
                         android:textColor="@color/hitam"
                         android:textSize="14dp" />
@@ -190,6 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtKategori"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="sans-serif"
                         android:text="Lokasi"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -216,6 +226,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/titik5"
+                        android:fontFamily="sans-serif"
                         android:text="Buah Batu, Bandung"
                         android:textColor="@color/hitam"
                         android:textSize="14dp" />
@@ -226,6 +237,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtLokasi"
                         android:layout_marginTop="7dp"
+                        android:fontFamily="sans-serif"
                         android:text="Status"
                         android:textColor="@color/hitam"
                         android:textSize="14dp"
@@ -252,6 +264,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_toRightOf="@id/titik6"
+                        android:fontFamily="sans-serif"
                         android:text="Disetujui"
                         android:textColor="@color/hijau"
                         android:textSize="14dp" />
@@ -271,10 +284,16 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="55dp"
                 android:background="@drawable/selector_button_login"
-                android:elevation="2dp"
+                android:drawableLeft="@drawable/icon_twitter"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="t"
+                android:minHeight="45dp"
+                android:paddingLeft="110dip"
+                android:paddingRight="110dip"
+                android:text="Twitter"
+                android:textAllCaps="false"
                 android:textColor="@color/putih" />
+
             <Button
                 android:id="@+id/btnFacebook"
                 android:layout_width="match_parent"
@@ -284,12 +303,16 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-
                 android:layout_marginTop="3dp"
                 android:background="@drawable/selector_button_login"
+                android:drawableLeft="@drawable/icon_facebook"
                 android:elevation="2dp"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="f"
+                android:paddingLeft="110dip"
+                android:paddingRight="110dip"
+                android:text="Facebook"
+                android:textAllCaps="false"
                 android:textColor="@color/putih" />
 
             <Button
@@ -303,10 +326,15 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="3dp"
                 android:background="@drawable/selector_button_login"
-                android:elevation="2dp"
+                android:drawableLeft="@drawable/icon_linkedin"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="l"
+                android:paddingLeft="110dip"
+                android:paddingRight="110dip"
+                android:text="Linkedln"
+                android:textAllCaps="false"
                 android:textColor="@color/putih" />
+
 
         </RelativeLayout>
     </ScrollView>
