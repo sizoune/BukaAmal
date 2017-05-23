@@ -1,6 +1,7 @@
 package com.studio.pattimura.bukaamal.Fragment;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,23 +19,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Adapter.AdapterGaleri;
 import com.studio.pattimura.bukaamal.Model.BantuanLain;
+import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.Galeri;
 import com.studio.pattimura.bukaamal.Model.ModalUKM;
 import com.studio.pattimura.bukaamal.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailDonasi extends Fragment{
+public class DetailDonasi extends Fragment {
     private NumberProgressBar bnp;
     private AdapterGaleri adapter;
     private ArrayList<Galeri> dataGambar = new ArrayList<>();
     private Button donasi;
+    private StorageReference mStorageref;
 
     public DetailDonasi() {
         // Required empty public constructor
@@ -47,7 +58,7 @@ public class DetailDonasi extends Fragment{
         View v = inflater.inflate(R.layout.fragment_detail_donasi, container, false);
         Bundle b = this.getArguments();
         if (b != null) {
-            ImageView cover = (ImageView) v.findViewById(R.id.coverDetailDonasi);
+            final ImageView cover = (ImageView) v.findViewById(R.id.coverDetailDonasi);
             TextView danaterkumpul = (TextView) v.findViewById(R.id.txtSudahTerkumupl);
             TextView persen = (TextView) v.findViewById(R.id.txtpersen);
             TextView sisahari = (TextView) v.findViewById(R.id.txtsisahari);
@@ -56,23 +67,29 @@ public class DetailDonasi extends Fragment{
             donasi = (Button) v.findViewById(R.id.btnDonasiSekarang);
             bnp = (NumberProgressBar) v.findViewById(R.id.numberbar5);
             if (b.getParcelable("ukm") != null) {
-                ModalUKM mu = b.getParcelable("ukm");
+                Berita mu = b.getParcelable("ukm");
                 judul.setText(mu.getJudul());
                 desc.setText(mu.getDeskripsi());
-                Picasso.with(DetailDonasi.this.getContext()).load(mu.getGambar().get(0).getGambar()).fit().into(cover);
-                danaterkumpul.setText("Rp." + mu.getDanaterkumpul());
-                bnp.setProgress(Math.round(mu.getPersen()));
-                persen.setText(Integer.toString(Math.round(mu.getPersen())) + "%");
-                dataGambar = mu.getGambar();
-            } else {
-                BantuanLain mu = b.getParcelable("bantuan");
-                judul.setText(mu.getJudul());
-                desc.setText(mu.getDeskripsi());
-                Picasso.with(DetailDonasi.this.getContext()).load(mu.getGambar().get(0).getGambar()).fit().into(cover);
-                danaterkumpul.setText("Rp." + mu.getDanaterkumpul());
-                bnp.setProgress(Math.round(mu.getPersen()));
-                persen.setText(Integer.toString(Math.round(mu.getPersen())) + "%");
-                dataGambar = mu.getGambar();
+                mStorageref = FirebaseStorage.getInstance().getReference(mu.getFoto());
+                mStorageref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.with(DetailDonasi.this.getContext()).load(uri).fit().into(cover);
+                    }
+                });
+                danaterkumpul.setText("Rp." + mu.getDana_terkumpul());
+                bnp.setProgress(Math.round((mu.getDana_terkumpul() / 100) * 100));
+                persen.setText(Integer.toString(Math.round((mu.getDana_terkumpul() / 100) * 100)) + "%");
+                SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                try {
+                    Date deadline = myFormat.parse(mu.getDeadline());
+                    long selisih = deadline.getTime() - date.getTime();
+                    sisahari.setText(Long.toString(TimeUnit.DAYS.convert(selisih, TimeUnit.MILLISECONDS)));
+                } catch (ParseException e) {
+                    Log.e("parse error", e.getMessage());
+                }
+                //dataGambar = mu.getGambar();
             }
             LinearLayoutManager layoutManager
                     = new LinearLayoutManager(DetailDonasi.this.getContext(), LinearLayoutManager.HORIZONTAL, false);

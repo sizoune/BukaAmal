@@ -1,18 +1,21 @@
 package com.studio.pattimura.bukaamal.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by desmoncode on 22/05/17.
  */
 
-public class Berita {
-    private String judul,deadline,kategori,lokasi,deskripsi,foto;
+public class Berita implements Parcelable {
+    private String judul, deadline, kategori, lokasi, deskripsi, foto;
     private Boolean status, status_pencairan;
-    private long dana,dana_terkumpul,id;
+    private long dana, dana_terkumpul, id;
 
     public Berita() {
     }
 
-    public Berita(long id,String judul, String deadline, String kategori, String lokasi, String deskripsi, String foto, Boolean status, Boolean status_pencarian, long dana, long dana_terkumpul) {
+    public Berita(long id, String judul, String deadline, String kategori, String lokasi, String deskripsi, String foto, Boolean status, Boolean status_pencarian, long dana, long dana_terkumpul) {
         this.id = id;
         this.judul = judul;
         this.deadline = deadline;
@@ -25,6 +28,30 @@ public class Berita {
         this.dana = dana;
         this.dana_terkumpul = dana_terkumpul;
     }
+
+    protected Berita(Parcel in) {
+        judul = in.readString();
+        deadline = in.readString();
+        kategori = in.readString();
+        lokasi = in.readString();
+        deskripsi = in.readString();
+        foto = in.readString();
+        dana = in.readLong();
+        dana_terkumpul = in.readLong();
+        id = in.readLong();
+    }
+
+    public static final Creator<Berita> CREATOR = new Creator<Berita>() {
+        @Override
+        public Berita createFromParcel(Parcel in) {
+            return new Berita(in);
+        }
+
+        @Override
+        public Berita[] newArray(int size) {
+            return new Berita[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -112,5 +139,23 @@ public class Berita {
 
     public void setDana_terkumpul(long dana_terkumpul) {
         this.dana_terkumpul = dana_terkumpul;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(judul);
+        dest.writeString(deadline);
+        dest.writeString(kategori);
+        dest.writeString(lokasi);
+        dest.writeString(deskripsi);
+        dest.writeString(foto);
+        dest.writeLong(dana);
+        dest.writeLong(dana_terkumpul);
+        dest.writeLong(id);
     }
 }
