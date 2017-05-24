@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.studio.pattimura.bukaamal">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -24,21 +24,28 @@
         </activity>
         <activity
             android:name=".HalamanLogin"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HalamanDaftar"
             android:label=""
             android:parentActivityName=".HalamanLogin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".IntroductionApp"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LandingPage"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MenuAdmin"
+            android:label=""
+            android:parentActivityName=".LandingPage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Fragment.DetailGalangdanDonasiAdmin"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label=""
+            android:parentActivityName=".MenuAdmin"></activity>
     </application>
 
 </manifest>

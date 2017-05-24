@@ -1,5 +1,6 @@
 package com.studio.pattimura.bukaamal;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -184,6 +185,8 @@ public class LandingPage extends AppCompatActivity
             tukar = getSupportFragmentManager().beginTransaction();
             tukar.replace(R.id.mainframe, fragment);
             tukar.commit();
+        } else if (id == 5) {
+            startActivity(new Intent(LandingPage.this,MenuAdmin.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
