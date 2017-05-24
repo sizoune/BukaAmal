@@ -86,7 +86,7 @@ public class DetailProfileFragment extends Fragment {
                 case 0:
                     return new GalangDanaSaya();
                 case 1:
-                    return new BantuanLainFragment();
+                    return new DonasiSaya();
 
             }
             return null;

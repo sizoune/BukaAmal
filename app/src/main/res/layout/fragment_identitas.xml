@@ -164,6 +164,7 @@
 
             </Spinner>
 
+
             <EditText
                 android:id="@+id/edNoRek"
                 android:layout_width="match_parent"
