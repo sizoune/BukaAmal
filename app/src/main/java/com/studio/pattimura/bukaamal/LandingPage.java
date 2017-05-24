@@ -30,6 +30,7 @@ import com.studio.pattimura.bukaamal.Fragment.DetailProfileFragment;
 import com.studio.pattimura.bukaamal.Fragment.DonasiFragment;
 import com.studio.pattimura.bukaamal.Fragment.GalangDanaFragment;
 import com.studio.pattimura.bukaamal.Fragment.LogoutDialogFragment;
+import com.studio.pattimura.bukaamal.Model.userAuth;
 import com.studio.pattimura.bukaamal.Model.userProfile;
 
 public class LandingPage extends AppCompatActivity
@@ -39,11 +40,12 @@ public class LandingPage extends AppCompatActivity
     private Fragment fragment;
     private FragmentManager fm;
     private FragmentTransaction tukar;
-    private TextView txtJudul,txtNama,txtAsal;
-    private ImageView logo,avatar;
+    private TextView txtJudul, txtNama, txtAsal;
+    private ImageView logo, avatar;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private userProfile profileData;
+    private userAuth userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,12 @@ public class LandingPage extends AppCompatActivity
         Gson gson = new Gson();
         String json = preferences.getString("prefProfile", "");
         profileData = gson.fromJson(json, userProfile.class);
+
+        preferences = getSharedPreferences("prefTok", MODE_PRIVATE);
+        editor = preferences.edit();
+        gson = new Gson();
+        json = preferences.getString("prefTok", "");
+        userData = gson.fromJson(json, userAuth.class);
 
         txtJudul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
         logo = (ImageView) toolbar.findViewById(R.id.logobuka);
@@ -85,6 +93,10 @@ public class LandingPage extends AppCompatActivity
         txtAsal.setText(profileData.getAlamat());
         Picasso.with(getApplicationContext()).load(profileData.getAvatar()).into(avatar);
         Picasso.with(getApplicationContext()).load(R.drawable.logoberanda).into(logo);
+        if (userData.getUser_id().equals("33985651")) {
+            Menu menu = navigationView.getMenu();
+            menu.add(1, 5, 5, "Administrator");
+        }
 //        toolbar.setBackground(getResources().getDrawable(R.drawable.toolbarbg));
         fragment = new BerandaFragment();
         tukar = getSupportFragmentManager().beginTransaction();
