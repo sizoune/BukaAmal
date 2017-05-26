@@ -25,6 +25,7 @@ import com.studio.pattimura.bukaamal.Adapter.AdapterBerita;
 import com.studio.pattimura.bukaamal.Adapter.ModalUKMAdapter;
 import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.Galeri;
+import com.studio.pattimura.bukaamal.Model.Identitas;
 import com.studio.pattimura.bukaamal.Model.ModalUKM;
 import com.studio.pattimura.bukaamal.Model.userAuth;
 import com.studio.pattimura.bukaamal.R;
@@ -38,6 +39,7 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class DaftarUKMFragment extends Fragment {
     private ArrayList<Berita> dataUKM = new ArrayList<>();
+    private ArrayList<Identitas> dataIdentitas = new ArrayList<>();
     private AdapterBerita adapter;
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
@@ -64,14 +66,16 @@ public class DaftarUKMFragment extends Fragment {
     }
 
     private void getAllData() {
-        database.getReference("admin").child("galang_dana").child("belum_terverifikasi").addValueEventListener(new ValueEventListener() {
+        database.getReference("admin").child("galang_dana").child("sudah_terverifikasi").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Berita berita = data.child("berita").getValue(Berita.class);
+                    Identitas identitas = data.child("identitas").getValue(Identitas.class);
                     //Toast.makeText(DaftarUKMFragment.this.getContext(), berita.getJudul(), Toast.LENGTH_SHORT).show();
                     if (berita.getKategori().equals("Modal UKM")) {
                         dataUKM.add(berita);
+                        dataIdentitas.add(identitas);
                     }
                 }
                 adapter = new AdapterBerita(DaftarUKMFragment.this.getContext(), dataUKM);
@@ -81,8 +85,10 @@ public class DaftarUKMFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         Berita mu = dataUKM.get(position);
+                        Identitas ident = dataIdentitas.get(position);
                         Bundle b = new Bundle();
                         b.putParcelable("ukm", mu);
+                        b.putParcelable("identitas",ident);
                         Fragment f = new DetailDonasi();
                         f.setArguments(b);
                         FragmentTransaction ft = DaftarUKMFragment.this.getActivity().getSupportFragmentManager().beginTransaction();

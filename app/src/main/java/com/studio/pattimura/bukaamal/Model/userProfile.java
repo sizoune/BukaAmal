@@ -1,13 +1,16 @@
 package com.studio.pattimura.bukaamal.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
  * Created by desmoncode on 19/05/17.
  */
 
-public class userProfile implements Serializable{
-    private String nama,avatar,badge,alamat,email,telepon,tglLahir,rekening,ktp;
+public class userProfile implements Serializable,Parcelable{
+    private String nama,avatar,badge,alamat,email,telepon,tglLahir,rekening,ktp,user_id;
 
     public userProfile(String nama, String avatar, String badge, String alamat, String email, String telepon, String tglLahir) {
         this.nama = nama;
@@ -36,6 +39,30 @@ public class userProfile implements Serializable{
         this.tglLahir = tglLahir;
     }
 
+    protected userProfile(Parcel in) {
+        nama = in.readString();
+        avatar = in.readString();
+        badge = in.readString();
+        alamat = in.readString();
+        email = in.readString();
+        telepon = in.readString();
+        tglLahir = in.readString();
+        rekening = in.readString();
+        ktp = in.readString();
+    }
+
+    public static final Creator<userProfile> CREATOR = new Creator<userProfile>() {
+        @Override
+        public userProfile createFromParcel(Parcel in) {
+            return new userProfile(in);
+        }
+
+        @Override
+        public userProfile[] newArray(int size) {
+            return new userProfile[size];
+        }
+    };
+
     public String getRekening() {
         return rekening;
     }
@@ -45,6 +72,14 @@ public class userProfile implements Serializable{
     }
 
     public userProfile() {
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getKtp() {
@@ -109,5 +144,23 @@ public class userProfile implements Serializable{
 
     public void setTglLahir(String tglLahir) {
         this.tglLahir = tglLahir;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(nama);
+        parcel.writeString(avatar);
+        parcel.writeString(badge);
+        parcel.writeString(alamat);
+        parcel.writeString(email);
+        parcel.writeString(telepon);
+        parcel.writeString(tglLahir);
+        parcel.writeString(rekening);
+        parcel.writeString(ktp);
     }
 }

@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -39,7 +41,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+import com.studio.pattimura.bukaamal.GalangDana;
 import com.studio.pattimura.bukaamal.Model.Berita;
+import com.studio.pattimura.bukaamal.Model.Identitas;
 import com.studio.pattimura.bukaamal.Model.userAuth;
 import com.studio.pattimura.bukaamal.Model.userProfile;
 import com.studio.pattimura.bukaamal.R;
@@ -70,6 +74,9 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
     private userProfile userProfile;
     private userAuth userData;
     private ProgressDialog progressdialog;
+    private File files;
+    public static TabLayout tabLayout;
+    private GalangDana g;
 
     public IdentitasFragment() {
         // Required empty public constructor
@@ -80,6 +87,9 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_identitas, container, false);
+
+        g = (GalangDana) getActivity();
+        tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
 
         preferences = this.getActivity().getSharedPreferences("prefProfile", MODE_PRIVATE);
         editor = preferences.edit();
@@ -108,16 +118,23 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
         imfoto = (ImageView) view.findViewById(R.id.fotoKTP);
         imfoto.setOnClickListener(this);
         imfoto.setAdjustViewBounds(true);
-
-        nama.setText(userProfile.getNama());
-        alamat.setText(userProfile.getAlamat());
-        notel.setText(userProfile.getTelepon());
+        if (!userProfile.getNama().equals("null"))
+            nama.setText(userProfile.getNama());
+        if (!userProfile.getAlamat().equals("null, null"))
+            alamat.setText(userProfile.getAlamat());
+        if (!userProfile.getTelepon().equals("null"))
+            notel.setText(userProfile.getTelepon());
 
         sp = (Spinner) view.findViewById(R.id.spinBank);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.KategoriBank, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(adapter);
+
+        if(g.getIdentitas()!=null){
+            setIdentitas();
+        }
+
         progressdialog = new ProgressDialog(this.getContext());
 
         return view;
@@ -134,12 +151,22 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
             if (!isValid()) {
                 Toast.makeText(IdentitasFragment.this.getContext(), "Lengkapi Data Berita Terlebih Dahulu", Toast.LENGTH_SHORT).show();
             } else {
-                if(!isOnline()){
+                if (!isOnline()) {
                     Toast.makeText(this.getContext(), "Cek Koneksi Internet Anda", Toast.LENGTH_SHORT).show();
-                }else {
-                    progressdialog.setMessage("Mohon tunggu...");
-                    progressdialog.show();
-                    Submit(foto);
+                } else {
+                    if(g.getBerita()!=null) {
+                        if(!g.getBerita().getStatus()) {
+                            progressdialog.setMessage("Mohon tunggu...");
+                            progressdialog.show();
+                            Submit(foto);
+                        }else{
+                            Toast.makeText(this.getContext(), "Data Sudah Diverifikasi Tidak Bisa Di Ubah", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        progressdialog.setMessage("Mohon tunggu...");
+                        progressdialog.show();
+                        Submit(foto);
+                    }
                 }
             }
         }
@@ -168,6 +195,7 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     // Choose file storage location
                     File file = new File(Environment.getExternalStorageDirectory(), UUID.randomUUID().toString() + ".jpg");
+                    files = file;
 //                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                     namefile = Uri.fromFile(file).getLastPathSegment();
@@ -189,9 +217,9 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
-                File file = new File(Environment.getExternalStorageDirectory().toString());
-                foto = Uri.fromFile(file);
-                Picasso.with(IdentitasFragment.this.getContext()).load(file).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+
+                foto = Uri.fromFile(files);
+                Picasso.with(IdentitasFragment.this.getContext()).load(files).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
             } else {
                 Toast.makeText(IdentitasFragment.this.getContext(), "Foto gagal diambil, silahkan coba lagi", Toast.LENGTH_SHORT).show();
             }
@@ -213,8 +241,8 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-    public void Submit(Uri fileUri){
-        try{
+    public void Submit(Uri fileUri) {
+        try {
             final StorageReference photoRef = mStorageRef.child(userData.getUser_id()).child("galangdana").child(fileUri.getLastPathSegment());
             photoRef.putFile(fileUri)
                     .addOnSuccessListener(IdentitasFragment.this.getActivity(), new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -239,11 +267,46 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
                                             userProfile.setRekening(norek.getText().toString());
                                             userProfile.setKtp(urlgambar);
                                             mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(id)).child("identitas").setValue(userProfile);
+                                            mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(id)).child("identitas").child("id").setValue(userData.getUser_id());
+                                            mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(id)).child("identitas").child("bank").setValue(sp.getSelectedItem().toString());
+                                            g.setIdentitasTrue(true);
+                                            progressdialog.dismiss();
+                                            TabLayout.Tab tab = tabLayout.getTabAt(2);
+                                            tab.select();
                                             mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id)).child("identitas").setValue(userProfile);
-                                        }else{
-
+                                            mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id)).child("identitas").child("id").setValue(userData.getUser_id());
+                                            mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id)).child("identitas").child("bank").setValue(sp.getSelectedItem().toString());
+                                        } else {
+                                            if(g.getBerita()!=null){
+                                                userProfile.setRekening(norek.getText().toString());
+                                                userProfile.setKtp(urlgambar);
+                                                mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(g.getBerita().getId())).child("identitas").setValue(userProfile);
+                                                mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(g.getBerita().getId())).child("identitas").child("id").setValue(userData.getUser_id());
+                                                mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(g.getBerita().getId())).child("identitas").child("bank").setValue(sp.getSelectedItem().toString());
+                                                g.setIdentitasTrue(true);
+                                                progressdialog.dismiss();
+                                                TabLayout.Tab tab = tabLayout.getTabAt(2);
+                                                tab.select();
+                                                mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getBerita().getId())).child("identitas").setValue(userProfile);
+                                                mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getBerita().getId())).child("identitas").child("id").setValue(userData.getUser_id());
+                                                mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getBerita().getId())).child("identitas").child("bank").setValue(sp.getSelectedItem().toString());
+                                            }
+                                            else {
+                                                userProfile.setRekening(norek.getText().toString());
+                                                userProfile.setKtp(urlgambar);
+                                                mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(g.getIdBerita())).child("identitas").setValue(userProfile);
+                                                mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(g.getIdBerita())).child("identitas").child("id").setValue(userData.getUser_id());
+                                                mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(g.getIdBerita())).child("identitas").child("bank").setValue(sp.getSelectedItem().toString());
+                                                g.setIdentitasTrue(true);
+                                                progressdialog.dismiss();
+                                                TabLayout.Tab tab = tabLayout.getTabAt(2);
+                                                tab.select();
+                                                mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getIdBerita())).child("identitas").setValue(userProfile);
+                                                mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getIdBerita())).child("identitas").child("id").setValue(userData.getUser_id());
+                                                mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getIdBerita())).child("identitas").child("bank").setValue(sp.getSelectedItem().toString());
+                                            }
                                         }
-                                        progressdialog.dismiss();
+//                                        progressdialog.dismiss();
                                     } else {
                                         /*userProfile.setRekening(norek.getText().toString());
                                         userProfile.setKtp(urlgambar);
@@ -266,7 +329,7 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
                     Toast.makeText(IdentitasFragment.this.getContext(), "Error: upload failed", Toast.LENGTH_SHORT).show();
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -277,4 +340,32 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
+
+    public void setIdentitas(){
+        nama.setText(g.getIdentitas().getNama());
+        alamat.setText(g.getIdentitas().getAlamat());
+        norek.setText(g.getIdentitas().getRekening());
+        notel.setText(g.getIdentitas().getTelepon());
+        if(g.getIdentitas().getBank().equals("BCA")){
+            sp.setSelection(0);
+        }
+        else if(g.getIdentitas().getBank().equals("BNI")){
+            sp.setSelection(1);
+        }
+        else if(g.getIdentitas().getBank().equals("BRI")){
+            sp.setSelection(2);
+        }
+        else if(g.getIdentitas().getBank().equals("MANDIRI")){
+            sp.setSelection(3);
+        }
+        mStorageRef = FirebaseStorage.getInstance().getReference(g.getIdentitas().getKtp());
+        mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(IdentitasFragment.this.getContext()).load(uri).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+            }
+        });
+        g.setIdentitasTrue(true);
+    }
+
 }

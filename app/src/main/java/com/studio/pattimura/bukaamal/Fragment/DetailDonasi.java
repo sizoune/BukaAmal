@@ -1,6 +1,7 @@
 package com.studio.pattimura.bukaamal.Fragment;
 
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -24,9 +25,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Adapter.AdapterGaleri;
+import com.studio.pattimura.bukaamal.Donasi;
 import com.studio.pattimura.bukaamal.Model.BantuanLain;
 import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.Galeri;
+import com.studio.pattimura.bukaamal.Model.Identitas;
 import com.studio.pattimura.bukaamal.Model.ModalUKM;
 import com.studio.pattimura.bukaamal.R;
 
@@ -45,6 +48,8 @@ public class DetailDonasi extends Fragment {
     private ArrayList<Galeri> dataGambar = new ArrayList<>();
     private Button donasi;
     private StorageReference mStorageref;
+    private Berita mu;
+    private Identitas identitas;
 
     public DetailDonasi() {
         // Required empty public constructor
@@ -64,10 +69,14 @@ public class DetailDonasi extends Fragment {
             TextView sisahari = (TextView) v.findViewById(R.id.txtsisahari);
             TextView judul = (TextView) v.findViewById(R.id.txtJudulDonasi);
             TextView desc = (TextView) v.findViewById(R.id.txtDescDonasi);
+            TextView nama = (TextView) v.findViewById(R.id.txtPenggalang);
+            TextView target = (TextView) v.findViewById(R.id.txtTargetDonasi);
+            ImageView avatar = (ImageView) v.findViewById(R.id.profile_detailDonasi);
             donasi = (Button) v.findViewById(R.id.btnDonasiSekarang);
             bnp = (NumberProgressBar) v.findViewById(R.id.numberbar5);
             if (b.getParcelable("ukm") != null) {
-                Berita mu = b.getParcelable("ukm");
+                mu = b.getParcelable("ukm");
+                identitas = b.getParcelable("identitas");
                 judul.setText(mu.getJudul());
                 desc.setText(mu.getDeskripsi());
                 mStorageref = FirebaseStorage.getInstance().getReference(mu.getFoto());
@@ -77,9 +86,13 @@ public class DetailDonasi extends Fragment {
                         Picasso.with(DetailDonasi.this.getContext()).load(uri).fit().into(cover);
                     }
                 });
-                danaterkumpul.setText("Rp." + mu.getDana_terkumpul());
-                bnp.setProgress(Math.round((mu.getDana_terkumpul() / 100) * 100));
-                persen.setText(Integer.toString(Math.round((mu.getDana_terkumpul() / 100) * 100)) + "%");
+                nama.setText(identitas.getNama());
+                Picasso.with(this.getContext()).load(identitas.getAvatar()).fit().into(avatar);
+                danaterkumpul.setText("Rp " + mu.getDana_terkumpul());
+                target.setText("Rp "+mu.getDana());
+                double d = (double) mu.getDana_terkumpul() /  mu.getDana();
+                bnp.setProgress((int)Math.round((d) * 100));
+                persen.setText(String.format("%.2f",((d) * 100)) + "%");
                 SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
                 try {
@@ -101,13 +114,16 @@ public class DetailDonasi extends Fragment {
             donasi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    TabLayout tabl = (TabLayout) DetailDonasi.this.getActivity().findViewById(R.id.tabs);
-                    tabl.setVisibility(View.VISIBLE);
-                    Fragment fragment = new DonasiSekarangFragment();
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.mainframe, fragment);
-                    fragmentTransaction.commit();
+//                    TabLayout tabl = (TabLayout) DetailDonasi.this.getActivity().findViewById(R.id.tabs);
+//                    tabl.setVisibility(View.VISIBLE);
+                    Intent intent = new Intent(DetailDonasi.this.getContext(),Donasi.class);
+                    intent.putExtra("Berita",mu);
+                    startActivity(intent);
+//                    Fragment fragment = new DonasiSekarangFragment();
+//                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.mainframe, fragment);
+//                    fragmentTransaction.commit();
                 }
             });
         }

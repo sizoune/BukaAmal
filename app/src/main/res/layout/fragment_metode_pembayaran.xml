@@ -45,7 +45,7 @@
             <RelativeLayout
                 android:id="@+id/layoutJumlah"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="260dp"
                 android:layout_below="@id/pilihmetode"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
@@ -109,9 +109,7 @@
                     <RadioButton
                         android:id="@+id/rbBca"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        ></RadioButton>
+                        android:layout_height="wrap_content"></RadioButton>
 
                     <RadioButton
                         android:id="@+id/rbBri"
@@ -121,6 +119,41 @@
                         ></RadioButton>
 
                 </RadioGroup>
+
+                <ImageView
+                    android:id="@+id/mandiri"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:layout_below="@id/metodetransfer"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/rbGrup"
+                    android:src="@drawable/mandiri_logo" />
+                <ImageView
+                    android:id="@+id/bni"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/mandiri"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/rbGrup"
+                    android:src="@drawable/bni_logo" />
+                <ImageView
+                    android:id="@+id/bca"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/bni"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/rbGrup"
+                    android:src="@drawable/bca_logo" />
+                <ImageView
+                    android:id="@+id/bri"
+                    android:layout_width="80dp"
+                    android:layout_height="70dp"
+                    android:layout_below="@id/bca"
+                    android:paddingLeft="-40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/rbGrup"
+                    android:src="@drawable/bri_logo" />
 
             </RelativeLayout>
 

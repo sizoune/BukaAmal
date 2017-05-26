@@ -44,7 +44,7 @@ public class AdapterDonasiSaya extends RecyclerView.Adapter<AdapterDonasiSaya.Vi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.kategori.setText(dataDonasisaya.get(position).getDataBerita().getJudul());
-        holder.desc.setText("Anda telah mendonasikan uang sebesar Rp. " + dataDonasisaya.get(position).getJumlah());
+        holder.desc.setText("Anda mendonasikan sebesar Rp. " + dataDonasisaya.get(position).getJumlah());
         mStorageRef = FirebaseStorage.getInstance().getReference(dataDonasisaya.get(position).getDataBerita().getFoto());
         mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

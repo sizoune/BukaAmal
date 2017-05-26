@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -15,7 +16,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -44,6 +48,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+import com.studio.pattimura.bukaamal.GalangDana;
 import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.userAuth;
 import com.studio.pattimura.bukaamal.Model.userProfile;
@@ -51,7 +56,9 @@ import com.studio.pattimura.bukaamal.R;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
@@ -78,6 +85,10 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
     private userAuth userData;
     private Berita berita;
     private ProgressDialog progressdialog;
+    private Drawable picKtp;
+    private File files;
+    public static TabLayout tabLayout;
+    private GalangDana g;
 
     public BuatberitaFragment() {
         // Required empty public constructor
@@ -87,6 +98,10 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_buatberita, container, false);
+
+        g = (GalangDana) getActivity();
+
+        tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
 
         preferences = this.getActivity().getSharedPreferences("prefTok", MODE_PRIVATE);
         editor = preferences.edit();
@@ -120,6 +135,10 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
         deadline = (EditText) view.findViewById(R.id.edDeadline);
         deadline.setOnClickListener(this);
 
+        if(g.getBerita()!=null){
+            setBerita();
+        }
+
         progressdialog = new ProgressDialog(this.getContext());
 
         return view;
@@ -127,7 +146,24 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        deadline.setText(dayOfMonth + "/" + (++monthOfYear) + "/" + year);
+        String tanggal;
+        long tanggalpilih = 0;
+        if (monthOfYear < 10) {
+            tanggal = String.valueOf(dayOfMonth + "/0" + (++monthOfYear) + "/" + year);
+        } else {
+            tanggal = String.valueOf(dayOfMonth + "/" + (++monthOfYear) + "/" + year);
+        }
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = sdf.parse(tanggal);
+            tanggalpilih = date.getTime();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (tanggalpilih < System.currentTimeMillis()) {
+            Toast.makeText(this.getContext(), "Deadline Harus Melebihi Tanggal Sekarang", Toast.LENGTH_SHORT).show();
+        } else
+            deadline.setText(tanggal);
     }
 
     @Override
@@ -153,12 +189,22 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
             if (!isValid()) {
                 Toast.makeText(BuatberitaFragment.this.getContext(), "Lengkapi Data Berita Terlebih Dahulu", Toast.LENGTH_SHORT).show();
             } else {
-                if(!isOnline()){
+                if (!isOnline()) {
                     Toast.makeText(this.getContext(), "Cek Koneksi Internet Anda", Toast.LENGTH_SHORT).show();
-                }else {
-                    progressdialog.setMessage("Mohon tunggu...");
-                    progressdialog.show();
-                    Submit(foto);
+                } else {
+                    if(g.getBerita()!=null) {
+                        if(!g.getBerita().getStatus()) {
+                            progressdialog.setMessage("Mohon tunggu...");
+                            progressdialog.show();
+                            Submit(foto);
+                        }else{
+                            Toast.makeText(this.getContext(), "Data Sudah Diverifikasi Tidak Bisa Di Ubah", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        progressdialog.setMessage("Mohon tunggu...");
+                        progressdialog.show();
+                        Submit(foto);
+                    }
                 }
             }
         }
@@ -187,6 +233,7 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     // Choose file storage location
                     File file = new File(Environment.getExternalStorageDirectory(), UUID.randomUUID().toString() + ".jpg");
+                    files = file;
 //                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                     namefile = Uri.fromFile(file).getLastPathSegment();
@@ -208,9 +255,10 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
-                File file = new File(Environment.getExternalStorageDirectory().toString());
-                foto = Uri.fromFile(file);
-                Picasso.with(BuatberitaFragment.this.getContext()).load(file).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+
+                foto = Uri.fromFile(files);
+//                picKtp = Drawable.createFromPath(foto.getPath());
+                Picasso.with(BuatberitaFragment.this.getContext()).load(files).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
             } else {
                 Toast.makeText(BuatberitaFragment.this.getContext(), "Foto gagal diambil, silahkan coba lagi", Toast.LENGTH_SHORT).show();
             }
@@ -247,22 +295,42 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
                                 .load(photoRef)
                                 .dontAnimate()
                                 .into(gambarprof);*/
+
                             final long id = Long.parseLong(userData.getUser_id() + "1");
                             Query query = mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana");
                             query.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
-                                        long val = dataSnapshot.getChildrenCount();
-                                        berita = new Berita(id + val, judul.getText().toString(), deadline.getText().toString(), sp.getSelectedItem().toString(), lokasi.getText().toString(), cerita.getText().toString(), urlgambar, false, false, Long.parseLong(dana.getText().toString()), 0);
-                                        mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(id + val)).child("berita").setValue(berita);
-                                        mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id + val)).child("berita").setValue(berita);
-                                        progressdialog.dismiss();
+                                        if(g.getBerita()!=null){
+                                            berita = new Berita(g.getBerita().getId(), judul.getText().toString(), deadline.getText().toString(), sp.getSelectedItem().toString(), lokasi.getText().toString(), cerita.getText().toString(), urlgambar, false, false, Long.parseLong(dana.getText().toString()), 0);
+                                            mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(g.getBerita().getId())).child("berita").setValue(berita);
+                                            g.setBeritaTrue(true);
+                                            g.setIdBerita(g.getBerita().getId());
+                                            progressdialog.dismiss();
+                                            TabLayout.Tab tab = tabLayout.getTabAt(1);
+                                            tab.select();
+                                            mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getBerita().getId())).child("berita").setValue(berita);
+                                        }else {
+                                            long val = dataSnapshot.getChildrenCount();
+                                            berita = new Berita(id + val, judul.getText().toString(), deadline.getText().toString(), sp.getSelectedItem().toString(), lokasi.getText().toString(), cerita.getText().toString(), urlgambar, false, false, Long.parseLong(dana.getText().toString()), 0);
+                                            mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(id + val)).child("berita").setValue(berita);
+                                            g.setBeritaTrue(true);
+                                            g.setIdBerita(id + val);
+                                            progressdialog.dismiss();
+                                            TabLayout.Tab tab = tabLayout.getTabAt(1);
+                                            tab.select();
+                                            mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id + val)).child("berita").setValue(berita);
+                                        }
                                     } else {
                                         berita = new Berita(id, judul.getText().toString(), deadline.getText().toString(), sp.getSelectedItem().toString(), lokasi.getText().toString(), cerita.getText().toString(), urlgambar, false, false, Long.parseLong(dana.getText().toString()), 0);
                                         mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(id)).child("berita").setValue(berita);
-                                        mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id)).child("berita").setValue(berita);
+                                        g.setBeritaTrue(true);
+                                        g.setIdBerita(id);
                                         progressdialog.dismiss();
+                                        TabLayout.Tab tab = tabLayout.getTabAt(1);
+                                        tab.select();
+                                        mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id)).child("berita").setValue(berita);
                                     }
                                 }
 
@@ -279,7 +347,7 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
                     Toast.makeText(BuatberitaFragment.this.getContext(), "Error: upload failed", Toast.LENGTH_SHORT).show();
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             progressdialog.dismiss();
             e.printStackTrace();
         }
@@ -290,6 +358,39 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
                 (ConnectivityManager) this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+    public void setBerita(){
+        judul.setText(g.getBerita().getJudul());
+        dana.setText(String.valueOf(g.getBerita().getDana()));
+        deadline.setText(g.getBerita().getDeadline());
+        if(g.getBerita().getKategori().equals("Bencana Alam")){
+            sp.setSelection(0);
+        }
+        else if(g.getBerita().getKategori().equals("Penyakit")){
+            sp.setSelection(1);
+        }
+        else if(g.getBerita().getKategori().equals("Modal UKM")){
+            sp.setSelection(2);
+        }
+        else if(g.getBerita().getKategori().equals("Yatim Piatu")){
+            sp.setSelection(3);
+        }
+        lokasi.setText(g.getBerita().getLokasi());
+        cerita.setText(g.getBerita().getDeskripsi());
+        mStorageRef = FirebaseStorage.getInstance().getReference(g.getBerita().getFoto());
+        mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(BuatberitaFragment.this.getContext()).load(uri).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+            }
+        });
+        g.setBeritaTrue(true);
+        if (g.getIdentitas()!=null)
+            g.setIdentitasTrue(true);
+
+        if(g.getBerita().getStatus())
+            g.setVerifikasiTrue(true);
     }
 
 }

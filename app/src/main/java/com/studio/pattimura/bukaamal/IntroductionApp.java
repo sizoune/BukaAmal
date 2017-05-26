@@ -89,11 +89,11 @@ public class IntroductionApp extends AppIntro {
                                 editor.putString("prefProfile", token);
                                 editor.commit();
                             } else {
-                                Toast.makeText(IntroductionApp.this, "Cek Koneksi Internet anda 1", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(IntroductionApp.this, "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
                             Log.e(TAG, "Message : " + e.getMessage());
-                            Toast.makeText(IntroductionApp.this, "Cek Koneksi Internet anda 2", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(IntroductionApp.this, "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
                         }
 //tempat response di dapatkan
                     }

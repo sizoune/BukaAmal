@@ -4,339 +4,346 @@
     android:layout_height="match_parent"
     tools:context="com.studio.pattimura.bukaamal.Fragment.BagikanFragment">
 
-    <ScrollView
 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:fitsSystemWindows="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
 
-        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swiperefresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fitsSystemWindows="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
-            <TextView
-                android:id="@+id/titleBagikan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="Bagikan Berita Anda"
-                android:textColor="@color/hitam"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/layoutContent"
+            <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/titleBagikan"
+                android:layout_height="match_parent">
 
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="35dp">
+                <TextView
+                    android:id="@+id/titleBagikan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="Bagikan Berita Anda"
+                    android:textColor="@color/hitam"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                <RelativeLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/layoutContent"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingBottom="15dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="15dp">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/titleBagikan"
 
-                    <TextView
-                        android:id="@+id/judul"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:text="Judul Berita"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="35dp">
 
-                    <TextView
-                        android:id="@+id/titik1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/judul"
-                        android:text=":"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="15dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="15dp">
 
-                    <TextView
-                        android:id="@+id/txtJudul"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_toRightOf="@id/titik1"
-                        android:fontFamily="sans-serif"
-                        android:text="Anak yatim membutuhkan dana"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp" />
+                        <TextView
+                            android:id="@+id/judul"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="Judul Berita"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/dana"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtJudul"
-                        android:layout_marginTop="7dp"
-                        android:fontFamily="sans-serif"
-                        android:text="Dana"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/titik1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/judul"
+                            android:text=":"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/titik2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtJudul"
-                        android:layout_marginLeft="55dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/dana"
-                        android:text=":"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/txtJudul"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@id/titik1"
+                            android:fontFamily="sans-serif"
+                            android:text="Anak yatim membutuhkan dana"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp" />
 
-                    <TextView
-                        android:id="@+id/txtDana"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtJudul"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/titik2"
-                        android:fontFamily="sans-serif"
-                        android:text="Rp 2.000.000"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp" />
+                        <TextView
+                            android:id="@+id/dana"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtJudul"
+                            android:layout_marginTop="7dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Dana"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/deadline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtDana"
-                        android:layout_marginTop="7dp"
-                        android:fontFamily="sans-serif"
-                        android:text="Deadline"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/titik2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtJudul"
+                            android:layout_marginLeft="55dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@id/dana"
+                            android:text=":"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/titik3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtDana"
-                        android:layout_marginLeft="32.5dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/deadline"
-                        android:text=":"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/txtDana"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtJudul"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@id/titik2"
+                            android:fontFamily="sans-serif"
+                            android:text="Rp 2.000.000"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp" />
 
-                    <TextView
-                        android:id="@+id/txtDeadline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtDana"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/titik3"
-                        android:fontFamily="sans-serif"
-                        android:text="17/08/2017"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp" />
+                        <TextView
+                            android:id="@+id/deadline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtDana"
+                            android:layout_marginTop="7dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Deadline"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/kategori"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtDeadline"
-                        android:layout_marginTop="7dp"
-                        android:fontFamily="sans-serif"
-                        android:text="Kategori"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/titik3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtDana"
+                            android:layout_marginLeft="32.5dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@id/deadline"
+                            android:text=":"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/titik4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtDeadline"
-                        android:layout_marginLeft="32.5dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/deadline"
-                        android:text=":"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/txtDeadline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtDana"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@id/titik3"
+                            android:fontFamily="sans-serif"
+                            android:text="17/08/2017"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp" />
 
-                    <TextView
-                        android:id="@+id/txtKategori"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtDeadline"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/titik4"
-                        android:fontFamily="sans-serif"
-                        android:text="Anak Yatim"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp" />
+                        <TextView
+                            android:id="@+id/kategori"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtDeadline"
+                            android:layout_marginTop="7dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Kategori"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/lokasi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtKategori"
-                        android:layout_marginTop="7dp"
-                        android:fontFamily="sans-serif"
-                        android:text="Lokasi"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/titik4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtDeadline"
+                            android:layout_marginLeft="32.5dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@id/deadline"
+                            android:text=":"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/titik5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtKategori"
-                        android:layout_marginLeft="45dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/lokasi"
-                        android:text=":"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/txtKategori"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtDeadline"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@id/titik4"
+                            android:fontFamily="sans-serif"
+                            android:text="Anak Yatim"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp" />
 
-                    <TextView
-                        android:id="@+id/txtLokasi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtKategori"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/titik5"
-                        android:fontFamily="sans-serif"
-                        android:text="Buah Batu, Bandung"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp" />
+                        <TextView
+                            android:id="@+id/lokasi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtKategori"
+                            android:layout_marginTop="7dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Lokasi"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtLokasi"
-                        android:layout_marginTop="7dp"
-                        android:fontFamily="sans-serif"
-                        android:text="Status"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/titik5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtKategori"
+                            android:layout_marginLeft="45dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@id/lokasi"
+                            android:text=":"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/titik6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtLokasi"
-                        android:layout_marginLeft="45dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/status"
-                        android:text=":"
-                        android:textColor="@color/hitam"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/txtLokasi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtKategori"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@id/titik5"
+                            android:fontFamily="sans-serif"
+                            android:text="Buah Batu, Bandung"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp" />
 
-                    <TextView
-                        android:id="@+id/txtStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/txtLokasi"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toRightOf="@id/titik6"
-                        android:fontFamily="sans-serif"
-                        android:text="Disetujui"
-                        android:textColor="@color/hijau"
-                        android:textSize="14dp" />
+                        <TextView
+                            android:id="@+id/status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtLokasi"
+                            android:layout_marginTop="7dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Status"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/titik6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtLokasi"
+                            android:layout_marginLeft="45dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@id/status"
+                            android:text=":"
+                            android:textColor="@color/hitam"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-            </android.support.v7.widget.CardView>
+                        <TextView
+                            android:id="@+id/txtStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtLokasi"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_toRightOf="@id/titik6"
+                            android:fontFamily="sans-serif"
+                            android:text="Disetujui"
+                            android:textColor="@color/hijau"
+                            android:textSize="14dp" />
 
-            <Button
-                android:id="@+id/btnTwitter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layoutContent"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="55dp"
-                android:background="@drawable/selector_button_login"
-                android:drawableLeft="@drawable/icon_twitter"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:minHeight="45dp"
-                android:paddingLeft="110dip"
-                android:paddingRight="110dip"
-                android:text="Twitter"
-                android:textAllCaps="false"
-                android:textColor="@color/putih" />
+                    </RelativeLayout>
 
-            <Button
-                android:id="@+id/btnFacebook"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btnTwitter"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="3dp"
-                android:background="@drawable/selector_button_login"
-                android:drawableLeft="@drawable/icon_facebook"
-                android:elevation="2dp"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:paddingLeft="110dip"
-                android:paddingRight="110dip"
-                android:text="Facebook"
-                android:textAllCaps="false"
-                android:textColor="@color/putih" />
+                </android.support.v7.widget.CardView>
 
-            <Button
-                android:id="@+id/btnLinkein"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btnFacebook"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="3dp"
-                android:background="@drawable/selector_button_login"
-                android:drawableLeft="@drawable/icon_linkedin"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:paddingLeft="110dip"
-                android:paddingRight="110dip"
-                android:text="Linkedln"
-                android:textAllCaps="false"
-                android:textColor="@color/putih" />
+                <Button
+                    android:id="@+id/btnTwitter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutContent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="55dp"
+                    android:background="@drawable/selector_button_login"
+                    android:drawableLeft="@drawable/icon_twitter"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:minHeight="45dp"
+                    android:paddingLeft="110dip"
+                    android:paddingRight="110dip"
+                    android:text="Twitter"
+                    android:textAllCaps="false"
+                    android:textColor="@color/putih" />
+
+                <Button
+                    android:id="@+id/btnFacebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btnTwitter"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/selector_button_login"
+                    android:drawableLeft="@drawable/icon_facebook"
+                    android:elevation="2dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:paddingLeft="110dip"
+                    android:paddingRight="110dip"
+                    android:text="Facebook"
+                    android:textAllCaps="false"
+                    android:textColor="@color/putih" />
+
+                <Button
+                    android:id="@+id/btnLinkein"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btnFacebook"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/selector_button_login"
+                    android:drawableLeft="@drawable/icon_linkedin"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:paddingLeft="110dip"
+                    android:paddingRight="110dip"
+                    android:text="Linkedln"
+                    android:textAllCaps="false"
+                    android:textColor="@color/putih" />
 
 
-        </RelativeLayout>
-    </ScrollView>
+            </RelativeLayout>
+            </ScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </FrameLayout>

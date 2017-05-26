@@ -6,23 +6,38 @@
     android:layout_height="match_parent"
     tools:context="com.studio.pattimura.bukaamal.Fragment.DetailGalangdanDonasiAdmin">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:minHeight="@dimen/abc_action_bar_default_height_material"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <TextView
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Detail"
-            android:textColor="@color/putih"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_gravity="center">
 
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
     </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -123,7 +138,7 @@
                                         android:layout_centerVertical="true"
                                         android:text="terkumpul dari target"
                                         android:textColor="@color/putih"
-                                        android:textSize="10sp" />
+                                        android:textSize="12sp" />
 
                                 </RelativeLayout>
                             </FrameLayout>
@@ -294,6 +309,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/orang"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Penggalang Dana"
