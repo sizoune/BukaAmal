@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Anak Yatim Membutuhkan Dana"
                 android:textColor="@color/hitam"
@@ -35,6 +36,7 @@
                 android:layout_below="@id/titleDonasi"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Mohon Lakukan Pembayaran"
                 android:textColor="@color/merahBukaAmal"
@@ -44,13 +46,14 @@
 
             <RelativeLayout
                 android:id="@+id/layoutJumlah"
-                android:layout_width="match_parent"
+                android:layout_width="550dp"
                 android:layout_height="230dp"
-                android:layout_below="@id/mohon"
+                android:layout_below="@+id/mohon"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/shape_card_galangdana"
+                android:gravity="center"
                 android:paddingBottom="15dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -61,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:fontFamily="sans-serif"
                     android:gravity="center_horizontal"
                     android:text="Transfer"
                     android:textColor="@color/hitam"
@@ -83,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/imgMetode"
                     android:layout_marginLeft="10dp"
+                    android:fontFamily="sans-serif"
                     android:text="Nama Penerima"
                     android:textColor="@color/hitam"
                     android:textSize="14dp" />
@@ -106,6 +111,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_toRightOf="@id/titik1"
+                    android:fontFamily="sans-serif"
                     android:text="PT BukaAmal Indonesia"
                     android:textColor="@color/hitam"
                     android:textSize="14dp" />
@@ -117,6 +123,7 @@
                     android:layout_below="@id/txtNamaPenerima"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"
                     android:text="Bank"
                     android:textColor="@color/hitam"
                     android:textSize="14dp" />
@@ -125,10 +132,10 @@
                     android:id="@+id/titik2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txtNamaPenerima"
+                    android:layout_above="@+id/titik3"
                     android:layout_marginLeft="78dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@id/bank"
+                    android:layout_toStartOf="@+id/txtNamaPenerima"
+                    android:fontFamily="sans-serif"
                     android:text=":"
                     android:textColor="@color/hitam"
                     android:textSize="14dp" />
@@ -142,6 +149,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@id/titik2"
+                    android:fontFamily="sans-serif"
                     android:text="Bank Mandiri"
                     android:textColor="@color/hitam"
                     android:textSize="14dp" />
@@ -150,9 +158,10 @@
                     android:id="@+id/norek"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txtBank"
+                    android:layout_alignBaseline="@+id/titik3"
+                    android:layout_alignBottom="@+id/titik3"
+                    android:layout_alignParentStart="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
                     android:text="No. Rekening"
                     android:textColor="@color/hitam"
                     android:textSize="14dp" />
@@ -165,6 +174,7 @@
                     android:layout_marginLeft="28dp"
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@id/norek"
+                    android:fontFamily="sans-serif"
                     android:text=":"
                     android:textColor="@color/hitam"
                     android:textSize="14dp" />
@@ -180,6 +190,7 @@
                     android:layout_toRightOf="@id/titik3"
                     android:text="165 000 089 3748"
                     android:textColor="@color/hitam"
+
                     android:textSize="14dp" />
 
             </RelativeLayout>

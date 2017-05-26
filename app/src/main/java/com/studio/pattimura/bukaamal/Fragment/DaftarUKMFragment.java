@@ -64,7 +64,7 @@ public class DaftarUKMFragment extends Fragment {
     }
 
     private void getAllData() {
-        database.getReference("admin").child("galang_dana").child("belum_terverifikasi").addValueEventListener(new ValueEventListener() {
+        database.getReference("admin").child("galang_dana").child("sudah_terverifikasi").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {

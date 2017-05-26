@@ -213,15 +213,17 @@
                 android:id="@+id/rbDisclaim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/layoutLangkah5"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/layoutLangkah5"
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
                 android:buttonTint="@color/merahBukaAmal"
                 android:fontFamily="sans-serif"
                 android:text="Saya telah menyetujui langkah-langkah untuk menggalang dana di BukaAmal"
                 android:textColor="@color/hitam"
-                android:textSize="14dp" />
+                android:textSize="10dp" />
 
             <Button
                 android:id="@+id/btnGalangDana"

@@ -211,6 +211,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:ellipsize="end"
+                    android:fontFamily="sans-serif"
                     android:maxLines="1"
                     android:text="Judul"
                     android:textColor="@color/hitam"
@@ -225,6 +226,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif"
                     android:text="ini Deskripsi"
                     android:textColor="@color/hitam"
                     android:textSize="14sp" />
@@ -245,6 +247,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/recyclerViewDonasi"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="2dp"
                     android:text="Galeri Gambar"
                     android:textColor="@color/hitam"
@@ -263,6 +266,7 @@
                         android:id="@+id/profile_detailDonasi"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
+                        android:layout_marginBottom="20dp"
                         android:layout_marginTop="2dp"
                         android:src="@drawable/ic_user2" />
 

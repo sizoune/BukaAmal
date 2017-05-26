@@ -180,7 +180,7 @@ public class LandingPage extends AppCompatActivity
         } else if (id == R.id.profil) {
             logo.setVisibility(View.GONE);
             tabLayout.setVisibility(View.GONE);
-            txtJudul.setText("Profil");
+            txtJudul.setText("Profile");
             fragment = new DetailProfileFragment();
             tukar = getSupportFragmentManager().beginTransaction();
             tukar.replace(R.id.mainframe, fragment);
