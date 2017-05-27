@@ -4,13 +4,16 @@ package com.studio.pattimura.bukaamal.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,13 +42,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import static android.R.attr.fragment;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class DetailDonasi extends Fragment {
     private NumberProgressBar bnp;
-    private AdapterGaleri adapter;
-    private ArrayList<Galeri> dataGambar = new ArrayList<>();
+    //    private AdapterGaleri adapter;
+//    private ArrayList<Galeri> dataGambar = new ArrayList<>();
     private Button donasi;
     private StorageReference mStorageref;
     private Berita mu;
@@ -89,14 +94,13 @@ public class DetailDonasi extends Fragment {
                 nama.setText(identitas.getNama());
                 Picasso.with(this.getContext()).load(identitas.getAvatar()).fit().into(avatar);
                 danaterkumpul.setText("Rp " + mu.getDana_terkumpul());
-                target.setText("Rp "+mu.getDana());
-                double d = (double) mu.getDana_terkumpul() /  mu.getDana();
+                target.setText("Rp " + mu.getDana());
+                double d = (double) mu.getDana_terkumpul() / mu.getDana();
 
-                if (d*100 < 100) {
-                    bnp.setProgress((int)Math.round((d) * 100));
+                if (d * 100 < 100) {
+                    bnp.setProgress((int) Math.round((d) * 100));
                     persen.setText(String.format("%.2f", ((d) * 100)) + "%");
-                }
-                else {
+                } else {
                     bnp.setProgress(100);
                     persen.setText("100%");
                 }
@@ -111,20 +115,20 @@ public class DetailDonasi extends Fragment {
                 }
                 //dataGambar = mu.getGambar();
             }
-            LinearLayoutManager layoutManager
-                    = new LinearLayoutManager(DetailDonasi.this.getContext(), LinearLayoutManager.HORIZONTAL, false);
-            RecyclerView rv = (RecyclerView) v.findViewById(R.id.recyclerViewDonasi);
-            adapter = new AdapterGaleri(DetailDonasi.this.getContext(), dataGambar);
-//            Toast.makeText(DetailDonasi.this.getContext(), Integer.toString(adapter.getItemCount()), Toast.LENGTH_SHORT).show();
-            rv.setAdapter(adapter);
-            rv.setLayoutManager(layoutManager);
+//            LinearLayoutManager layoutManager
+//                    = new LinearLayoutManager(DetailDonasi.this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+//            RecyclerView rv = (RecyclerView) v.findViewById(R.id.recyclerViewDonasi);
+//            adapter = new AdapterGaleri(DetailDonasi.this.getContext(), dataGambar);
+////            Toast.makeText(DetailDonasi.this.getContext(), Integer.toString(adapter.getItemCount()), Toast.LENGTH_SHORT).show();
+//            rv.setAdapter(adapter);
+//            rv.setLayoutManager(layoutManager);
             donasi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 //                    TabLayout tabl = (TabLayout) DetailDonasi.this.getActivity().findViewById(R.id.tabs);
 //                    tabl.setVisibility(View.VISIBLE);
-                    Intent intent = new Intent(DetailDonasi.this.getContext(),Donasi.class);
-                    intent.putExtra("Berita",mu);
+                    Intent intent = new Intent(DetailDonasi.this.getContext(), Donasi.class);
+                    intent.putExtra("Berita", mu);
                     startActivity(intent);
 //                    Fragment fragment = new DonasiSekarangFragment();
 //                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -136,6 +140,24 @@ public class DetailDonasi extends Fragment {
         }
 
         return v;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    Log.e("gif--","fragment back key is clicked");
+                    getActivity().getSupportFragmentManager().popBackStack("BerandaFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
 

@@ -209,6 +209,7 @@ public class BerandaFragment extends Fragment {
                         f.setArguments(b);
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.replace(R.id.mainframe, f);
+                        ft.addToBackStack("BerandaFragment");
                         ft.commit();
                         TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
                         NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
