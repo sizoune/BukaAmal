@@ -188,7 +188,8 @@ public class LandingPage extends AppCompatActivity
         } else if (id == R.id.bantuan) {
 
         } else if (id == R.id.tentang) {
-
+            Intent intent = new Intent(LandingPage.this,Tentang.class);
+            startActivity(intent);
         } else if (id == R.id.logout) {
             LogoutDialogFragment alertdFragment = new LogoutDialogFragment();
             // Show Alert DialogFragment
