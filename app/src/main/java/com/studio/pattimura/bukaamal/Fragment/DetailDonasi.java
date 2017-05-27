@@ -29,6 +29,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Adapter.AdapterGaleri;
 import com.studio.pattimura.bukaamal.Donasi;
+import com.studio.pattimura.bukaamal.LandingPage;
 import com.studio.pattimura.bukaamal.Model.BantuanLain;
 import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.Galeri;
@@ -113,28 +114,15 @@ public class DetailDonasi extends Fragment {
                 } catch (ParseException e) {
                     Log.e("parse error", e.getMessage());
                 }
-                //dataGambar = mu.getGambar();
             }
-//            LinearLayoutManager layoutManager
-//                    = new LinearLayoutManager(DetailDonasi.this.getContext(), LinearLayoutManager.HORIZONTAL, false);
-//            RecyclerView rv = (RecyclerView) v.findViewById(R.id.recyclerViewDonasi);
-//            adapter = new AdapterGaleri(DetailDonasi.this.getContext(), dataGambar);
-////            Toast.makeText(DetailDonasi.this.getContext(), Integer.toString(adapter.getItemCount()), Toast.LENGTH_SHORT).show();
-//            rv.setAdapter(adapter);
-//            rv.setLayoutManager(layoutManager);
+
             donasi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    TabLayout tabl = (TabLayout) DetailDonasi.this.getActivity().findViewById(R.id.tabs);
-//                    tabl.setVisibility(View.VISIBLE);
                     Intent intent = new Intent(DetailDonasi.this.getContext(), Donasi.class);
                     intent.putExtra("Berita", mu);
                     startActivity(intent);
-//                    Fragment fragment = new DonasiSekarangFragment();
-//                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                    fragmentTransaction.replace(R.id.mainframe, fragment);
-//                    fragmentTransaction.commit();
+
                 }
             });
         }
@@ -151,8 +139,14 @@ public class DetailDonasi extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    Log.e("gif--","fragment back key is clicked");
+                    Log.e("gif--", "fragment back key is clicked");
+
                     getActivity().getSupportFragmentManager().popBackStack("BerandaFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    getActivity().getSupportFragmentManager().popBackStack("DaftarUKMFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    LandingPage l = (LandingPage) getActivity();
+                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.getLogo());
+                    l.getTxtJudul().setText("");
+
                     return true;
                 }
                 return false;

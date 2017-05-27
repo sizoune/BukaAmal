@@ -83,6 +83,10 @@ public class BerandaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
+        dataUKM = new ArrayList<>();
+        dataBantuan = new ArrayList<>();
+        dataIdentitasUKM = new ArrayList<>();
+        dataIdentitasBantuan = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance();
         View view = inflater.inflate(R.layout.fragment_beranda, container, false);
         avatar = (ImageView) view.findViewById(R.id.profile_imageBeranda);
@@ -253,6 +257,7 @@ public class BerandaFragment extends Fragment {
                         Fragment f = new DonasiFragment();
                         FragmentTransaction ft = BerandaFragment.this.getFragmentManager().beginTransaction();
                         ft.replace(R.id.mainframe, f);
+                        ft.addToBackStack("BerandaFragment");
                         ft.commit();
                         TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
                         NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
@@ -274,6 +279,7 @@ public class BerandaFragment extends Fragment {
                         FragmentTransaction ft = BerandaFragment.this.getFragmentManager().beginTransaction();
                         f.setArguments(b);
                         ft.replace(R.id.mainframe, f);
+                        ft.addToBackStack("BerandaFragment");
                         ft.commit();
                         TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
                         NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
@@ -365,7 +371,7 @@ public class BerandaFragment extends Fragment {
                 });
 
         //Adding the string request to the queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext().getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(BerandaFragment.this.getContext().getApplicationContext());
         requestQueue.add(stringRequest);
     }
 

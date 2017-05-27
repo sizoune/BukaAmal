@@ -86,6 +86,7 @@ public class BantuanLainFragment extends Fragment {
                         TabLayout tabl = (TabLayout) BantuanLainFragment.this.getActivity().findViewById(R.id.tabs);
                         tabl.setVisibility(View.GONE);
                         ft.replace(R.id.mainframe, f);
+                        ft.addToBackStack("BantuanLainFragment");
                         ft.commit();
                     }
                 });
