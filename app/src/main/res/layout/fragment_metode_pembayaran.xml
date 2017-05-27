@@ -80,7 +80,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="Metode Transfer"
+                    android:text="Transfer melalui bank"
                     android:textColor="@color/merahBukaAmal"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -95,32 +95,63 @@
                     <RadioButton
                         android:id="@+id/rbMandiri"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        ></RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/rbBni"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        ></RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/rbBca"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        ></RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/rbBri"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        ></RadioButton>
+                        android:layout_height="wrap_content"></RadioButton>
 
                 </RadioGroup>
+
+                <RadioButton
+                    android:id="@+id/rbBca"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/rbGrup"></RadioButton>
+
+                <RadioButton
+                    android:id="@+id/rbBri"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/rbBca"
+                    android:layout_marginTop="18dp"></RadioButton>
+
+                <RadioButton
+                    android:id="@+id/rbBni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/rbBri"
+                    android:layout_alignBottom="@+id/rbBri"
+                    android:layout_alignParentStart="true">
+
+
+                </RadioButton>
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@+id/btnBukaDompet"
+                    android:layout_alignTop="@+id/rbGrup"
+                    android:src="@drawable/mandiri_logo" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_alignBottom="@+id/rbBni"
+                    android:layout_toEndOf="@+id/rbBni"
+                    android:src="@drawable/bni_logo" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/metodetransfer"
+                    android:layout_toStartOf="@+id/rbBca"
+                    android:src="@drawable/bri_logo" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_alignBottom="@+id/rbBri"
+                    android:layout_toStartOf="@+id/rbBri"
+                    android:src="@drawable/bca_logo" />
 
             </RelativeLayout>
 

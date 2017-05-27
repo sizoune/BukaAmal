@@ -6,8 +6,8 @@
     tools:context="com.studio.pattimura.bukaamal.Fragment.DetailDonasi">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/bawah"
@@ -22,9 +22,12 @@
                 android:id="@+id/btnDonasiSekarang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/selector_button_selengkapnya"
+                android:padding="10dp"
                 android:text="Donasi Sekarang"
                 android:textAllCaps="false"
                 android:textColor="@color/putih" />
@@ -78,6 +81,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerHorizontal="true"
                                         android:layout_centerVertical="true"
+                                        android:fontFamily="sans-serif"
                                         android:maxLines="1"
                                         android:text="Rp.1.000.000.000"
                                         android:textColor="@color/putih"
@@ -100,7 +104,8 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerHorizontal="true"
                                         android:layout_centerVertical="true"
-                                        android:text="terkumpul dari target"
+                                        android:fontFamily="sans-serif"
+                                        android:text="Terkumpul dari target"
                                         android:textColor="@color/putih"
                                         android:textSize="12sp" />
 
@@ -122,6 +127,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerHorizontal="true"
                                         android:layout_centerVertical="true"
+                                        android:fontFamily="sans-serif"
                                         android:maxLines="1"
                                         android:text="Rp.2.000.000.000"
                                         android:textColor="@color/putih"
@@ -157,16 +163,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:fontFamily="sans-serif"
                         android:text="100%"
                         android:textColor="@color/hitam"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="dana yang terkumpul"
+                        android:fontFamily="sans-serif"
+                        android:text="Dana yang terkumpul"
                         android:textColor="@color/hitam"
                         android:textSize="14sp" />
 
@@ -186,6 +195,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="2dp"
+                            android:fontFamily="sans-serif"
                             android:text="123"
                             android:textColor="@color/hitam"
                             android:textSize="16sp"
@@ -196,7 +206,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="10dp"
-                            android:text="Hari Lagi"
+                            android:fontFamily="sans-serif"
+                            android:text="Hari lagi"
                             android:textColor="@color/hitam"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -256,7 +267,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_below="@+id/txtGal"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -266,7 +277,7 @@
                         android:id="@+id/profile_detailDonasi"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginTop="2dp"
                         android:src="@drawable/ic_user2" />
 

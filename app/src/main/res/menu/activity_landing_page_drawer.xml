@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/profil"
-            android:icon="@drawable/iconberanda"
+            android:icon="@drawable/icon_profil"
             android:title="Profil" />
         <item
             android:id="@+id/beranda"
@@ -20,7 +20,7 @@
             android:title="Galang Dana" />
         <item
             android:id="@+id/cairkan"
-            android:icon="@drawable/iconberanda"
+            android:icon="@drawable/icon_cairkan"
             android:title="Cairkan Dana" />
     </group>
 
@@ -37,8 +37,8 @@
             android:title="Bantuan" />
         <item
             android:id="@+id/tentang"
-            android:icon="@drawable/tentang"
-            android:title="Tentang Aplikasi" />
+            android:icon="@drawable/icon_tentang"
+            android:title="Tentang" />
         <item
             android:id="@+id/logout"
             android:icon="@drawable/logout"
