@@ -23,25 +23,35 @@ public class ModalUKM implements Parcelable {
         }
     };
     private String tanggal, judul, deskripsi;
-    private int danaterkumpul;
+    private long dana_terkumpul,dana;
     private float persen;
     private ArrayList<Galeri> gambar;
 
 
-    public ModalUKM(String tanggal, String judul, String deskripsi, int danaterkumpul, float persen) {
+//    public ModalUKM(String tanggal, String judul, String deskripsi, long dana_terkumpul, float persen) {
+//        gambar = new ArrayList<>();
+//        this.tanggal = tanggal;
+//        this.judul = judul;
+//        this.deskripsi = deskripsi;
+//        this.dana_terkumpul = dana_terkumpul;
+//        this.persen = persen;
+//    }
+
+    public ModalUKM(String tanggal, String judul, String deskripsi, long dana_terkumpul,long dana) {
         gambar = new ArrayList<>();
         this.tanggal = tanggal;
         this.judul = judul;
         this.deskripsi = deskripsi;
-        this.danaterkumpul = danaterkumpul;
-        this.persen = persen;
+        this.dana_terkumpul = dana_terkumpul;
+        this.dana = dana;
     }
 
     protected ModalUKM(Parcel in) {
         tanggal = in.readString();
         judul = in.readString();
         deskripsi = in.readString();
-        danaterkumpul = in.readInt();
+        dana_terkumpul = in.readLong();
+        dana = in.readLong();
         persen = in.readFloat();
         gambar = in.createTypedArrayList(Galeri.CREATOR);
     }
@@ -70,14 +80,6 @@ public class ModalUKM implements Parcelable {
         this.deskripsi = deskripsi;
     }
 
-    public int getDanaterkumpul() {
-        return danaterkumpul;
-    }
-
-    public void setDanaterkumpul(int danaterkumpul) {
-        this.danaterkumpul = danaterkumpul;
-    }
-
     public float getPersen() {
         return persen;
     }
@@ -94,6 +96,22 @@ public class ModalUKM implements Parcelable {
         this.gambar = gambar;
     }
 
+    public long getDana_terkumpul() {
+        return dana_terkumpul;
+    }
+
+    public void setDana_terkumpul(long dana_terkumpul) {
+        this.dana_terkumpul = dana_terkumpul;
+    }
+
+    public long getDana() {
+        return dana;
+    }
+
+    public void setDana(long dana) {
+        this.dana = dana;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -105,7 +123,8 @@ public class ModalUKM implements Parcelable {
         dest.writeString(tanggal);
         dest.writeString(judul);
         dest.writeString(deskripsi);
-        dest.writeInt(danaterkumpul);
+        dest.writeLong(dana_terkumpul);
+        dest.writeLong(dana);
         dest.writeFloat(persen);
         dest.writeTypedList(gambar);
     }

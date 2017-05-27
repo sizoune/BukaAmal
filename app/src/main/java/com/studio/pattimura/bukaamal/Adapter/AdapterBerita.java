@@ -54,7 +54,11 @@ public class AdapterBerita extends RecyclerView.Adapter<AdapterBerita.ViewHolder
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.judul.setText(dataBerita.get(position).getJudul());
         holder.desc.setText(dataBerita.get(position).getDeskripsi());
-        holder.persen.setText(Long.toString((dataBerita.get(position).getDana_terkumpul() / 100) * 100) + " %");
+        double d = (double) dataBerita.get(position).getDana_terkumpul() / dataBerita.get(position).getDana();
+        if (d*100 < 100)
+            holder.persen.setText(String.format("%.2f", ((d) * 100)) + "%");
+        else
+            holder.persen.setText("100%");
         holder.danaterkumpul.setText("Rp. " + Long.toString(dataBerita.get(position).getDana_terkumpul()));
 
         SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");

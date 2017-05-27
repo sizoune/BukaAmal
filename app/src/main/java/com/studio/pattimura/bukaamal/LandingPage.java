@@ -116,6 +116,14 @@ public class LandingPage extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
+        } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -200,6 +208,7 @@ public class LandingPage extends AppCompatActivity
 
         return true;
     }
+
 
 
 }

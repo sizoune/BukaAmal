@@ -40,8 +40,8 @@ public class BantuanLainAdapter extends RecyclerView.Adapter<BantuanLainAdapter.
     @Override
     public void onBindViewHolder(BantuanLainAdapter.ViewHolder holder, int position) {
         holder.judul.setText(listUKM.get(position).getJudul());
-        holder.danaterkumpul.setText("Rp. " + Integer.toString(listUKM.get(position).getDanaterkumpul()));
-        holder.persen.setText(String.format("%.2f",listUKM.get(position).getPersen()) + " %");
+        holder.danaterkumpul.setText("Rp. " + Long.toString(listUKM.get(position).getDana_terkumpul()));
+        holder.persen.setText(String.format("%.2f",((listUKM.get(position).getDana_terkumpul()/listUKM.get(position).getDana())*100)) + " %");
         holder.tenggatwaktu.setText(listUKM.get(position).getTanggal());
         holder.desc.setText(listUKM.get(position).getDeskripsi());
         Picasso.with(context).load(listUKM.get(position).getGambar().get(0).getGambar()).fit().into(holder.gambar);

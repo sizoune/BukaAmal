@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,8 +31,8 @@ public class GalangDana extends AppCompatActivity {
     private BagikanFragment bagikanfragment;
     private boolean beritaTrue, identitasTrue, verifikasiTrue, bagikanTrue;
     private long idBerita;
-    private Berita berita=null;
-    private Identitas identitas=null;
+    private Berita berita = null;
+    private Identitas identitas = null;
 
 
     @Override
@@ -65,13 +67,53 @@ public class GalangDana extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            android.app.FragmentManager fm = getFragmentManager();
-            fm.popBackStack();
-            finish();
+            if (beritaTrue) {
+                if (identitasTrue) {
+                    android.app.FragmentManager fm = getFragmentManager();
+                    fm.popBackStack();
+                    finish();
+                } else {
+                    Toast.makeText(this, "Lengkapi Data Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                android.app.FragmentManager fm = getFragmentManager();
+                fm.popBackStack();
+                finish();
+            }
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
+                && keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            Log.d("CDA", "onKeyDown Called");
+            onBackPressed();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (beritaTrue) {
+            if (identitasTrue) {
+                android.app.FragmentManager fm = getFragmentManager();
+                fm.popBackStack();
+                finish();
+            } else {
+                Toast.makeText(this, "Lengkapi Data Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            android.app.FragmentManager fm = getFragmentManager();
+            fm.popBackStack();
+            finish();
+        }
     }
 
     private void setupTabLayout() {

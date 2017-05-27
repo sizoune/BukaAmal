@@ -91,8 +91,15 @@ public class DetailDonasi extends Fragment {
                 danaterkumpul.setText("Rp " + mu.getDana_terkumpul());
                 target.setText("Rp "+mu.getDana());
                 double d = (double) mu.getDana_terkumpul() /  mu.getDana();
-                bnp.setProgress((int)Math.round((d) * 100));
-                persen.setText(String.format("%.2f",((d) * 100)) + "%");
+
+                if (d*100 < 100) {
+                    bnp.setProgress((int)Math.round((d) * 100));
+                    persen.setText(String.format("%.2f", ((d) * 100)) + "%");
+                }
+                else {
+                    bnp.setProgress(100);
+                    persen.setText("100%");
+                }
                 SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
                 try {

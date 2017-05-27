@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.ModalUKM;
 import com.studio.pattimura.bukaamal.R;
 
@@ -23,9 +24,9 @@ import java.util.ArrayList;
 public class ModalUKMAdapter extends RecyclerView.Adapter<ModalUKMAdapter.ViewHolder> {
     final Context context;
     OnItemClickListener mItemClickListener;
-    private ArrayList<ModalUKM> listUKM;
+    private ArrayList<Berita> listUKM;
 
-    public ModalUKMAdapter(ArrayList<ModalUKM> listUKM, Context context) {
+    public ModalUKMAdapter(ArrayList<Berita> listUKM, Context context) {
         this.listUKM = listUKM;
         this.context = context;
     }
@@ -40,11 +41,11 @@ public class ModalUKMAdapter extends RecyclerView.Adapter<ModalUKMAdapter.ViewHo
     @Override
     public void onBindViewHolder(ModalUKMAdapter.ViewHolder holder, int position) {
         holder.judul.setText(listUKM.get(position).getJudul());
-        holder.danaterkumpul.setText("Rp. " + Integer.toString(listUKM.get(position).getDanaterkumpul()));
-        holder.persen.setText(String.format("%.2f",listUKM.get(position).getPersen()) + " %");
-        holder.tenggatwaktu.setText(listUKM.get(position).getTanggal());
+        holder.danaterkumpul.setText("Rp. " + Long.toString(listUKM.get(position).getDana_terkumpul()));
+        holder.persen.setText(String.format("%.2f",((listUKM.get(position).getDana_terkumpul()/listUKM.get(position).getDana())*100)) + " %");
+        holder.tenggatwaktu.setText(listUKM.get(position).getDeadline());
         holder.desc.setText(listUKM.get(position).getDeskripsi());
-        Picasso.with(context).load(listUKM.get(position).getGambar().get(0).getGambar()).fit().into(holder.gambar);
+        Picasso.with(context).load(listUKM.get(position).getFoto()).fit().into(holder.gambar);
     }
 
     @Override

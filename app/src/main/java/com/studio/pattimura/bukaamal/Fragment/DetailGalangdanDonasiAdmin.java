@@ -107,8 +107,14 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
                 });
                 danaterkumpul.setText("Rp." + mu.getDana_terkumpul());
                 double d = (double) mu.getDana_terkumpul() /  mu.getDana();
-                bnp.setProgress((int)Math.round((d) * 100));
-                persen.setText(String.format("%.2f",((d) * 100)) + "%");
+                if (d*100 < 100) {
+                    bnp.setProgress((int) Math.round((d) * 100));
+                    persen.setText(String.format("%.2f", ((d) * 100)) + "%");
+                }
+                else {
+                    bnp.setProgress(100);
+                    persen.setText("100%");
+                }
                 SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
                 try {
@@ -139,8 +145,15 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
                 });
                 danaterkumpul.setText("Rp." + mu.getDana_terkumpul());
                 double d = (double) mu.getDana_terkumpul() /  mu.getDana();
-                bnp.setProgress((int)Math.round((d) * 100));
-                persen.setText(String.format("%.2f",((d) * 100)) + "%");
+
+                if (d*100 < 100) {
+                    bnp.setProgress((int) Math.round((d) * 100));
+                    persen.setText(String.format("%.2f", ((d) * 100)) + "%");
+                }
+                else {
+                    bnp.setProgress(100);
+                    persen.setText("100%");
+                }
                 SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
                 try {
@@ -218,8 +231,8 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
                             });
                             progressdialog.dismiss();
                             Toast.makeText(DetailGalangdanDonasiAdmin.this, "Donasi Berhasil Diverifikasi", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(DetailGalangdanDonasiAdmin.this, MenuAdmin.class);
-                            startActivity(intent);
+                            android.app.FragmentManager fm = getFragmentManager();
+                            fm.popBackStack();
                             finish();
                         }
                     }
@@ -242,8 +255,8 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
                             mDatabase.getReference("admin").child("galang_dana").child("sudah_terverifikasi").child(String.valueOf(mu.getId())).child("berita").child("status").setValue(true);
                             progressdialog.dismiss();
                             Toast.makeText(DetailGalangdanDonasiAdmin.this, "Galang Dana Berhasil Diverifikasi", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(DetailGalangdanDonasiAdmin.this, MenuAdmin.class);
-                            startActivity(intent);
+                            android.app.FragmentManager fm = getFragmentManager();
+                            fm.popBackStack();
                             finish();
                         }
                     }
