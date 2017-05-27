@@ -3,6 +3,7 @@ package com.studio.pattimura.bukaamal;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -55,6 +57,7 @@ public class HalamanLogin extends AppCompatActivity implements View.OnClickListe
     private FirebaseDatabase mDatabase;
     private userAuth userData;
     private ProgressDialog progressdialog;
+    private TextView lupaPassword;
 
 
     @Override
@@ -62,7 +65,8 @@ public class HalamanLogin extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_halaman_login);
 
-
+        lupaPassword = (TextView) findViewById(R.id.textView);
+        lupaPassword.setOnClickListener(this);
         logo = (ImageView) findViewById(R.id.logoLogin);
         Picasso.with(getApplicationContext()).load(R.drawable.logoberanda).into(logo);
         username = (EditText) findViewById(R.id.edUsernameLogin);
@@ -74,7 +78,7 @@ public class HalamanLogin extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
 
-        preferences = getSharedPreferences("prefTok",MODE_PRIVATE);
+        preferences = getSharedPreferences("prefTok", MODE_PRIVATE);
         editor = preferences.edit();
         String loggedin = preferences.getString("prefTok", "kosong");
         if (!loggedin.equals("kosong")) {
@@ -108,7 +112,15 @@ public class HalamanLogin extends AppCompatActivity implements View.OnClickListe
                 progressdialog.show();
             }
         } else if (v == daftar) {
-            startActivity(new Intent(getApplicationContext(), HalamanDaftar.class));
+            String url = "https://www.bukalapak.com/register?comeback=%2F&from=agentregister";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        } else if (v == lupaPassword) {
+            String url = "https://www.bukalapak.com/password_resets/new";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
         }
     }
 
