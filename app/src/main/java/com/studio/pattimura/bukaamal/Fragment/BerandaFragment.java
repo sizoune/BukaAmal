@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,9 +39,15 @@ import com.studio.pattimura.bukaamal.Model.BantuanLain;
 import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.Galeri;
 import com.studio.pattimura.bukaamal.Model.ModalUKM;
+import com.studio.pattimura.bukaamal.Model.topUser;
+import com.studio.pattimura.bukaamal.Model.userProfile;
 import com.studio.pattimura.bukaamal.R;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import static android.view.View.GONE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +61,12 @@ public class BerandaFragment extends Fragment {
     private FirebaseDatabase mDatabase;
     private ImageView avatar;
     private TextView nama, total, top;
+    private String id_user;
+    private long jumlah_donasi;
+    private String judul;
+    private long dana_terkumpul;
+    private Berita berita, beritaTemp;
+    private topUser userTop, userTopTemp;
 
     public BerandaFragment() {
         // Required empty public constructor
@@ -66,6 +85,8 @@ public class BerandaFragment extends Fragment {
         total = (TextView) view.findViewById(R.id.txtallTotalDonate);
         top = (TextView) view.findViewById(R.id.txtTopDonasi);
         total.setText("Memuat...");
+        nama.setText("Memuat...");
+        top.setText("Memuat...");
         getData();
         ImageView cover = (ImageView) view.findViewById(R.id.coverBeranda);
         Picasso.with(BerandaFragment.this.getContext()).load(R.drawable.coverberanda).fit().into(cover);
@@ -102,7 +123,7 @@ public class BerandaFragment extends Fragment {
                 Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
                 ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
                 TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-                cover.setVisibility(View.GONE);
+                cover.setVisibility(GONE);
                 judul.setText("Donasi");
 //                tabl.setVisibility(View.VISIBLE);
             }
@@ -125,7 +146,7 @@ public class BerandaFragment extends Fragment {
                 Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
                 ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
                 TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-                cover.setVisibility(View.GONE);
+                cover.setVisibility(GONE);
                 judul.setText("Donasi");
 //                tabl.setVisibility(View.GONE);
             }
@@ -143,7 +164,7 @@ public class BerandaFragment extends Fragment {
                 Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
                 ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
                 TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-                cover.setVisibility(View.GONE);
+                cover.setVisibility(GONE);
                 judul.setText("Donasi");
                 tabl.setVisibility(View.VISIBLE);
             }
@@ -164,7 +185,7 @@ public class BerandaFragment extends Fragment {
                 Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
                 ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
                 TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-                cover.setVisibility(View.GONE);
+                cover.setVisibility(GONE);
                 judul.setText("Donasi");
                 tabl.setVisibility(View.VISIBLE);
             }
@@ -172,7 +193,7 @@ public class BerandaFragment extends Fragment {
         return view;
     }
 
-//    void dummyData() {
+    //    void dummyData() {
 //        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
 //                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih1", 8000000, 50));
 //        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
@@ -217,7 +238,7 @@ public class BerandaFragment extends Fragment {
         mDatabase.getReference("admin").child("total_donasi").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                total.setText("Rp "+String.valueOf(dataSnapshot.getValue(long.class)));
+                total.setText("Rp " + String.valueOf(dataSnapshot.getValue(long.class)));
             }
 
             @Override
@@ -226,6 +247,115 @@ public class BerandaFragment extends Fragment {
             }
         });
 
+        mDatabase.getReference("admin").child("top_user").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userTopTemp =new topUser();
+                userTopTemp.setJumlah_donasi(0);
+                userTopTemp.setId_user("");
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot datai : dataSnapshot.getChildren()) {
+
+                            userTop=datai.getValue(topUser.class);
+                            if(userTop.getJumlah_donasi()>userTopTemp.getJumlah_donasi())
+                                userTopTemp=userTop;
+
+                    }
+                } else {
+                    Toast.makeText(BerandaFragment.this.getActivity(), "ga ada", Toast.LENGTH_SHORT).show();
+                }
+                if (!userTopTemp.getId_user().equals("")) {
+                    requestProfile(userTopTemp.getId_user());
+                } else {
+                    nama.setText("");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        mDatabase.getReference("admin").child("galang_dana").child("sudah_terverifikasi").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                beritaTemp = new Berita();
+                beritaTemp.setDana_terkumpul(0);
+                beritaTemp.setJudul("");
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot datai : dataSnapshot.getChildren()) {
+                        for (DataSnapshot dataj : datai.getChildren()) {
+                            if (dataj.exists()) {
+                                try {
+                                    berita = dataj.getValue(Berita.class);
+                                    if (berita.getDana_terkumpul() > beritaTemp.getDana_terkumpul())
+                                        beritaTemp = berita;
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!beritaTemp.getJudul().equals("")) {
+                    top.setText(beritaTemp.getJudul());
+                } else {
+                    top.setText("");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void requestProfile(final String iduser) {
+        //Creating a string request
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.bukalapak.com/v2/users/" + iduser + "/profile.json",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Log.i("Beranda", "Message : " + response);
+                            JSONObject respon = new JSONObject(response);
+                            JSONObject user = respon.getJSONObject("user");
+                            JSONObject alamat = user.getJSONObject("address");
+                            if (respon.getString("status").equals("OK")) {
+//                                profileData = new userProfile(user.getString("name"), user.getString("avatar"), alamat.getString("city") + ", " + alamat.getString("province"), user.getString("email"), user.getString("phone"), "");
+                                userProfile profile = new userProfile(user.getString("name"), user.getString("avatar"), alamat.getString("city") + ", " + alamat.getString("province"), "", "", "");
+                                profile.setUser_id(user.getString("id"));
+                                nama.setText(profile.getNama());
+                                Picasso.with(BerandaFragment.this.getContext()).load(profile.getAvatar()).fit().into(avatar);
+
+                            } else {
+                                Toast.makeText(BerandaFragment.this.getContext(), "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            Log.e("Beranda", "Message : " + e.getMessage());
+                            Toast.makeText(BerandaFragment.this.getContext(), "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
+                        }
+//tempat response di dapatkan
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //You can handle error here if you want
+                        Toast.makeText(BerandaFragment.this.getContext(), "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                        Log.e("Beranda", "Message : " + error.getMessage());
+                    }
+                });
+
+        //Adding the string request to the queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
+        requestQueue.add(stringRequest);
     }
 
 }
