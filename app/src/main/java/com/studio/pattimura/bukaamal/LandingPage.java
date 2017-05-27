@@ -47,6 +47,7 @@ public class LandingPage extends AppCompatActivity
     private SharedPreferences.Editor editor;
     private userProfile profileData;
     private userAuth userData;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
 
     @Override
@@ -168,6 +169,9 @@ public class LandingPage extends AppCompatActivity
             fragment = new DonasiFragment();
             tukar = getSupportFragmentManager().beginTransaction();
             tukar.replace(R.id.mainframe, fragment);
+            editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+            editor.putString("TAG", "BerandaFragment");
+            editor.commit();
             tukar.addToBackStack("BerandaFragment");
             tukar.commit();
 
@@ -177,7 +181,10 @@ public class LandingPage extends AppCompatActivity
             txtJudul.setText("Galang Dana");
             fragment = new GalangDanaFragment();
             tukar = getSupportFragmentManager().beginTransaction();
+            editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
             tukar.replace(R.id.mainframe, fragment);
+            editor.putString("TAG", "BerandaFragment");
+            editor.commit();
             tukar.addToBackStack("BerandaFragment");
             tukar.commit();
 

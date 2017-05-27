@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Adapter.AdapterGaleri;
 import com.studio.pattimura.bukaamal.Donasi;
+import com.studio.pattimura.bukaamal.LandingPage;
 import com.studio.pattimura.bukaamal.Model.BantuanLain;
 import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.Galeri;
@@ -159,6 +160,10 @@ public class DetailDonasi extends Fragment {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     Log.e("gif--", "fragment back key is clicked");
                     getActivity().getSupportFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    LandingPage l = (LandingPage) getActivity();
+                    ImageView logo = (ImageView) getActivity().findViewById(R.id.logobuka);
+                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(logo);
+                    l.getTxtJudul().setText("");
                     return true;
                 }
                 return false;

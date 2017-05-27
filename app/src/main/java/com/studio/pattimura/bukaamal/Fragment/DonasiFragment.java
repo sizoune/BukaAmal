@@ -1,6 +1,7 @@
 package com.studio.pattimura.bukaamal.Fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -13,10 +14,14 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.LandingPage;
 import com.studio.pattimura.bukaamal.R;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +30,8 @@ public class DonasiFragment extends Fragment {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
     public static int int_items = 2;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    private String TAG;
 
     public DonasiFragment() {
         // Required empty public constructor
@@ -35,6 +42,8 @@ public class DonasiFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_donasi, container, false);
+        SharedPreferences prefs = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        TAG = prefs.getString("TAG", "not found");
         tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
@@ -110,9 +119,12 @@ public class DonasiFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     Log.e("gif--","fragment back key is clicked");
-                    getActivity().getSupportFragmentManager().popBackStack("BerandaFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    getActivity().getSupportFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     LandingPage l = (LandingPage) getActivity();
-                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.logo);
+                    ImageView logo = (ImageView) getActivity().findViewById(R.id.logobuka);
+                    TabLayout tablayout = (TabLayout) getActivity().findViewById(R.id.tabs);
+                    tablayout.setVisibility(View.GONE);
+                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(logo);
                     l.getTxtJudul().setText("");
                     return true;
                 }

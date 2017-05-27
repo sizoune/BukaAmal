@@ -3,6 +3,7 @@ package com.studio.pattimura.bukaamal.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import java.io.File;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 import static com.studio.pattimura.bukaamal.R.id.status;
 
 /**
@@ -45,7 +47,8 @@ public class GalangDanaFragment extends Fragment implements View.OnClickListener
     private TabLayout tabLayout;
     private RadioButton rb;
     private TextView kebijakan;
-
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    private String TAG;
 
     public GalangDanaFragment() {
         // Required empty public constructor
@@ -55,6 +58,8 @@ public class GalangDanaFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_galang_dana, container, false);
+        SharedPreferences prefs = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        TAG = prefs.getString("TAG", "not found");
 
         tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
         rb = (RadioButton) view.findViewById(R.id.rbDisclaim);
@@ -101,9 +106,10 @@ public class GalangDanaFragment extends Fragment implements View.OnClickListener
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     Log.e("gif--","fragment back key is clicked");
-                    getActivity().getSupportFragmentManager().popBackStack("BerandaFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    getActivity().getSupportFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     LandingPage l = (LandingPage) getActivity();
-                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.logo);
+                    ImageView logo = (ImageView) getActivity().findViewById(R.id.logobuka);
+                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(logo);
                     l.getTxtJudul().setText("");
                     return true;
                 }

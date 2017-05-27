@@ -63,6 +63,8 @@ public class BantuanLainFragment extends Fragment {
     }
 
     private void getAllData() {
+        dataUKM = new ArrayList<>();
+        dataIdentitas = new ArrayList<>();
         database.getReference("admin").child("galang_dana").child("sudah_terverifikasi").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

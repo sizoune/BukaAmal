@@ -74,6 +74,8 @@ public class DaftarUKMFragment extends Fragment {
     }
 
     private void getAllData() {
+        dataUKM = new ArrayList<>();
+        dataIdentitas = new ArrayList<>();
         database.getReference("admin").child("galang_dana").child("sudah_terverifikasi").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -113,7 +115,7 @@ public class DaftarUKMFragment extends Fragment {
                         FragmentTransaction ft = DaftarUKMFragment.this.getActivity().getSupportFragmentManager().beginTransaction();
                         editor.putString("TAG", "DaftarUKMFragment");
                         editor.commit();
-                        ft.addToBackStack("DaftarUKMFragment");
+//                        ft.addToBackStack("DaftarUKMFragment");
                         TabLayout tabl = (TabLayout) DaftarUKMFragment.this.getActivity().findViewById(R.id.tabs);
                         tabl.setVisibility(View.GONE);
                         ft.replace(R.id.mainframe, f);

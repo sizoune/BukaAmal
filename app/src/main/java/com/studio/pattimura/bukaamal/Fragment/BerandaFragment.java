@@ -88,9 +88,9 @@ public class BerandaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
+        View view = inflater.inflate(R.layout.fragment_beranda, container, false);
         editor = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
         mDatabase = FirebaseDatabase.getInstance();
-        View view = inflater.inflate(R.layout.fragment_beranda, container, false);
         avatar = (ImageView) view.findViewById(R.id.profile_imageBeranda);
         nama = (TextView) view.findViewById(R.id.txtNamaDonatur1);
         total = (TextView) view.findViewById(R.id.txtallTotalDonate);
@@ -112,10 +112,15 @@ public class BerandaFragment extends Fragment {
     }
 
     public void getData() {
+        dataBantuan = new ArrayList<>();
+        dataUKM = new ArrayList<>();
+        dataIdentitasUKM = new ArrayList<>();
+        dataIdentitasBantuan = new ArrayList<>();
         mDatabase.getReference("admin").child("total_donasi").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 total.setText("Rp " + String.valueOf(dataSnapshot.getValue(long.class)));
+
             }
 
             @Override
@@ -144,6 +149,7 @@ public class BerandaFragment extends Fragment {
                 } else {
                     nama.setText("");
                 }
+
             }
 
             @Override
@@ -156,6 +162,7 @@ public class BerandaFragment extends Fragment {
         mDatabase.getReference("admin").child("galang_dana").child("sudah_terverifikasi").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 beritaTemp = new Berita();
                 beritaTemp.setDana_terkumpul(0);
                 beritaTemp.setJudul("");
@@ -247,7 +254,7 @@ public class BerandaFragment extends Fragment {
                         editor.putString("TAG", TAG);
                         editor.commit();
                         ft.commit();
-                        ft.addToBackStack(null);
+                        ft.addToBackStack(TAG);
                         TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
                         NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
                         navigationView.setCheckedItem(R.id.donasi);
@@ -377,8 +384,12 @@ public class BerandaFragment extends Fragment {
                 });
 
         //Adding the string request to the queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
-        requestQueue.add(stringRequest);
+        try {
+            RequestQueue requestQueue = Volley.newRequestQueue(this.getContext().getApplicationContext());
+            requestQueue.add(stringRequest);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
