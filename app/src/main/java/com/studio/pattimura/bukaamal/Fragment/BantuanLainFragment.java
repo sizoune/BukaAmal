@@ -25,7 +25,10 @@ import com.studio.pattimura.bukaamal.Model.Galeri;
 import com.studio.pattimura.bukaamal.Model.Identitas;
 import com.studio.pattimura.bukaamal.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,8 +68,19 @@ public class BantuanLainFragment extends Fragment {
                     Identitas identitas = data.child("identitas").getValue(Identitas.class);
                     //Toast.makeText(DaftarUKMFragment.this.getContext(), berita.getJudul(), Toast.LENGTH_SHORT).show();
                     if (berita.getKategori().equals("Bencana Alam") || berita.getKategori().equals("Penyakit") || berita.getKategori().equals("Yatim Piatu") ) {
-                        dataUKM.add(berita);
-                        dataIdentitas.add(identitas);
+                        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        Date date = new Date();
+                        long selisih = 0;
+                        try {
+                            Date deadline = myFormat.parse(berita.getDeadline());
+                            selisih = deadline.getTime() - date.getTime();
+                        } catch (ParseException e) {
+                            Log.e("parse error", e.getMessage());
+                        }
+                        if(selisih>=0) {
+                            dataUKM.add(berita);
+                            dataIdentitas.add(identitas);
+                        }
                     }
                 }
                 adapter = new AdapterBerita(BantuanLainFragment.this.getContext(), dataUKM);

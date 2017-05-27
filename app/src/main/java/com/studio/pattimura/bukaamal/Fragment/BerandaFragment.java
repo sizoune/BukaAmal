@@ -38,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Adapter.BantuanLainAdapter;
 import com.studio.pattimura.bukaamal.Adapter.ModalUKMAdapter;
+import com.studio.pattimura.bukaamal.LandingPage;
 import com.studio.pattimura.bukaamal.Model.BantuanLain;
 import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.Galeri;
@@ -49,7 +50,11 @@ import com.studio.pattimura.bukaamal.R;
 
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import static android.view.View.GONE;
 
@@ -86,12 +91,20 @@ public class BerandaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
+
+        View view = inflater.inflate(R.layout.fragment_beranda, container, false);
         dataUKM = new ArrayList<>();
         dataBantuan = new ArrayList<>();
         dataIdentitasUKM = new ArrayList<>();
         dataIdentitasBantuan = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance();
-        View view = inflater.inflate(R.layout.fragment_beranda, container, false);
+        try {
+            LandingPage l = (LandingPage) getActivity();
+            Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.logo);
+            l.getTxtJudul().setText("");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         avatar = (ImageView) view.findViewById(R.id.profile_imageBeranda);
         nama = (TextView) view.findViewById(R.id.txtNamaDonatur1);
         total = (TextView) view.findViewById(R.id.txtallTotalDonate);
@@ -113,7 +126,7 @@ public class BerandaFragment extends Fragment {
     }
 
     public void getData() {
-        if(isOnline()) {
+        if (isOnline()) {
             mDatabase.getReference("admin").child("total_donasi").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -165,12 +178,23 @@ public class BerandaFragment extends Fragment {
                         for (DataSnapshot datai : dataSnapshot.getChildren()) {
                             Berita b = datai.child("berita").getValue(Berita.class);
                             Identitas i = datai.child("identitas").getValue(Identitas.class);
-                            if (b.getKategori().equals("Modal UKM")) {
-                                dataUKM.add(b);
-                                dataIdentitasUKM.add(i);
-                            } else {
-                                dataBantuan.add(b);
-                                dataIdentitasBantuan.add(i);
+                            SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+                            Date date = new Date();
+                            long selisih=0;
+                            try {
+                                Date deadline = myFormat.parse(b.getDeadline());
+                                selisih = deadline.getTime() - date.getTime();
+                            } catch (ParseException e) {
+                                Log.e("parse error", e.getMessage());
+                            }
+                            if(selisih>=0) {
+                                if (b.getKategori().equals("Modal UKM")) {
+                                    dataUKM.add(b);
+                                    dataIdentitasUKM.add(i);
+                                } else {
+                                    dataBantuan.add(b);
+                                    dataIdentitasBantuan.add(i);
+                                }
                             }
                             for (DataSnapshot dataj : datai.getChildren()) {
                                 if (dataj.exists()) {
@@ -233,7 +257,7 @@ public class BerandaFragment extends Fragment {
                     adapter1.SetOnItemClickListener(new BantuanLainAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
-                            Berita mu = dataUKM.get(position);
+                            Berita mu = dataBantuan.get(position);
                             Identitas ident = dataIdentitasBantuan.get(position);
                             Bundle b = new Bundle();
                             b.putParcelable("ukm", mu);
@@ -242,8 +266,8 @@ public class BerandaFragment extends Fragment {
                             f.setArguments(b);
                             FragmentTransaction ft = getFragmentManager().beginTransaction();
                             ft.replace(R.id.mainframe, f);
+                            ft.addToBackStack("BerandaFragment");
                             ft.commit();
-                            ft.addToBackStack(null);
                             TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
                             NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
                             navigationView.setCheckedItem(R.id.donasi);
@@ -296,6 +320,13 @@ public class BerandaFragment extends Fragment {
                             tabl.setVisibility(View.VISIBLE);
                         }
                     });
+                    try {
+                        LandingPage l = (LandingPage) getActivity();
+                        Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.logo);
+                        l.getTxtJudul().setText("");
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -303,7 +334,7 @@ public class BerandaFragment extends Fragment {
 
                 }
             });
-        }else{
+        } else {
             Toast.makeText(this.getContext(), "Cek Koneksi Internet Anda", Toast.LENGTH_SHORT).show();
         }
 
@@ -349,8 +380,12 @@ public class BerandaFragment extends Fragment {
                 });
 
         //Adding the string request to the queue
-        RequestQueue requestQueue = Volley.newRequestQueue(BerandaFragment.this.getContext().getApplicationContext());
-        requestQueue.add(stringRequest);
+        try {
+            RequestQueue requestQueue = Volley.newRequestQueue(BerandaFragment.this.getContext().getApplicationContext());
+            requestQueue.add(stringRequest);
+        } catch (Exception e) {
+            Log.d("Beranda", "requestProfile: " + e);
+        }
     }
 
     public boolean isOnline() {

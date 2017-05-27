@@ -30,7 +30,10 @@ import com.studio.pattimura.bukaamal.Model.ModalUKM;
 import com.studio.pattimura.bukaamal.Model.userAuth;
 import com.studio.pattimura.bukaamal.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -73,9 +76,20 @@ public class DaftarUKMFragment extends Fragment {
                     Berita berita = data.child("berita").getValue(Berita.class);
                     Identitas identitas = data.child("identitas").getValue(Identitas.class);
                     //Toast.makeText(DaftarUKMFragment.this.getContext(), berita.getJudul(), Toast.LENGTH_SHORT).show();
-                    if (berita.getKategori().equals("Modal UKM")) {
-                        dataUKM.add(berita);
-                        dataIdentitas.add(identitas);
+                    SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = new Date();
+                    long selisih = 0;
+                    try {
+                        Date deadline = myFormat.parse(berita.getDeadline());
+                        selisih = deadline.getTime() - date.getTime();
+                    } catch (ParseException e) {
+                        Log.e("parse error", e.getMessage());
+                    }
+                    if(selisih>=0) {
+                        if (berita.getKategori().equals("Modal UKM")) {
+                            dataUKM.add(berita);
+                            dataIdentitas.add(identitas);
+                        }
                     }
                 }
                 adapter = new AdapterBerita(DaftarUKMFragment.this.getContext(), dataUKM);
@@ -88,7 +102,7 @@ public class DaftarUKMFragment extends Fragment {
                         Identitas ident = dataIdentitas.get(position);
                         Bundle b = new Bundle();
                         b.putParcelable("ukm", mu);
-                        b.putParcelable("identitas",ident);
+                        b.putParcelable("identitas", ident);
                         Fragment f = new DetailDonasi();
                         f.setArguments(b);
                         FragmentTransaction ft = DaftarUKMFragment.this.getActivity().getSupportFragmentManager().beginTransaction();
@@ -107,7 +121,6 @@ public class DaftarUKMFragment extends Fragment {
             }
         });
     }
-
 
 
 }

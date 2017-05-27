@@ -143,8 +143,9 @@ public class DetailDonasi extends Fragment {
 
                     getActivity().getSupportFragmentManager().popBackStack("BerandaFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     getActivity().getSupportFragmentManager().popBackStack("DaftarUKMFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    getActivity().getSupportFragmentManager().popBackStack("BantuanLainFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     LandingPage l = (LandingPage) getActivity();
-                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.getLogo());
+                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.logo);
                     l.getTxtJudul().setText("");
 
                     return true;

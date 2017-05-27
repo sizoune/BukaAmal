@@ -134,7 +134,7 @@ public class DetailProfileFragment extends Fragment {
                     Log.e("gif--","fragment back key is clicked");
                     getActivity().getSupportFragmentManager().popBackStack("BerandaFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     LandingPage l = (LandingPage) getActivity();
-                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.getLogo());
+                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.logo);
                     l.getTxtJudul().setText("");
                     return true;
                 }

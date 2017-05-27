@@ -42,7 +42,7 @@ public class LandingPage extends AppCompatActivity
     private FragmentManager fm;
     private FragmentTransaction tukar;
     private TextView txtJudul, txtNama, txtAsal;
-    private ImageView logo, avatar;
+    public ImageView logo, avatar;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private userProfile profileData;
