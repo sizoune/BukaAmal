@@ -46,6 +46,8 @@ public class DaftarUKMFragment extends Fragment {
     private userAuth userData;
     RecyclerView list;
     GridLayoutManager gridLayoutManager;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    SharedPreferences.Editor editor;
 
     public DaftarUKMFragment() {
         // Required empty public constructor
@@ -57,9 +59,12 @@ public class DaftarUKMFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_daftar_ukm, container, false);
+        editor = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         getAllData();
+        TabLayout tabl = (TabLayout) DaftarUKMFragment.this.getActivity().findViewById(R.id.tabs);
+        tabl.setVisibility(View.VISIBLE);
         list = (RecyclerView) v.findViewById(R.id.recyclerViewdaftarUKM);
         gridLayoutManager = new GridLayoutManager(DaftarUKMFragment.this.getContext(), 2, GridLayoutManager.VERTICAL, false);
         return v;
@@ -88,10 +93,13 @@ public class DaftarUKMFragment extends Fragment {
                         Identitas ident = dataIdentitas.get(position);
                         Bundle b = new Bundle();
                         b.putParcelable("ukm", mu);
-                        b.putParcelable("identitas",ident);
+                        b.putParcelable("identitas", ident);
                         Fragment f = new DetailDonasi();
                         f.setArguments(b);
                         FragmentTransaction ft = DaftarUKMFragment.this.getActivity().getSupportFragmentManager().beginTransaction();
+                        editor.putString("TAG", "DaftarUKMFragment");
+                        editor.commit();
+                        ft.addToBackStack("DaftarUKMFragment");
                         TabLayout tabl = (TabLayout) DaftarUKMFragment.this.getActivity().findViewById(R.id.tabs);
                         tabl.setVisibility(View.GONE);
                         ft.replace(R.id.mainframe, f);

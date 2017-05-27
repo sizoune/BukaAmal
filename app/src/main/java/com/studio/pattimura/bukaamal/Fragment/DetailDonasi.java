@@ -2,6 +2,7 @@ package com.studio.pattimura.bukaamal.Fragment;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -43,6 +44,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static android.R.attr.fragment;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +57,8 @@ public class DetailDonasi extends Fragment {
     private StorageReference mStorageref;
     private Berita mu;
     private Identitas identitas;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    private String TAG;
 
     public DetailDonasi() {
         // Required empty public constructor
@@ -65,6 +69,8 @@ public class DetailDonasi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        SharedPreferences prefs = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        TAG = prefs.getString("TAG", "not found");
         View v = inflater.inflate(R.layout.fragment_detail_donasi, container, false);
         Bundle b = this.getArguments();
         if (b != null) {
@@ -151,8 +157,8 @@ public class DetailDonasi extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    Log.e("gif--","fragment back key is clicked");
-                    getActivity().getSupportFragmentManager().popBackStack("BerandaFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    Log.e("gif--", "fragment back key is clicked");
+                    getActivity().getSupportFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     return true;
                 }
                 return false;

@@ -48,6 +48,7 @@ public class LandingPage extends AppCompatActivity
     private userProfile profileData;
     private userAuth userData;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

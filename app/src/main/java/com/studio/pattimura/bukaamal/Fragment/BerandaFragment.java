@@ -2,6 +2,7 @@ package com.studio.pattimura.bukaamal.Fragment;
 
 
 import android.content.ClipData;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -48,6 +49,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
 import static android.view.View.GONE;
 
 /**
@@ -70,8 +72,11 @@ public class BerandaFragment extends Fragment {
     private long dana_terkumpul;
     private Berita berita, beritaTemp;
     private topUser userTop, userTopTemp;
+    private String TAG;
     RecyclerView rv;
     RecyclerView rv1;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    SharedPreferences.Editor editor;
 
     public BerandaFragment() {
         // Required empty public constructor
@@ -83,6 +88,7 @@ public class BerandaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
+        editor = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
         mDatabase = FirebaseDatabase.getInstance();
         View view = inflater.inflate(R.layout.fragment_beranda, container, false);
         avatar = (ImageView) view.findViewById(R.id.profile_imageBeranda);
@@ -121,14 +127,14 @@ public class BerandaFragment extends Fragment {
         mDatabase.getReference("admin").child("top_user").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                userTopTemp =new topUser();
+                userTopTemp = new topUser();
                 userTopTemp.setJumlah_donasi(0);
                 userTopTemp.setId_user("");
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot datai : dataSnapshot.getChildren()) {
-                            userTop=datai.getValue(topUser.class);
-                            if(userTop.getJumlah_donasi()>userTopTemp.getJumlah_donasi())
-                                userTopTemp=userTop;
+                        userTop = datai.getValue(topUser.class);
+                        if (userTop.getJumlah_donasi() > userTopTemp.getJumlah_donasi())
+                            userTopTemp = userTop;
                     }
                 } else {
                     Toast.makeText(BerandaFragment.this.getActivity(), "ga ada", Toast.LENGTH_SHORT).show();
@@ -174,7 +180,7 @@ public class BerandaFragment extends Fragment {
 
                                 } catch (Exception e) {
                                     e.printStackTrace();
-                                    Log.d("modalukm", "onDataChange: "+e);
+                                    Log.d("modalukm", "onDataChange: " + e);
                                 }
                             }
                         }
@@ -182,7 +188,7 @@ public class BerandaFragment extends Fragment {
                 }
                 if (!beritaTemp.getJudul().equals("")) {
                     top.setText(beritaTemp.getJudul());
-                    Log.d("jumlahukm", "onDataChange: "+dataUKM.size());
+                    Log.d("jumlahukm", "onDataChange: " + dataUKM.size());
                 } else {
                     top.setText("");
                 }
@@ -204,12 +210,15 @@ public class BerandaFragment extends Fragment {
                         Identitas ident = dataIdentitasUKM.get(position);
                         Bundle b = new Bundle();
                         b.putParcelable("ukm", mu);
-                        b.putParcelable("identitas",ident);
+                        b.putParcelable("identitas", ident);
                         Fragment f = new DetailDonasi();
                         f.setArguments(b);
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.replace(R.id.mainframe, f);
-                        ft.addToBackStack("BerandaFragment");
+                        TAG = "BerandaFragment";
+                        editor.putString("TAG", TAG);
+                        editor.commit();
+                        ft.addToBackStack(TAG);
                         ft.commit();
                         TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
                         NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
@@ -229,11 +238,14 @@ public class BerandaFragment extends Fragment {
                         Identitas ident = dataIdentitasBantuan.get(position);
                         Bundle b = new Bundle();
                         b.putParcelable("ukm", mu);
-                        b.putParcelable("identitas",ident);
+                        b.putParcelable("identitas", ident);
                         Fragment f = new DetailDonasi();
                         f.setArguments(b);
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.replace(R.id.mainframe, f);
+                        TAG = "BerandaFragment";
+                        editor.putString("TAG", TAG);
+                        editor.commit();
                         ft.commit();
                         ft.addToBackStack(null);
                         TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);

@@ -1,6 +1,7 @@
 package com.studio.pattimura.bukaamal.Fragment;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,8 @@ import com.studio.pattimura.bukaamal.R;
 
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -37,6 +40,8 @@ public class BantuanLainFragment extends Fragment {
     RecyclerView list;
     GridLayoutManager gridLayoutManager;
     private FirebaseDatabase database;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    SharedPreferences.Editor editor;
 
     public BantuanLainFragment() {
         // Required empty public constructor
@@ -53,6 +58,7 @@ public class BantuanLainFragment extends Fragment {
         getAllData();
         list = (RecyclerView) v.findViewById(R.id.recyclerViewdaftarBantuan);
         gridLayoutManager = new GridLayoutManager(BantuanLainFragment.this.getContext(), 2, GridLayoutManager.VERTICAL, false);
+        editor = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
         return v;
     }
 
@@ -64,7 +70,7 @@ public class BantuanLainFragment extends Fragment {
                     Berita berita = data.child("berita").getValue(Berita.class);
                     Identitas identitas = data.child("identitas").getValue(Identitas.class);
                     //Toast.makeText(DaftarUKMFragment.this.getContext(), berita.getJudul(), Toast.LENGTH_SHORT).show();
-                    if (berita.getKategori().equals("Bencana Alam") || berita.getKategori().equals("Penyakit") || berita.getKategori().equals("Yatim Piatu") ) {
+                    if (berita.getKategori().equals("Bencana Alam") || berita.getKategori().equals("Penyakit") || berita.getKategori().equals("Yatim Piatu")) {
                         dataUKM.add(berita);
                         dataIdentitas.add(identitas);
                     }
@@ -86,6 +92,9 @@ public class BantuanLainFragment extends Fragment {
                         TabLayout tabl = (TabLayout) BantuanLainFragment.this.getActivity().findViewById(R.id.tabs);
                         tabl.setVisibility(View.GONE);
                         ft.replace(R.id.mainframe, f);
+                        editor.putString("TAG", "BantuanLainFragment");
+                        editor.commit();
+                        ft.addToBackStack("BantuanLainFragment");
                         ft.commit();
                     }
                 });
