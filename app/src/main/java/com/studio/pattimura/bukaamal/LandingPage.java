@@ -91,7 +91,10 @@ public class LandingPage extends AppCompatActivity
         tabLayout.setVisibility(View.GONE);
         txtJudul.setText("");
         txtNama.setText(profileData.getNama());
-        txtAsal.setText(profileData.getAlamat());
+        if (profileData.getAlamat().equals("null, null"))
+            txtAsal.setText("");
+        else
+            txtAsal.setText(profileData.getAlamat());
         Picasso.with(getApplicationContext()).load(profileData.getAvatar()).into(avatar);
         Picasso.with(getApplicationContext()).load(R.drawable.logoberanda).into(logo);
         if (userData.getUser_id().equals("33985651")) {
@@ -146,6 +149,7 @@ public class LandingPage extends AppCompatActivity
             fragment = new BerandaFragment();
             tukar = getSupportFragmentManager().beginTransaction();
             tukar.replace(R.id.mainframe, fragment);
+//            tukar.addToBackStack(null);
             tukar.commit();
 
         } else if (id == R.id.donasi) {
@@ -155,6 +159,7 @@ public class LandingPage extends AppCompatActivity
             fragment = new DonasiFragment();
             tukar = getSupportFragmentManager().beginTransaction();
             tukar.replace(R.id.mainframe, fragment);
+//            tukar.addToBackStack(null);
             tukar.commit();
 
         } else if (id == R.id.dana) {
@@ -164,6 +169,7 @@ public class LandingPage extends AppCompatActivity
             fragment = new GalangDanaFragment();
             tukar = getSupportFragmentManager().beginTransaction();
             tukar.replace(R.id.mainframe, fragment);
+//            tukar.addToBackStack(this.getClass().getName());
             tukar.commit();
 
         } else if (id == R.id.pengaturan) {
@@ -171,7 +177,7 @@ public class LandingPage extends AppCompatActivity
         } else if (id == R.id.bantuan) {
 
         } else if (id == R.id.tentang) {
-
+          
         } else if (id == R.id.logout) {
             LogoutDialogFragment alertdFragment = new LogoutDialogFragment();
             // Show Alert DialogFragment

@@ -26,6 +26,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Model.Berita;
+import com.studio.pattimura.bukaamal.Model.Identitas;
 import com.studio.pattimura.bukaamal.R;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class GalangDanaAdmin extends Fragment {
     private SectionedRecyclerViewAdapter sectionAdapter;
     private ArrayList<String> header = new ArrayList<>();
     private ArrayList<Berita> dataBerita = new ArrayList<>();
+    private ArrayList<Identitas> dataIdentitas = new ArrayList<>();
     private FirebaseDatabase database;
     private RecyclerView list;
     private GridLayoutManager gridLayoutManager;
@@ -72,10 +74,12 @@ public class GalangDanaAdmin extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Berita berita = data.child("berita").getValue(Berita.class);
+                    Identitas identitas = data.child("identitas").getValue(Identitas.class);
                     dataBerita.add(berita);
+                    dataIdentitas.add(identitas);
                 }
                 if (!dataBerita.isEmpty()) {
-                    sectionAdapter.addSection(new ContactsSection(header.get(0), dataBerita, GalangDanaAdmin.this.getContext()));
+                    sectionAdapter.addSection(new ContactsSection(header.get(0), dataBerita, GalangDanaAdmin.this.getContext(),dataIdentitas));
                 }
             }
 
@@ -88,12 +92,15 @@ public class GalangDanaAdmin extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataBerita = new ArrayList<Berita>();
+                dataIdentitas = new ArrayList<Identitas>();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Berita berita = data.child("berita").getValue(Berita.class);
+                    Identitas identitas = data.child("identitas").getValue(Identitas.class);
                     dataBerita.add(berita);
+                    dataIdentitas.add(identitas);
                 }
                 if (!dataBerita.isEmpty()) {
-                    sectionAdapter.addSection(new ContactsSection(header.get(1), dataBerita, GalangDanaAdmin.this.getContext()));
+                    sectionAdapter.addSection(new ContactsSection(header.get(1), dataBerita, GalangDanaAdmin.this.getContext(),dataIdentitas));
                 }
             }
 
@@ -115,12 +122,13 @@ public class GalangDanaAdmin extends Fragment {
 
         String title;
         ArrayList<Berita> list;
+        ArrayList<Identitas> listIdentitas;
         Context context;
         StorageReference mStorageRef;
 
-        public ContactsSection(String title, ArrayList<Berita> list, Context context) {
+        public ContactsSection(String title, ArrayList<Berita> list, Context context, ArrayList<Identitas> listIdentitas) {
             super(R.layout.header_item, R.layout.list_row_galangdanasaya);
-
+            this.listIdentitas=listIdentitas;
             this.title = title;
             this.list = list;
             this.context = context;
@@ -141,6 +149,7 @@ public class GalangDanaAdmin extends Fragment {
             final ItemViewHolder itemHolder = (ItemViewHolder) holder;
 
             final Berita item = list.get(position);
+            final Identitas itemIdentitas = listIdentitas.get(position);
 
             itemHolder.kategori.setText(item.getJudul());
             itemHolder.desc.setText(item.getDeskripsi());
@@ -157,6 +166,7 @@ public class GalangDanaAdmin extends Fragment {
                 public void onClick(View v) {
                     Intent intent = new Intent(GalangDanaAdmin.this.getActivity(), DetailGalangdanDonasiAdmin.class)
                             .putExtra("berita", item);
+                    intent.putExtra("identitas",itemIdentitas);
                     startActivity(intent);
                 }
             });

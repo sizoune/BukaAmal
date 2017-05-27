@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.studio.pattimura.bukaamal.R;
 
@@ -22,6 +23,8 @@ public class DonasiSekarangFragment extends Fragment {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
     public static int int_items = 3;
+    public boolean donasiTrue=false;
+    public boolean pembayaranTrue=false;
 
     public DonasiSekarangFragment() {
         // Required empty public constructor
@@ -36,10 +39,41 @@ public class DonasiSekarangFragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
+
         tabLayout.post(new Runnable() {
             @Override
             public void run() {
                 tabLayout.setupWithViewPager(viewPager);
+            }
+        });
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position==0){
+                    Toast.makeText(DonasiSekarangFragment.this.getContext(), "0", Toast.LENGTH_SHORT).show();
+                }
+                else if (position==1){
+                    if(!isDonasiTrue()){
+                        Toast.makeText(DonasiSekarangFragment.this.getContext(), "Lengkapi Data Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+//                        viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+//                        Toast.makeText(DonasiSekarangFragment.this.getContext(), viewPager.getCurrentItem(), Toast.LENGTH_SHORT).show();
+
+//                        TabLayout.Tab tab = tabLayout.getTabAt(0);
+//                        tab.select();
+                    }
+//                    Toast.makeText(DonasiSekarangFragment.this.getContext(), "abc", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
         return view;
@@ -60,6 +94,11 @@ public class DonasiSekarangFragment extends Fragment {
                 case 0:
                     return new JumlahDonasiFragment();
                 case 1:
+                    if(!isDonasiTrue()) {
+                        Toast.makeText(DonasiSekarangFragment.this.getContext(), "Lengkapi Data Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+                        viewPager.setCurrentItem(0);
+                        return new JumlahDonasiFragment();
+                    }else
                     return new MetodePembayaranFragment();
                 case 2:
                     return new PembayaranFragment();
@@ -92,5 +131,13 @@ public class DonasiSekarangFragment extends Fragment {
             }
             return null;
         }
+    }
+
+    public boolean isDonasiTrue() {
+        return donasiTrue;
+    }
+
+    public void setDonasiTrue(boolean donasiTrue) {
+        this.donasiTrue = donasiTrue;
     }
 }

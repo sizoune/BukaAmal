@@ -21,6 +21,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Adapter.BantuanLainAdapter;
 import com.studio.pattimura.bukaamal.Adapter.ModalUKMAdapter;
@@ -40,6 +44,9 @@ public class BerandaFragment extends Fragment {
     private ArrayList<BantuanLain> dataBantuan = new ArrayList<>();
     private BantuanLainAdapter adapter1;
     private Button ukmlengkap, bantuanlengkap;
+    private FirebaseDatabase mDatabase;
+    private ImageView avatar;
+    private TextView nama, total, top;
 
     public BerandaFragment() {
         // Required empty public constructor
@@ -51,7 +58,14 @@ public class BerandaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
+        mDatabase = FirebaseDatabase.getInstance();
         View view = inflater.inflate(R.layout.fragment_beranda, container, false);
+        avatar = (ImageView) view.findViewById(R.id.profile_imageBeranda);
+        nama = (TextView) view.findViewById(R.id.txtNamaDonatur1);
+        total = (TextView) view.findViewById(R.id.txtallTotalDonate);
+        top = (TextView) view.findViewById(R.id.txtTopDonasi);
+        total.setText("");
+        getData();
         ImageView cover = (ImageView) view.findViewById(R.id.coverBeranda);
         Picasso.with(BerandaFragment.this.getContext()).load(R.drawable.coverberanda).fit().into(cover);
         dummyData();
@@ -196,6 +210,21 @@ public class BerandaFragment extends Fragment {
         dataBantuan.get(2).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
         dataBantuan.get(3).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
         dataBantuan.get(4).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
+    }
+
+    public void getData() {
+        mDatabase.getReference("admin").child("total_donasi").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                total.setText("Rp "+String.valueOf(dataSnapshot.getValue(long.class)));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(BerandaFragment.this.getContext(), "Cek Koneksi Internet Anda", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 }

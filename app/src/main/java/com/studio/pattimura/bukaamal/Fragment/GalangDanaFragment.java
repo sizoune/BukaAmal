@@ -24,6 +24,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+import com.studio.pattimura.bukaamal.GalangDana;
 import com.studio.pattimura.bukaamal.R;
 
 import java.io.File;
@@ -64,12 +65,14 @@ public class GalangDanaFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         if (view == galang) {
             if (rb.isChecked()) {
-                tabLayout.setVisibility(View.VISIBLE);
-                Fragment fragment = new BuatGalangDanaFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.mainframe, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+//                tabLayout.setVisibility(View.VISIBLE);
+//                Fragment fragment = new BuatGalangDanaFragment();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.mainframe, fragment);
+//                transaction.addToBackStack(null);
+//                transaction.commit();
+                Intent intent = new Intent(this.getContext(), GalangDana.class);
+                startActivity(intent);
             } else {
                 Toast.makeText(GalangDanaFragment.this.getContext(), "Setujui syarat dan ketentuan yang berlaku terlebih dahulu", Toast.LENGTH_SHORT).show();
                 rb.isFocused();

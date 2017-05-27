@@ -102,7 +102,7 @@
                                         android:layout_centerVertical="true"
                                         android:text="terkumpul dari target"
                                         android:textColor="@color/putih"
-                                        android:textSize="10sp" />
+                                        android:textSize="12sp" />
 
                                 </RelativeLayout>
                             </FrameLayout>

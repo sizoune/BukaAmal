@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.studio.pattimura.bukaamal.Adapter.AdapterDonasiSaya;
 import com.studio.pattimura.bukaamal.Adapter.AdapterGalangDanaSaya;
+import com.studio.pattimura.bukaamal.Donasi;
 import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.userAuth;
 import com.studio.pattimura.bukaamal.Model.userProfile;
@@ -96,7 +97,7 @@ public class DonasiSaya extends Fragment {
 
     private void getDataBerita() {
         for (final com.studio.pattimura.bukaamal.Model.DonasiSaya datadonasi : dataDonasi) {
-            Query query = database.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(datadonasi.getId_berita_galang());
+            Query query = database.getReference("admin").child("galang_dana").child("sudah_terverifikasi").child(datadonasi.getId_berita_galang());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -117,11 +118,20 @@ public class DonasiSaya extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (iy == ix) {
+//                if (iy == ix) {
                     adapter = new AdapterDonasiSaya(DonasiSaya.this.getContext(), dataDonasi);
                     list.setAdapter(adapter);
                     list.setLayoutManager(gridLayoutManager);
-                }
+                    adapter.SetOnItemClickListener(new AdapterDonasiSaya.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            com.studio.pattimura.bukaamal.Model.DonasiSaya donasi = dataDonasi.get(position);
+                            Intent intent = new Intent(DonasiSaya.this.getContext(),Donasi.class);
+                            intent.putExtra("Donasi",donasi);
+                            startActivity(intent);
+                        }
+                    });
+//                }
             }
         }, 5000);
     }

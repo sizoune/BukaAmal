@@ -4,17 +4,16 @@
     android:layout_height="match_parent"
     tools:context="com.studio.pattimura.bukaamal.Fragment.VerifikasiFragment">
 
-    <ScrollView
-
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:fitsSystemWindows="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@id/swiperefresh"
+            >
 
             <TextView
                 android:id="@+id/titleVerifikasi"
@@ -285,15 +284,16 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="55dp"
-                android:fontFamily="sans-serif"
                 android:background="@drawable/selector_button_login"
                 android:elevation="2dp"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:textAllCaps="false"
                 android:text="@string/simpanlanjut"
+                android:textAllCaps="false"
                 android:textColor="@color/putih" />
 
         </RelativeLayout>
-    </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </FrameLayout>

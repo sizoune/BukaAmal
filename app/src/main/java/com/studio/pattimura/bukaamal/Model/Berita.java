@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class Berita implements Parcelable {
     private String judul, deadline, kategori, lokasi, deskripsi, foto;
-    private Boolean status, status_pencairan;
+    private boolean status, status_pencairan;
     private long dana, dana_terkumpul, id;
 
     public Berita() {
@@ -29,6 +29,7 @@ public class Berita implements Parcelable {
         this.dana_terkumpul = dana_terkumpul;
     }
 
+
     protected Berita(Parcel in) {
         judul = in.readString();
         deadline = in.readString();
@@ -39,6 +40,8 @@ public class Berita implements Parcelable {
         dana = in.readLong();
         dana_terkumpul = in.readLong();
         id = in.readLong();
+        status = in.readByte() != 0;
+        status_pencairan = in.readByte() != 0;
     }
 
     public static final Creator<Berita> CREATOR = new Creator<Berita>() {
@@ -141,21 +144,25 @@ public class Berita implements Parcelable {
         this.dana_terkumpul = dana_terkumpul;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(judul);
-        dest.writeString(deadline);
-        dest.writeString(kategori);
-        dest.writeString(lokasi);
-        dest.writeString(deskripsi);
-        dest.writeString(foto);
-        dest.writeLong(dana);
-        dest.writeLong(dana_terkumpul);
-        dest.writeLong(id);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(judul);
+        parcel.writeString(deadline);
+        parcel.writeString(kategori);
+        parcel.writeString(lokasi);
+        parcel.writeString(deskripsi);
+        parcel.writeString(foto);
+        parcel.writeLong(dana);
+        parcel.writeLong(dana_terkumpul);
+        parcel.writeLong(id);
+        parcel.writeByte((byte) (status ? 1 : 0));
+        parcel.writeByte((byte) (status_pencairan ? 1 : 0));
+
     }
 }

@@ -41,7 +41,7 @@ public class ModalUKMAdapter extends RecyclerView.Adapter<ModalUKMAdapter.ViewHo
     public void onBindViewHolder(ModalUKMAdapter.ViewHolder holder, int position) {
         holder.judul.setText(listUKM.get(position).getJudul());
         holder.danaterkumpul.setText("Rp. " + Integer.toString(listUKM.get(position).getDanaterkumpul()));
-        holder.persen.setText(Float.toString(listUKM.get(position).getPersen()) + " %");
+        holder.persen.setText(String.format("%.2f",listUKM.get(position).getPersen()) + " %");
         holder.tenggatwaktu.setText(listUKM.get(position).getTanggal());
         holder.desc.setText(listUKM.get(position).getDeskripsi());
         Picasso.with(context).load(listUKM.get(position).getGambar().get(0).getGambar()).fit().into(holder.gambar);

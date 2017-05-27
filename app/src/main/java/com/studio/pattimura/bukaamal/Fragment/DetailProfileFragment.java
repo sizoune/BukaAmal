@@ -66,7 +66,10 @@ public class DetailProfileFragment extends Fragment {
 
         Picasso.with(DetailProfileFragment.this.getContext()).load(profileData.getAvatar()).fit().into(gambar);
         nama.setText(profileData.getNama());
-        asal.setText(profileData.getAlamat());
+        if(!profileData.getAlamat().equals("null, null"))
+            asal.setText(profileData.getAlamat());
+        else
+            asal.setText("");
         return v;
     }
 

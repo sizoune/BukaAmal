@@ -1,6 +1,7 @@
 package com.studio.pattimura.bukaamal.Fragment;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,8 +18,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.studio.pattimura.bukaamal.Adapter.AdapterBerita;
 import com.studio.pattimura.bukaamal.Adapter.AdapterGalangDanaSaya;
+import com.studio.pattimura.bukaamal.GalangDana;
 import com.studio.pattimura.bukaamal.Model.Berita;
+import com.studio.pattimura.bukaamal.Model.Identitas;
 import com.studio.pattimura.bukaamal.Model.userAuth;
 import com.studio.pattimura.bukaamal.Model.userProfile;
 import com.studio.pattimura.bukaamal.R;
@@ -32,6 +36,7 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class GalangDanaSaya extends Fragment {
     private ArrayList<Berita> databerita = new ArrayList<>();
+    private ArrayList<Identitas> dataIdentitas = new ArrayList<>();
     private AdapterGalangDanaSaya adapter;
     private RecyclerView list;
     private GridLayoutManager gridLayoutManager;
@@ -57,8 +62,6 @@ public class GalangDanaSaya extends Fragment {
         String json = preferences.getString("prefTok", "");
         userData = gson.fromJson(json, userAuth.class);
 
-
-
         View v = inflater.inflate(R.layout.fragment_galang_dana_saya, container, false);
         database = FirebaseDatabase.getInstance();
 
@@ -76,10 +79,23 @@ public class GalangDanaSaya extends Fragment {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Berita berita = data.child("berita").getValue(Berita.class);
                     databerita.add(berita);
+                    Identitas identitas = data.child("identitas").getValue(Identitas.class);
+                    dataIdentitas.add(identitas);
                 }
                 adapter = new AdapterGalangDanaSaya(GalangDanaSaya.this.getContext(), databerita);
                 list.setAdapter(adapter);
                 list.setLayoutManager(gridLayoutManager);
+                adapter.SetOnItemClickListener(new AdapterGalangDanaSaya.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Berita brt = databerita.get(position);
+                        Identitas idt = dataIdentitas.get(position);
+                        Intent intent = new Intent(GalangDanaSaya.this.getContext(),GalangDana.class);
+                        intent.putExtra("Berita",brt);
+                        intent.putExtra("Identitas",idt);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override

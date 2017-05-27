@@ -38,7 +38,7 @@
         <item
             android:id="@+id/tentang"
             android:icon="@drawable/tentang"
-            android:title="Tentang" />
+            android:title="Tentang Aplikasi" />
         <item
             android:id="@+id/logout"
             android:icon="@drawable/logout"

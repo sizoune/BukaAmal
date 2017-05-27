@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.studio.pattimura.bukaamal.R;
 
@@ -42,6 +43,12 @@ public class BuatGalangDanaFragment extends Fragment {
                 tabLayout.setupWithViewPager(viewPager);
             }
         });
+
+        LinearLayout tabStrip = ((LinearLayout)tabLayout.getChildAt(0));
+        tabStrip.setEnabled(false);
+        for(int i = 0; i < tabStrip.getChildCount(); i++) {
+            tabStrip.getChildAt(i).setClickable(false);
+        }
 
         return view;
     }

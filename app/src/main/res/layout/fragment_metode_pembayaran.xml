@@ -22,7 +22,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Anak Yatim Membutuhkan Dana"
                 android:textColor="@color/hitam"
@@ -36,7 +35,6 @@
                 android:layout_below="@id/titleDonasi"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Pilih Metode Pembayaran"
                 android:textColor="@color/merahBukaAmal"
@@ -68,7 +66,6 @@
                     android:layout_marginRight="35dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/selector_button_login"
-                    android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:minHeight="45dp"
                     android:text="Bayar dengan BukaDompet"
@@ -82,9 +79,8 @@
                     android:layout_below="@id/btnBukaDompet"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="sans-serif"
                     android:gravity="center"
-                    android:text="Transfer ditujukan ke bank"
+                    android:text="Metode Transfer"
                     android:textColor="@color/merahBukaAmal"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -100,7 +96,6 @@
                         android:id="@+id/rbMandiri"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
 
                         ></RadioButton>
 
@@ -111,52 +106,21 @@
 
                         ></RadioButton>
 
+                    <RadioButton
+                        android:id="@+id/rbBca"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        ></RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/rbBri"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        ></RadioButton>
+
                 </RadioGroup>
-
-                <RadioButton
-                    android:id="@+id/rbBca"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@+id/rbGrup"></RadioButton>
-
-                <RadioButton
-                    android:id="@+id/rbBri"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignBottom="@+id/rbGrup"
-                    android:layout_alignParentEnd="true"></RadioButton>
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="80dp"
-                    android:layout_height="32dp"
-                    android:layout_alignTop="@+id/rbGrup"
-                    android:layout_toEndOf="@+id/rbGrup"
-                    android:src="@drawable/bni_logo" />
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/bri_logo"
-                    android:layout_alignBottom="@+id/rbGrup"
-                    android:layout_toEndOf="@+id/rbGrup" />
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/mandiri_logo"
-                    android:layout_alignTop="@+id/rbBca"
-                    android:layout_toStartOf="@+id/rbBca" />
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/bca_logo"
-                    android:layout_alignTop="@+id/rbBri"
-                    android:layout_toStartOf="@+id/rbBri" />
 
             </RelativeLayout>
 
@@ -171,7 +135,6 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="70dp"
                 android:background="@drawable/selector_button_login"
-                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Lanjut ke Pemabayaran"
                 android:textAllCaps="false"
