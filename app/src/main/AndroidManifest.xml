@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name=".HalamanLogin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HalamanDaftar"
             android:label=""
@@ -55,6 +55,17 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CairkanDana"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Perjanjian"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Tentang"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Bantuan"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

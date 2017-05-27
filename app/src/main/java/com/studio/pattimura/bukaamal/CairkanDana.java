@@ -77,17 +77,18 @@ public class CairkanDana extends AppCompatActivity {
                 adapter = new AdapterGalangDanaSaya(getApplicationContext(), databerita);
                 list.setAdapter(adapter);
                 list.setLayoutManager(gridLayoutManager);
-//                adapter.SetOnItemClickListener(new AdapterGalangDanaSaya.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View view, int position) {
+                adapter.SetOnItemClickListener(new AdapterGalangDanaSaya.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
 //                        Berita brt = databerita.get(position);
 //                        Identitas idt = dataIdentitas.get(position);
 //                        Intent intent = new Intent(GalangDanaSaya.this.getContext(),GalangDana.class);
 //                        intent.putExtra("Berita",brt);
 //                        intent.putExtra("Identitas",idt);
 //                        startActivity(intent);
-//                    }
-//                });
+                        Toast.makeText(CairkanDana.this, "Menunggu Verifikasi Admin BukaAmal", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override

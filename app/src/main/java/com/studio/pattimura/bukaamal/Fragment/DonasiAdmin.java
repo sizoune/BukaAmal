@@ -393,8 +393,13 @@ public class DonasiAdmin extends Fragment {
                 });
 
         //Adding the string request to the queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
-        requestQueue.add(stringRequest);
+        try{
+            RequestQueue requestQueue = Volley.newRequestQueue(this.getContext().getApplicationContext());
+            requestQueue.add(stringRequest);
+        }catch (Exception e){
+            Log.d("donasiAdmin", "requestProfile: "+e);
+        }
+
     }
 
 }

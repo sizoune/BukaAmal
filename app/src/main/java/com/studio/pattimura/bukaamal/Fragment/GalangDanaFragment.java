@@ -15,16 +15,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.GalangDana;
+import com.studio.pattimura.bukaamal.LandingPage;
+import com.studio.pattimura.bukaamal.Perjanjian;
 import com.studio.pattimura.bukaamal.R;
 
 import java.io.File;
@@ -40,6 +44,7 @@ public class GalangDanaFragment extends Fragment implements View.OnClickListener
     private Button galang, lampirfoto, simpanlanjut;
     private TabLayout tabLayout;
     private RadioButton rb;
+    private TextView kebijakan;
 
 
     public GalangDanaFragment() {
@@ -55,6 +60,8 @@ public class GalangDanaFragment extends Fragment implements View.OnClickListener
         rb = (RadioButton) view.findViewById(R.id.rbDisclaim);
 
         galang = (Button) view.findViewById(R.id.btnGalangDana);
+        kebijakan = (TextView) view.findViewById(R.id.kebijakan);
+        kebijakan.setOnClickListener(this);
         galang.setOnClickListener(this);
 
 
@@ -78,6 +85,31 @@ public class GalangDanaFragment extends Fragment implements View.OnClickListener
                 rb.isFocused();
             }
         }
+        else if(view == kebijakan){
+            Intent intent = new Intent(this.getContext(), Perjanjian.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    Log.e("gif--","fragment back key is clicked");
+                    getActivity().getSupportFragmentManager().popBackStack("BerandaFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    LandingPage l = (LandingPage) getActivity();
+                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.logo);
+                    l.getTxtJudul().setText("");
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
 

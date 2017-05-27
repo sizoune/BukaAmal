@@ -42,7 +42,7 @@ public class LandingPage extends AppCompatActivity
     private FragmentManager fm;
     private FragmentTransaction tukar;
     private TextView txtJudul, txtNama, txtAsal;
-    private ImageView logo, avatar;
+    public ImageView logo, avatar;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private userProfile profileData;
@@ -109,6 +109,7 @@ public class LandingPage extends AppCompatActivity
         tukar.commit();
     }
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -168,7 +169,7 @@ public class LandingPage extends AppCompatActivity
             fragment = new DonasiFragment();
             tukar = getSupportFragmentManager().beginTransaction();
             tukar.replace(R.id.mainframe, fragment);
-//            tukar.addToBackStack(null);
+            tukar.addToBackStack("BerandaFragment");
             tukar.commit();
 
         } else if (id == R.id.dana) {
@@ -178,18 +179,18 @@ public class LandingPage extends AppCompatActivity
             fragment = new GalangDanaFragment();
             tukar = getSupportFragmentManager().beginTransaction();
             tukar.replace(R.id.mainframe, fragment);
-//            tukar.addToBackStack(this.getClass().getName());
+            tukar.addToBackStack("BerandaFragment");
             tukar.commit();
 
         } else if (id == R.id.cairkan) {
             Intent intent = new Intent(LandingPage.this,CairkanDana.class);
             startActivity(intent);
-        } else if (id == R.id.pengaturan) {
-
         } else if (id == R.id.bantuan) {
-
+            Intent intent = new Intent(LandingPage.this,Bantuan.class);
+            startActivity(intent);
         } else if (id == R.id.tentang) {
-
+            Intent intent = new Intent(LandingPage.this,Tentang.class);
+            startActivity(intent);
         } else if (id == R.id.logout) {
             LogoutDialogFragment alertdFragment = new LogoutDialogFragment();
             // Show Alert DialogFragment
@@ -202,6 +203,7 @@ public class LandingPage extends AppCompatActivity
             fragment = new DetailProfileFragment();
             tukar = getSupportFragmentManager().beginTransaction();
             tukar.replace(R.id.mainframe, fragment);
+            tukar.addToBackStack("BerandaFragment");
             tukar.commit();
         } else if (id == 5) {
             startActivity(new Intent(LandingPage.this, MenuAdmin.class));
@@ -213,5 +215,19 @@ public class LandingPage extends AppCompatActivity
         return true;
     }
 
+    public TextView getTxtJudul() {
+        return txtJudul;
+    }
 
+    public void setTxtJudul(TextView txtJudul) {
+        this.txtJudul = txtJudul;
+    }
+
+    public ImageView getLogo() {
+        return logo;
+    }
+
+    public void setLogo(ImageView logo) {
+        this.logo = logo;
+    }
 }

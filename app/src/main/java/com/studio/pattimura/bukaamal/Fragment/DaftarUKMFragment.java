@@ -30,7 +30,10 @@ import com.studio.pattimura.bukaamal.Model.ModalUKM;
 import com.studio.pattimura.bukaamal.Model.userAuth;
 import com.studio.pattimura.bukaamal.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -78,9 +81,20 @@ public class DaftarUKMFragment extends Fragment {
                     Berita berita = data.child("berita").getValue(Berita.class);
                     Identitas identitas = data.child("identitas").getValue(Identitas.class);
                     //Toast.makeText(DaftarUKMFragment.this.getContext(), berita.getJudul(), Toast.LENGTH_SHORT).show();
-                    if (berita.getKategori().equals("Modal UKM")) {
-                        dataUKM.add(berita);
-                        dataIdentitas.add(identitas);
+                    SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = new Date();
+                    long selisih = 0;
+                    try {
+                        Date deadline = myFormat.parse(berita.getDeadline());
+                        selisih = deadline.getTime() - date.getTime();
+                    } catch (ParseException e) {
+                        Log.e("parse error", e.getMessage());
+                    }
+                    if(selisih>=0) {
+                        if (berita.getKategori().equals("Modal UKM")) {
+                            dataUKM.add(berita);
+                            dataIdentitas.add(identitas);
+                        }
                     }
                 }
                 adapter = new AdapterBerita(DaftarUKMFragment.this.getContext(), dataUKM);
@@ -103,6 +117,7 @@ public class DaftarUKMFragment extends Fragment {
                         TabLayout tabl = (TabLayout) DaftarUKMFragment.this.getActivity().findViewById(R.id.tabs);
                         tabl.setVisibility(View.GONE);
                         ft.replace(R.id.mainframe, f);
+                        ft.addToBackStack("DaftarUKMFragment");
                         ft.commit();
                     }
                 });
@@ -114,42 +129,6 @@ public class DaftarUKMFragment extends Fragment {
             }
         });
     }
-
-//    void dummyData() {
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih1", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih2", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih3", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih4", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
-//
-//        dataUKM.get(0).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(0).getGambar().add(new Galeri("air bersih", "http://fujiro.com/wp-content/uploads/2014/01/82041-Galon-1-770x470.jpg"));
-//        dataUKM.get(0).getGambar().add(new Galeri("air sehat", "http://www.nicofilter.co.id/wp-content/uploads/2014/11/Manfaat-Air-Minum-Sehat-Water-Filter-untuk-Kesehatan.jpg"));
-//
-//        dataUKM.get(1).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(2).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(3).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(4).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(5).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(6).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(7).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(8).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//
-//
-//    }
 
 
 }

@@ -27,10 +27,10 @@
     <group
         android:id="@+id/menu_1"
         android:checkableBehavior="none">
-        <item
-            android:id="@+id/pengaturan"
-            android:icon="@drawable/pengaturan"
-            android:title="Pengaturan" />
+        <!--<item-->
+            <!--android:id="@+id/pengaturan"-->
+            <!--android:icon="@drawable/pengaturan"-->
+            <!--android:title="Pengaturan" />-->
         <item
             android:id="@+id/bantuan"
             android:icon="@drawable/bantuan"
