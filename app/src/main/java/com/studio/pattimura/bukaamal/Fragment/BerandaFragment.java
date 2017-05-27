@@ -38,6 +38,7 @@ import com.studio.pattimura.bukaamal.Adapter.ModalUKMAdapter;
 import com.studio.pattimura.bukaamal.Model.BantuanLain;
 import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.Galeri;
+import com.studio.pattimura.bukaamal.Model.Identitas;
 import com.studio.pattimura.bukaamal.Model.ModalUKM;
 import com.studio.pattimura.bukaamal.Model.topUser;
 import com.studio.pattimura.bukaamal.Model.userProfile;
@@ -55,7 +56,9 @@ import static android.view.View.GONE;
 public class BerandaFragment extends Fragment {
     private ArrayList<Berita> dataUKM = new ArrayList<>();
     private ModalUKMAdapter adapter;
-    private ArrayList<BantuanLain> dataBantuan = new ArrayList<>();
+    private ArrayList<Berita> dataBantuan = new ArrayList<>();
+    private ArrayList<Identitas> dataIdentitasUKM = new ArrayList<>();
+    private ArrayList<Identitas> dataIdentitasBantuan = new ArrayList<>();
     private BantuanLainAdapter adapter1;
     private Button ukmlengkap, bantuanlengkap;
     private FirebaseDatabase mDatabase;
@@ -67,6 +70,8 @@ public class BerandaFragment extends Fragment {
     private long dana_terkumpul;
     private Berita berita, beritaTemp;
     private topUser userTop, userTopTemp;
+    RecyclerView rv;
+    RecyclerView rv1;
 
     public BerandaFragment() {
         // Required empty public constructor
@@ -90,150 +95,16 @@ public class BerandaFragment extends Fragment {
         getData();
         ImageView cover = (ImageView) view.findViewById(R.id.coverBeranda);
         Picasso.with(BerandaFragment.this.getContext()).load(R.drawable.coverberanda).fit().into(cover);
-//        dummyData();
-        RecyclerView rv = (RecyclerView) view.findViewById(R.id.recyclerView);
-        RecyclerView rv1 = (RecyclerView) view.findViewById(R.id.recyclerView2);
+
+        rv = (RecyclerView) view.findViewById(R.id.recyclerView);
+        rv1 = (RecyclerView) view.findViewById(R.id.recyclerView2);
         ukmlengkap = (Button) view.findViewById(R.id.btnSelengkapnyaUKM);
         bantuanlengkap = (Button) view.findViewById(R.id.btnSelengkapnyabencana);
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(BerandaFragment.this.getContext(), LinearLayoutManager.HORIZONTAL, false);
-        LinearLayoutManager layoutManager1
-                = new LinearLayoutManager(BerandaFragment.this.getContext(), LinearLayoutManager.HORIZONTAL, false);
-        adapter = new ModalUKMAdapter(dataUKM, BerandaFragment.this.getContext());
-        adapter1 = new BantuanLainAdapter(dataBantuan, BerandaFragment.this.getContext());
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(layoutManager);
-        rv1.setAdapter(adapter1);
-        rv1.setLayoutManager(layoutManager1);
-        adapter.SetOnItemClickListener(new ModalUKMAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                //Toast.makeText(BerandaFragment.this.getContext(), dataUKM.get(position).getDeskripsi(), Toast.LENGTH_SHORT).show();
-                Berita mu = dataUKM.get(position);
-                Bundle b = new Bundle();
-                b.putParcelable("ukm", mu);
-                Fragment f = new DetailDonasi();
-                f.setArguments(b);
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.mainframe, f);
-                ft.commit();
-                TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
-                NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
-                navigationView.setCheckedItem(R.id.donasi);
-                Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
-                ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
-                TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-                cover.setVisibility(GONE);
-                judul.setText("Donasi");
-//                tabl.setVisibility(View.VISIBLE);
-            }
-        });
-        adapter1.SetOnItemClickListener(new BantuanLainAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                BantuanLain mu = dataBantuan.get(position);
-                Bundle b = new Bundle();
-                b.putParcelable("bantuan", mu);
-                Fragment f = new DetailDonasi();
-                f.setArguments(b);
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.mainframe, f);
-                ft.commit();
-                ft.addToBackStack(null);
-                TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
-                NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
-                navigationView.setCheckedItem(R.id.donasi);
-                Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
-                ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
-                TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-                cover.setVisibility(GONE);
-                judul.setText("Donasi");
-//                tabl.setVisibility(View.GONE);
-            }
-        });
-        ukmlengkap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment f = new DonasiFragment();
-                FragmentTransaction ft = BerandaFragment.this.getFragmentManager().beginTransaction();
-                ft.replace(R.id.mainframe, f);
-                ft.commit();
-                TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
-                NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
-                navigationView.setCheckedItem(R.id.donasi);
-                Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
-                ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
-                TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-                cover.setVisibility(GONE);
-                judul.setText("Donasi");
-                tabl.setVisibility(View.VISIBLE);
-            }
-        });
-        bantuanlengkap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putInt("1", 2);
-                Fragment f = new DonasiFragment();
-                FragmentTransaction ft = BerandaFragment.this.getFragmentManager().beginTransaction();
-                f.setArguments(b);
-                ft.replace(R.id.mainframe, f);
-                ft.commit();
-                TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
-                NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
-                navigationView.setCheckedItem(R.id.donasi);
-                Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
-                ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
-                TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-                cover.setVisibility(GONE);
-                judul.setText("Donasi");
-                tabl.setVisibility(View.VISIBLE);
-            }
-        });
+
+
         return view;
     }
 
-    //    void dummyData() {
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih1", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih2", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih3", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih4", 8000000, 50));
-//        dataUKM.add(new ModalUKM("10 Hari Lagi", "Bantuan Air Bersih",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman dalam mendapatkan air bersih5", 8000000, 50));
-//
-//        dataUKM.get(0).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(0).getGambar().add(new Galeri("air bersih", "http://fujiro.com/wp-content/uploads/2014/01/82041-Galon-1-770x470.jpg"));
-//        dataUKM.get(0).getGambar().add(new Galeri("air sehat", "http://www.nicofilter.co.id/wp-content/uploads/2014/11/Manfaat-Air-Minum-Sehat-Water-Filter-untuk-Kesehatan.jpg"));
-//
-//        dataUKM.get(1).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(2).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(3).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//        dataUKM.get(4).getGambar().add(new Galeri("air minum", "https://assets.kitabisa.com/images/banner-child.png"));
-//
-//        dataBantuan.add(new BantuanLain("10 Hari Lagi", "Bantuan Gunung Meletus",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman setelah terkena dampak gunung1", 5000000, 80));
-//        dataBantuan.add(new BantuanLain("10 Hari Lagi", "Bantuan Gunung Meletus",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman setelah terkena dampak gunung2", 5000000, 80));
-//        dataBantuan.add(new BantuanLain("10 Hari Lagi", "Bantuan Gunung Meletus",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman setelah terkena dampak gunung3", 5000000, 80));
-//        dataBantuan.add(new BantuanLain("10 Hari Lagi", "Bantuan Gunung Meletus",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman setelah terkena dampak gunung4", 5000000, 80));
-//        dataBantuan.add(new BantuanLain("10 Hari Lagi", "Bantuan Gunung Meletus",
-//                "Dibutuhkan bantuan dalam bentuk apapun untuk membantu desa pedalaman setelah terkena dampak gunung5", 5000000, 80));
-//
-//        dataBantuan.get(0).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
-//        dataBantuan.get(0).getGambar().add(new Galeri("gunung", "https://cdn.sindonews.net/dyn/620/content/2015/07/14/149/1023483/gunung-berapi-dengan-letusan-paling-dahsyat-oD5.jpg"));
-//
-//        dataBantuan.get(1).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
-//        dataBantuan.get(2).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
-//        dataBantuan.get(3).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
-//        dataBantuan.get(4).getGambar().add(new Galeri("gunung merapi", "https://i1.wp.com/obatrindu.com/wp-content/uploads/2017/01/bencana-alam-gunung-meletus.jpg"));
-//    }
-//
     public void getData() {
         mDatabase.getReference("admin").child("total_donasi").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -255,11 +126,9 @@ public class BerandaFragment extends Fragment {
                 userTopTemp.setId_user("");
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot datai : dataSnapshot.getChildren()) {
-
                             userTop=datai.getValue(topUser.class);
                             if(userTop.getJumlah_donasi()>userTopTemp.getJumlah_donasi())
                                 userTopTemp=userTop;
-
                     }
                 } else {
                     Toast.makeText(BerandaFragment.this.getActivity(), "ga ada", Toast.LENGTH_SHORT).show();
@@ -286,14 +155,26 @@ public class BerandaFragment extends Fragment {
                 beritaTemp.setJudul("");
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot datai : dataSnapshot.getChildren()) {
+                        Berita b = datai.child("berita").getValue(Berita.class);
+                        Identitas i = datai.child("identitas").getValue(Identitas.class);
+                        if (b.getKategori().equals("Modal UKM")) {
+                            dataUKM.add(b);
+                            dataIdentitasUKM.add(i);
+                        } else {
+                            dataBantuan.add(b);
+                            dataIdentitasBantuan.add(i);
+                        }
                         for (DataSnapshot dataj : datai.getChildren()) {
                             if (dataj.exists()) {
                                 try {
                                     berita = dataj.getValue(Berita.class);
                                     if (berita.getDana_terkumpul() > beritaTemp.getDana_terkumpul())
                                         beritaTemp = berita;
+//                                    Berita b = dataj.getValue(Berita.class);
+
                                 } catch (Exception e) {
                                     e.printStackTrace();
+                                    Log.d("modalukm", "onDataChange: "+e);
                                 }
                             }
                         }
@@ -301,9 +182,109 @@ public class BerandaFragment extends Fragment {
                 }
                 if (!beritaTemp.getJudul().equals("")) {
                     top.setText(beritaTemp.getJudul());
+                    Log.d("jumlahukm", "onDataChange: "+dataUKM.size());
                 } else {
                     top.setText("");
                 }
+                LinearLayoutManager layoutManager
+                        = new LinearLayoutManager(BerandaFragment.this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+                LinearLayoutManager layoutManager1
+                        = new LinearLayoutManager(BerandaFragment.this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+                adapter = new ModalUKMAdapter(dataUKM, BerandaFragment.this.getContext());
+                adapter1 = new BantuanLainAdapter(dataBantuan, BerandaFragment.this.getContext());
+                rv.setAdapter(adapter);
+                rv.setLayoutManager(layoutManager);
+                rv1.setAdapter(adapter1);
+                rv1.setLayoutManager(layoutManager1);
+                adapter.SetOnItemClickListener(new ModalUKMAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        //Toast.makeText(BerandaFragment.this.getContext(), dataUKM.get(position).getDeskripsi(), Toast.LENGTH_SHORT).show();
+                        Berita mu = dataUKM.get(position);
+                        Identitas ident = dataIdentitasUKM.get(position);
+                        Bundle b = new Bundle();
+                        b.putParcelable("ukm", mu);
+                        b.putParcelable("identitas",ident);
+                        Fragment f = new DetailDonasi();
+                        f.setArguments(b);
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.replace(R.id.mainframe, f);
+                        ft.commit();
+                        TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
+                        NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
+                        navigationView.setCheckedItem(R.id.donasi);
+                        Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
+                        ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
+                        TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
+                        cover.setVisibility(GONE);
+                        judul.setText("Donasi");
+//                tabl.setVisibility(View.VISIBLE);
+                    }
+                });
+                adapter1.SetOnItemClickListener(new BantuanLainAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Berita mu = dataUKM.get(position);
+                        Identitas ident = dataIdentitasBantuan.get(position);
+                        Bundle b = new Bundle();
+                        b.putParcelable("ukm", mu);
+                        b.putParcelable("identitas",ident);
+                        Fragment f = new DetailDonasi();
+                        f.setArguments(b);
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.replace(R.id.mainframe, f);
+                        ft.commit();
+                        ft.addToBackStack(null);
+                        TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
+                        NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
+                        navigationView.setCheckedItem(R.id.donasi);
+                        Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
+                        ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
+                        TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
+                        cover.setVisibility(GONE);
+                        judul.setText("Donasi");
+//                tabl.setVisibility(View.GONE);
+                    }
+                });
+                ukmlengkap.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Fragment f = new DonasiFragment();
+                        FragmentTransaction ft = BerandaFragment.this.getFragmentManager().beginTransaction();
+                        ft.replace(R.id.mainframe, f);
+                        ft.commit();
+                        TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
+                        NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
+                        navigationView.setCheckedItem(R.id.donasi);
+                        Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
+                        ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
+                        TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
+                        cover.setVisibility(GONE);
+                        judul.setText("Donasi");
+                        tabl.setVisibility(View.VISIBLE);
+                    }
+                });
+                bantuanlengkap.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle b = new Bundle();
+                        b.putInt("1", 2);
+                        Fragment f = new DonasiFragment();
+                        FragmentTransaction ft = BerandaFragment.this.getFragmentManager().beginTransaction();
+                        f.setArguments(b);
+                        ft.replace(R.id.mainframe, f);
+                        ft.commit();
+                        TabLayout tabl = (TabLayout) BerandaFragment.this.getActivity().findViewById(R.id.tabs);
+                        NavigationView navigationView = (NavigationView) BerandaFragment.this.getActivity().findViewById(R.id.nav_view);
+                        navigationView.setCheckedItem(R.id.donasi);
+                        Toolbar toolbar = (Toolbar) BerandaFragment.this.getActivity().findViewById(R.id.toolbar);
+                        ImageView cover = (ImageView) toolbar.findViewById(R.id.logobuka);
+                        TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
+                        cover.setVisibility(GONE);
+                        judul.setText("Donasi");
+                        tabl.setVisibility(View.VISIBLE);
+                    }
+                });
             }
 
             @Override
@@ -311,6 +292,35 @@ public class BerandaFragment extends Fragment {
 
             }
         });
+
+//        mDatabase.getReference("admin").child("galang_dana").child("sudah_terverifikasi").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//                    for (DataSnapshot datai : dataSnapshot.getChildren()) {
+//                        for (DataSnapshot dataj : datai.getChildren()) {
+//                            if (dataj.exists()) {
+//                                try {
+//                                    Berita b = dataj.getValue(Berita.class);
+//                                    if (b.getKategori().equals("Modal UKM")) {
+//                                        dataUKM.add(b);
+//                                    } else {
+//                                        dataBantuan.add(b);
+//                                    }
+//                                }catch (Exception e){
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
     }
 

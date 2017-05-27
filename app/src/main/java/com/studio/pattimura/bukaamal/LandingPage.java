@@ -180,12 +180,15 @@ public class LandingPage extends AppCompatActivity
 //            tukar.addToBackStack(this.getClass().getName());
             tukar.commit();
 
+        } else if (id == R.id.cairkan) {
+            Intent intent = new Intent(LandingPage.this,CairkanDana.class);
+            startActivity(intent);
         } else if (id == R.id.pengaturan) {
 
         } else if (id == R.id.bantuan) {
 
         } else if (id == R.id.tentang) {
-          
+
         } else if (id == R.id.logout) {
             LogoutDialogFragment alertdFragment = new LogoutDialogFragment();
             // Show Alert DialogFragment
@@ -200,7 +203,7 @@ public class LandingPage extends AppCompatActivity
             tukar.replace(R.id.mainframe, fragment);
             tukar.commit();
         } else if (id == 5) {
-            startActivity(new Intent(LandingPage.this,MenuAdmin.class));
+            startActivity(new Intent(LandingPage.this, MenuAdmin.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -208,7 +211,6 @@ public class LandingPage extends AppCompatActivity
 
         return true;
     }
-
 
 
 }

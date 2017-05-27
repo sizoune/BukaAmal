@@ -1,20 +1,30 @@
 package com.studio.pattimura.bukaamal.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.studio.pattimura.bukaamal.Model.BantuanLain;
+import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.ModalUKM;
 import com.studio.pattimura.bukaamal.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wildan on 07/05/17.
@@ -22,10 +32,11 @@ import java.util.ArrayList;
 
 public class BantuanLainAdapter extends RecyclerView.Adapter<BantuanLainAdapter.ViewHolder> {
     OnItemClickListener mItemClickListener;
-    private ArrayList<BantuanLain> listUKM;
+    private ArrayList<Berita> listUKM;
     private Context context;
+    StorageReference mStorageRef;
 
-    public BantuanLainAdapter(ArrayList<BantuanLain> listUKM, Context context) {
+    public BantuanLainAdapter(ArrayList<Berita> listUKM, Context context) {
         this.listUKM = listUKM;
         this.context = context;
     }
@@ -38,13 +49,32 @@ public class BantuanLainAdapter extends RecyclerView.Adapter<BantuanLainAdapter.
     }
 
     @Override
-    public void onBindViewHolder(BantuanLainAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.judul.setText(listUKM.get(position).getJudul());
-        holder.danaterkumpul.setText("Rp. " + Long.toString(listUKM.get(position).getDana_terkumpul()));
-        holder.persen.setText(String.format("%.2f",((listUKM.get(position).getDana_terkumpul()/listUKM.get(position).getDana())*100)) + " %");
-        holder.tenggatwaktu.setText(listUKM.get(position).getTanggal());
         holder.desc.setText(listUKM.get(position).getDeskripsi());
-        Picasso.with(context).load(listUKM.get(position).getGambar().get(0).getGambar()).fit().into(holder.gambar);
+        double d = (double) listUKM.get(position).getDana_terkumpul() / listUKM.get(position).getDana();
+        if (d * 100 < 100)
+            holder.persen.setText(String.format("%.2f", ((d) * 100)) + "%");
+        else
+            holder.persen.setText("100%");
+        holder.danaterkumpul.setText("Rp. " + Long.toString(listUKM.get(position).getDana_terkumpul()));
+
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            Date deadline = myFormat.parse(listUKM.get(position).getDeadline());
+            long selisih = deadline.getTime() - date.getTime();
+            holder.tenggatwaktu.setText(Long.toString(TimeUnit.DAYS.convert(selisih, TimeUnit.MILLISECONDS)) + " Hari Lagi");
+        } catch (ParseException e) {
+            Log.e("parse error", e.getMessage());
+        }
+        mStorageRef = FirebaseStorage.getInstance().getReference(listUKM.get(position).getFoto());
+        mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(context).load(uri).fit().into(holder.gambar);
+            }
+        });
     }
 
     @Override
