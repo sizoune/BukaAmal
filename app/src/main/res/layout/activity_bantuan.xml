@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.studio.pattimura.bukaamal.Bantuan">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:minHeight="@dimen/abc_action_bar_default_height_material"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/toolbarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appbarlayout"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/syarat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Bantuan BukaAmal"
+            android:textColor="@color/hitam"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:id="@+id/border"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/syarat"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_card_galangdana"
+            android:paddingBottom="8dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/nomor1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="1. Galang Dana"
+                android:textColor="@color/hitam"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/deskripsi1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nomor1"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif"
+                android:text="Pilih menu galang dana, kemudian isi berita dan identitas yang valid ."
+                android:textColor="@color/hitam"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/nomor2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deskripsi1"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif"
+                android:text="2. Donasi"
+                android:textColor="@color/hitam"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/deskripsi2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nomor2"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif"
+                android:text="Pilih menu donasi, isi jumlah yang ingin di donasikan kemudian pilih metode pembayaran."
+                android:textColor="@color/hitam"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/nomor3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deskripsi2"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif"
+                android:text="3. Cairkan Dana"
+                android:textColor="@color/hitam"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/deskripsi3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nomor3"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif"
+                android:text="Pilih menu cairkan, kemudian tunggu verifikasi dari BukaAmal."
+                android:textColor="@color/hitam"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
