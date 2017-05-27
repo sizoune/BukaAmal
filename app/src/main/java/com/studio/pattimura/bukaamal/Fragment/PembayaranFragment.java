@@ -40,6 +40,7 @@ public class PembayaranFragment extends Fragment implements View.OnClickListener
         bank = (TextView) view.findViewById(R.id.txtBank);
         norek = (TextView) view.findViewById(R.id.txtNoRek);
         bayar = (Button) view.findViewById(R.id.btnSudahBayar);
+        bayar.setOnClickListener(this);
         imlogo = (ImageView) view.findViewById(R.id.imgMetode);
         d = (Donasi) getActivity();
 
@@ -71,6 +72,10 @@ public class PembayaranFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-
+        if(view==bayar){
+            android.app.FragmentManager fm = getActivity().getFragmentManager();
+            fm.popBackStack();
+            getActivity().finish();
+        }
     }
 }

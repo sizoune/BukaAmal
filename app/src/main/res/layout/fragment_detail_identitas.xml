@@ -1,0 +1,183 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.studio.pattimura.bukaamal.Fragment.DetailIdentitasFragment">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtNama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@id/nama"
+                android:maxLines="1"
+                android:text="nama"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/alamat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nama"
+                android:layout_marginTop="10dp"
+                android:text="Alamat"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtAlamat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nama"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="10dp"
+                android:text="alamat"
+                android:layout_toRightOf="@id/alamat"
+                android:maxLines="1"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/alamat"
+                android:layout_marginTop="10dp"
+                android:text="Email"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/alamat"
+                android:layout_marginLeft="34dp"
+                android:layout_marginTop="10dp"
+                android:text="email"
+                android:layout_toRightOf="@id/email"
+                android:maxLines="1"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/telepon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/email"
+                android:layout_marginTop="10dp"
+                android:text="No. Telp."
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtTelepon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/email"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="10dp"
+                android:text="telepon"
+                android:layout_toRightOf="@id/telepon"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/bank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/telepon"
+                android:layout_marginTop="10dp"
+                android:text="Bank"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtBank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/telepon"
+                android:layout_marginLeft="39dp"
+                android:layout_marginTop="10dp"
+                android:text="bank"
+                android:layout_toRightOf="@id/bank"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/rekening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bank"
+                android:layout_marginTop="10dp"
+                android:text="No. Rek."
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtRekening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bank"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="norek"
+                android:layout_toRightOf="@id/rekening"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/ktp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rekening"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="Foto KTP"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/gambarKTP"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_below="@id/ktp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

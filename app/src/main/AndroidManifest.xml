@@ -65,7 +65,11 @@
             android:name=".Tentang"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Bantuan"
+        <activity
+            android:name=".Bantuan"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Profil"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

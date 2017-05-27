@@ -12,217 +12,194 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:minHeight="@dimen/abc_action_bar_default_height_material"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <TextView
-                android:id="@+id/toolbarTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=""
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/toolbar">
-
-
-        <LinearLayout
-            android:id="@+id/bawah"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnKonfirmasi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/selector_button_selengkapnya"
-                android:text="Verifikasi Sekarang"
-                android:textAllCaps="false"
-                android:textColor="@color/putih" />
-
-        </LinearLayout>
-
-        <ScrollView
-            android:id="@+id/scrol"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/bawah"
-            android:layout_marginBottom="2dp">
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:minHeight="@dimen/abc_action_bar_default_height_material"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
 
             <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/toolbarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/mainframe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbarlayout">
+
+        <RelativeLayout
+            android:id="@+id/rel"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+
+            <LinearLayout
+                android:id="@+id/bawah"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnKonfirmasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/selector_button_selengkapnya"
+                    android:text="Verifikasi Sekarang"
+                    android:textAllCaps="false"
+                    android:textColor="@color/putih" />
+
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/scrol"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bawah"
+                android:layout_marginBottom="2dp">
 
                 <RelativeLayout
-                    android:id="@+id/layoutcoverDetailDonasi"
                     android:layout_width="match_parent"
-                    android:layout_height="216dp">
-
-                    <ImageView
-                        android:id="@+id/coverDetailDonasi"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                    android:layout_height="wrap_content">
 
                     <RelativeLayout
+                        android:id="@+id/layoutcoverDetailDonasi"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_alignBottom="@+id/coverDetailDonasi"
-                        android:background="#d51f1f1f">
+                        android:layout_height="216dp">
 
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/coverDetailDonasi"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
 
-                            <FrameLayout
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_alignBottom="@+id/coverDetailDonasi"
+                            android:background="#d51f1f1f">
+
+                            <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1">
+                                android:orientation="horizontal">
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                <FrameLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
 
-                                    <TextView
-                                        android:id="@+id/txtSudahTerkumupl"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_centerVertical="true"
-                                        android:maxLines="1"
-                                        android:text="Rp.1.000.000.000"
-                                        android:textColor="@color/putih"
-                                        android:textSize="14sp" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
 
-                                </RelativeLayout>
-                            </FrameLayout>
+                                        <TextView
+                                            android:id="@+id/txtSudahTerkumupl"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_centerVertical="true"
+                                            android:maxLines="1"
+                                            android:text="Rp.1.000.000.000"
+                                            android:textColor="@color/putih"
+                                            android:textSize="14sp" />
 
-                            <FrameLayout
-                                android:layout_width="fill_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1">
+                                    </RelativeLayout>
+                                </FrameLayout>
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                <FrameLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_centerVertical="true"
-                                        android:text="terkumpul dari target"
-                                        android:textColor="@color/putih"
-                                        android:textSize="12sp" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
 
-                                </RelativeLayout>
-                            </FrameLayout>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_centerVertical="true"
+                                            android:text="terkumpul dari target"
+                                            android:textColor="@color/putih"
+                                            android:textSize="12sp" />
 
-                            <FrameLayout
-                                android:layout_width="fill_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1">
+                                    </RelativeLayout>
+                                </FrameLayout>
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                <FrameLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
 
-                                    <TextView
-                                        android:id="@+id/txtTargetDonasi"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_centerVertical="true"
-                                        android:maxLines="1"
-                                        android:text="Rp.2.000.000.000"
-                                        android:textColor="@color/putih"
-                                        android:textSize="14sp" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
 
-                                </RelativeLayout>
-                            </FrameLayout>
-                        </LinearLayout>
+                                        <TextView
+                                            android:id="@+id/txtTargetDonasi"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_centerVertical="true"
+                                            android:maxLines="1"
+                                            android:text="Rp.2.000.000.000"
+                                            android:textColor="@color/putih"
+                                            android:textSize="14sp" />
+
+                                    </RelativeLayout>
+                                </FrameLayout>
+                            </LinearLayout>
+
+                        </RelativeLayout>
 
                     </RelativeLayout>
 
-                </RelativeLayout>
-
-                <com.daimajia.numberprogressbar.NumberProgressBar xmlns:custom="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/numberbar5"
-                    style="@style/NumberProgressBar_Warning_Red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/linlay"
-                    android:layout_margin="5dp"
-                    custom:progress_text_visibility="invisible" />
-
-                <LinearLayout
-                    android:id="@+id/linlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/layoutcoverDetailDonasi"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/txtpersen"
+                    <com.daimajia.numberprogressbar.NumberProgressBar xmlns:custom="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/numberbar5"
+                        style="@style/NumberProgressBar_Warning_Red"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="100%"
-                        android:textColor="@color/hitam"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="dana yang terkumpul"
-                        android:textColor="@color/hitam"
-                        android:textSize="14sp" />
+                        android:layout_below="@+id/linlay"
+                        android:layout_margin="5dp"
+                        custom:progress_text_visibility="invisible" />
 
                     <LinearLayout
+                        android:id="@+id/linlay"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="right"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layoutcoverDetailDonasi"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_time" />
-
                         <TextView
-                            android:id="@+id/txtsisahari"
+                            android:id="@+id/txtpersen"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="2dp"
-                            android:text="123"
+                            android:layout_marginLeft="10dp"
+                            android:text="100%"
                             android:textColor="@color/hitam"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -231,108 +208,138 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:layout_marginRight="10dp"
-                            android:text="Hari Lagi"
+                            android:text="dana yang terkumpul"
                             android:textColor="@color/hitam"
                             android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_time" />
+
+                            <TextView
+                                android:id="@+id/txtsisahari"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:text="123"
+                                android:textColor="@color/hitam"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Hari Lagi"
+                                android:textColor="@color/hitam"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                </LinearLayout>
+                    <TextView
+                        android:id="@+id/txtJudulDonasi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/numberbar5"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Judul"
+                        android:textColor="@color/hitam"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtJudulDonasi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/numberbar5"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Judul"
-                    android:textColor="@color/hitam"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/txtDescDonasi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtJudulDonasi"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="ini Deskripsi"
+                        android:textColor="@color/hitam"
+                        android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/txtDescDonasi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtJudulDonasi"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="ini Deskripsi"
-                    android:textColor="@color/hitam"
-                    android:textSize="14sp" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewDonasi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtDescDonasi"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        android:scrollbars="horizontal" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerViewDonasi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtDescDonasi"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="5dp"
-                    android:scrollbars="horizontal" />
-
-                <TextView
-                    android:id="@+id/txtGal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/recyclerViewDonasi"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="2dp"
-                    android:text="Galeri Gambar"
-                    android:textColor="@color/hitam"
-                    android:textSize="14sp"
-                    android:textStyle="italic" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtGal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/profile_detailDonasi"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                    <TextView
+                        android:id="@+id/txtGal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/recyclerViewDonasi"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="2dp"
-                        android:src="@drawable/ic_user2" />
+                        android:text="Galeri Gambar"
+                        android:textColor="@color/hitam"
+                        android:textSize="14sp"
+                        android:textStyle="italic" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:orientation="vertical">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtGal"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/orang"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Penggalang Dana"
-                            android:textColor="@color/hitam"
-                            android:textSize="14sp" />
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profile_detailDonasi"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="2dp"
+                            android:src="@drawable/ic_user2" />
 
-                        <TextView
-                            android:id="@+id/txtPenggalang"
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Songko"
-                            android:textColor="@color/hitam"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/orang"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Penggalang Dana"
+                                android:textColor="@color/hitam"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/txtPenggalang"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Songko"
+                                android:textColor="@color/hitam"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
+                </RelativeLayout>
 
-                </LinearLayout>
-            </RelativeLayout>
-
-        </ScrollView>
+            </ScrollView>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
+    </FrameLayout>
 
 </RelativeLayout>

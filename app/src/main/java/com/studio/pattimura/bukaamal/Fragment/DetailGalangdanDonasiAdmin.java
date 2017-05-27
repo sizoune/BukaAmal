@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +53,8 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
     private com.studio.pattimura.bukaamal.Model.DonasiSaya donasi;
     private Bundle b;
     private userProfile user;
+    private TextView nama;
+    private ImageView avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +77,11 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
             TextView judul = (TextView) findViewById(R.id.txtJudulDonasi);
             TextView desc = (TextView) findViewById(R.id.txtDescDonasi);
             TextView orang = (TextView) findViewById(R.id.orang);
-            TextView nama = (TextView) findViewById(R.id.txtPenggalang);
+            nama = (TextView) findViewById(R.id.txtPenggalang);
             TextView target = (TextView) findViewById(R.id.txtTargetDonasi);
-            ImageView avatar = (ImageView) findViewById(R.id.profile_detailDonasi);
+            avatar = (ImageView) findViewById(R.id.profile_detailDonasi);
+            nama.setOnClickListener(this);
+            avatar.setOnClickListener(this);
             verif = (Button) findViewById(R.id.btnKonfirmasi);
             verif.setOnClickListener(this);
             bnp = (NumberProgressBar) findViewById(R.id.numberbar5);
@@ -91,10 +98,10 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
                 verif.setText("Verifikasi Donasi");
                 orang.setText("Donatur");
                 judul.setText(mu.getJudul());
-                if(donasi.getMetode_bayar()!=null)
+                if (donasi.getMetode_bayar() != null)
                     desc.setText("Jumlah Donasi Sebesar Rp " + donasi.getJumlah() + " Melalui Rekening " + donasi.getMetode_bayar());
                 else
-                    desc.setText(user.getNama()+" Belum Memilih Metode Pembayaran");
+                    desc.setText(user.getNama() + " Belum Memilih Metode Pembayaran");
                 nama.setText(user.getNama());
                 Picasso.with(getApplicationContext()).load(user.getAvatar()).fit().into(avatar);
                 target.setText("Rp. " + String.valueOf(mu.getDana()));
@@ -106,12 +113,11 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
                     }
                 });
                 danaterkumpul.setText("Rp." + mu.getDana_terkumpul());
-                double d = (double) mu.getDana_terkumpul() /  mu.getDana();
-                if (d*100 < 100) {
+                double d = (double) mu.getDana_terkumpul() / mu.getDana();
+                if (d * 100 < 100) {
                     bnp.setProgress((int) Math.round((d) * 100));
                     persen.setText(String.format("%.2f", ((d) * 100)) + "%");
-                }
-                else {
+                } else {
                     bnp.setProgress(100);
                     persen.setText("100%");
                 }
@@ -144,13 +150,12 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
                     }
                 });
                 danaterkumpul.setText("Rp." + mu.getDana_terkumpul());
-                double d = (double) mu.getDana_terkumpul() /  mu.getDana();
+                double d = (double) mu.getDana_terkumpul() / mu.getDana();
 
-                if (d*100 < 100) {
+                if (d * 100 < 100) {
                     bnp.setProgress((int) Math.round((d) * 100));
                     persen.setText(String.format("%.2f", ((d) * 100)) + "%");
-                }
-                else {
+                } else {
                     bnp.setProgress(100);
                     persen.setText("100%");
                 }
@@ -173,6 +178,28 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
             progressdialog.setMessage("Mohon tunggu...");
             progressdialog.show();
             SubmitGalang();
+        } else if (view == nama) {
+            RelativeLayout r = (RelativeLayout) findViewById(R.id.rel);
+            r.setVisibility(GONE);
+            Bundle b = new Bundle();
+            b.putParcelable("identitas", identitas);
+            Fragment f = new DetailIdentitasFragment();
+            f.setArguments(b);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainframe, f);
+            ft.addToBackStack(null);
+            ft.commit();
+        } else if (view == avatar) {
+            RelativeLayout r = (RelativeLayout) findViewById(R.id.rel);
+            r.setVisibility(GONE);
+            Bundle b = new Bundle();
+            b.putParcelable("identitas", identitas);
+            Fragment f = new DetailIdentitasFragment();
+            f.setArguments(b);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainframe, f);
+            ft.addToBackStack(null);
+            ft.commit();
         }
     }
 
@@ -215,9 +242,9 @@ public class DetailGalangdanDonasiAdmin extends AppCompatActivity implements Vie
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
                                         mDatabase.getReference("admin").child("top_user").child(donasi.getId_user()).child("id_user").setValue(donasi.getId_user());
-                                        long jumlah = dataSnapshot.child("jumlah_donasi").getValue(long.class)+Long.parseLong(donasi.getJumlah());
+                                        long jumlah = dataSnapshot.child("jumlah_donasi").getValue(long.class) + Long.parseLong(donasi.getJumlah());
                                         mDatabase.getReference("admin").child("top_user").child(donasi.getId_user()).child("jumlah_donasi").setValue(jumlah);
-                                    }else{
+                                    } else {
                                         mDatabase.getReference("admin").child("top_user").child(donasi.getId_user()).child("id_user").setValue(donasi.getId_user());
                                         mDatabase.getReference("admin").child("top_user").child(donasi.getId_user()).child("jumlah_donasi").setValue(Long.parseLong(donasi.getJumlah()));
                                     }

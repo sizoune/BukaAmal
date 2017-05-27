@@ -109,7 +109,6 @@ public class LandingPage extends AppCompatActivity
         tukar.commit();
     }
 
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -197,14 +196,16 @@ public class LandingPage extends AppCompatActivity
 
             alertdFragment.show(fm, "Alert Dialog Fragment");
         } else if (id == R.id.profil) {
-            logo.setVisibility(View.GONE);
-            tabLayout.setVisibility(View.GONE);
-            txtJudul.setText("Profile");
-            fragment = new DetailProfileFragment();
-            tukar = getSupportFragmentManager().beginTransaction();
-            tukar.replace(R.id.mainframe, fragment);
-            tukar.addToBackStack("BerandaFragment");
-            tukar.commit();
+//            logo.setVisibility(View.GONE);
+//            tabLayout.setVisibility(View.GONE);
+//            txtJudul.setText("Profile");
+//            fragment = new DetailProfileFragment();
+//            tukar = getSupportFragmentManager().beginTransaction();
+//            tukar.replace(R.id.mainframe, fragment);
+//            tukar.addToBackStack("BerandaFragment");
+//            tukar.commit();
+            Intent intent = new Intent(LandingPage.this,Profil.class);
+            startActivity(intent);
         } else if (id == 5) {
             startActivity(new Intent(LandingPage.this, MenuAdmin.class));
         }
