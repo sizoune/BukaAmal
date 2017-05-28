@@ -122,5 +122,25 @@ public class DetailProfileFragment extends Fragment {
             return null;
         }
     }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    Log.e("gif--","fragment back key is clicked");
+                    getActivity().getSupportFragmentManager().popBackStack("BerandaFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    LandingPage l = (LandingPage) getActivity();
+                    Picasso.with(getActivity().getApplicationContext()).load(R.drawable.logoberanda).into(l.logo);
+                    l.getTxtJudul().setText("");
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 
 }

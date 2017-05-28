@@ -47,8 +47,6 @@ public class LandingPage extends AppCompatActivity
     private SharedPreferences.Editor editor;
     private userProfile profileData;
     private userAuth userData;
-    public static final String MY_PREFS_NAME = "MyPrefsFile";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +108,7 @@ public class LandingPage extends AppCompatActivity
         tukar.commit();
     }
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -169,9 +168,6 @@ public class LandingPage extends AppCompatActivity
             fragment = new DonasiFragment();
             tukar = getSupportFragmentManager().beginTransaction();
             tukar.replace(R.id.mainframe, fragment);
-            editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-            editor.putString("TAG", "BerandaFragment");
-            editor.commit();
             tukar.addToBackStack("BerandaFragment");
             tukar.commit();
 
@@ -181,10 +177,7 @@ public class LandingPage extends AppCompatActivity
             txtJudul.setText("Galang Dana");
             fragment = new GalangDanaFragment();
             tukar = getSupportFragmentManager().beginTransaction();
-            editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
             tukar.replace(R.id.mainframe, fragment);
-            editor.putString("TAG", "BerandaFragment");
-            editor.commit();
             tukar.addToBackStack("BerandaFragment");
             tukar.commit();
 
@@ -203,16 +196,14 @@ public class LandingPage extends AppCompatActivity
 
             alertdFragment.show(fm, "Alert Dialog Fragment");
         } else if (id == R.id.profil) {
-//            logo.setVisibility(View.GONE);
-//            tabLayout.setVisibility(View.GONE);
-//            txtJudul.setText("Profile");
-//            fragment = new DetailProfileFragment();
-//            tukar = getSupportFragmentManager().beginTransaction();
-//            tukar.replace(R.id.mainframe, fragment);
-//            tukar.addToBackStack("BerandaFragment");
-//            tukar.commit();
-            Intent intent = new Intent(LandingPage.this,Profil.class);
-            startActivity(intent);
+            logo.setVisibility(View.GONE);
+            tabLayout.setVisibility(View.GONE);
+            txtJudul.setText("Profile");
+            fragment = new DetailProfileFragment();
+            tukar = getSupportFragmentManager().beginTransaction();
+            tukar.replace(R.id.mainframe, fragment);
+            tukar.addToBackStack("BerandaFragment");
+            tukar.commit();
         } else if (id == 5) {
             startActivity(new Intent(LandingPage.this, MenuAdmin.class));
         }

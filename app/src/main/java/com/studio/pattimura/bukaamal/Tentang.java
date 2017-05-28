@@ -22,12 +22,12 @@ public class Tentang extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         TextView judul = (TextView) toolbar.findViewById(R.id.toolbarTitle);
         judul.setText("Tentang BukaAmal");
-        logo = (ImageView) findViewById(R.id.imageLogo);
+        logo = (ImageView) findViewById(R.id.logomaroon);
         graham = (ImageView) findViewById(R.id.graham);
         hilmi = (ImageView) findViewById(R.id.hilmi);
         wildan = (ImageView) findViewById(R.id.wildan);
         aswan = (ImageView) findViewById(R.id.aswan);
-        Picasso.with(getApplicationContext()).load(R.drawable.logobukaamal).fit().into(logo);
+        Picasso.with(getApplicationContext()).load(R.drawable.logomaroon).fit().into(logo);
         Picasso.with(getApplicationContext()).load(R.drawable.aswan).fit().into(aswan);
         Picasso.with(getApplicationContext()).load(R.drawable.graham).fit().into(graham);
         Picasso.with(getApplicationContext()).load(R.drawable.wildan).fit().into(wildan);
