@@ -241,7 +241,7 @@ public class BerandaFragment extends Fragment {
                 adapter1.SetOnItemClickListener(new BantuanLainAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Berita mu = dataUKM.get(position);
+                        Berita mu = dataBantuan.get(position);
                         Identitas ident = dataIdentitasBantuan.get(position);
                         Bundle b = new Bundle();
                         b.putParcelable("ukm", mu);
