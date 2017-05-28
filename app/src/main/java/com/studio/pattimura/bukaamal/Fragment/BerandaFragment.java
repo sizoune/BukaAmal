@@ -47,7 +47,10 @@ import com.studio.pattimura.bukaamal.R;
 
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.view.View.GONE;
@@ -170,12 +173,27 @@ public class BerandaFragment extends Fragment {
                     for (DataSnapshot datai : dataSnapshot.getChildren()) {
                         Berita b = datai.child("berita").getValue(Berita.class);
                         Identitas i = datai.child("identitas").getValue(Identitas.class);
-                        if (b.getKategori().equals("Modal UKM")) {
-                            dataUKM.add(b);
-                            dataIdentitasUKM.add(i);
-                        } else {
-                            dataBantuan.add(b);
-                            dataIdentitasBantuan.add(i);
+                        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        Date date = new Date();
+                        long selisih = 0;
+                        try {
+                            Date deadline = myFormat.parse(b.getDeadline());
+                            selisih = deadline.getTime() - date.getTime();
+                        } catch (ParseException e) {
+                            Log.e("parse error", e.getMessage());
+                        }
+                        if(selisih>=0) {
+                            if (b.getKategori().equals("Modal UKM")) {
+                                if (dataUKM.size() <= 5) {
+                                    dataUKM.add(b);
+                                    dataIdentitasUKM.add(i);
+                                }
+                            } else {
+                                if (dataBantuan.size() <= 5) {
+                                    dataBantuan.add(b);
+                                    dataIdentitasBantuan.add(i);
+                                }
+                            }
                         }
                         for (DataSnapshot dataj : datai.getChildren()) {
                             if (dataj.exists()) {
