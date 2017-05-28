@@ -373,11 +373,11 @@ public class DonasiAdmin extends Fragment {
                                 dataProfile.add(profile);
 
                             } else {
-                                Toast.makeText(DonasiAdmin.this.getContext(), "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(DonasiAdmin.this.getContext(), "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
                             Log.e("DonasiAdmin", "Message : " + e.getMessage());
-                            Toast.makeText(DonasiAdmin.this.getContext(), "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(DonasiAdmin.this.getContext(), "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
                         }
 //tempat response di dapatkan
                     }
@@ -386,7 +386,7 @@ public class DonasiAdmin extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //You can handle error here if you want
-                        Toast.makeText(DonasiAdmin.this.getContext(), "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(DonasiAdmin.this.getContext(), "Cek Koneksi Internet anda", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                         Log.e("DonasiAdmin", "Message : " + error.getMessage());
                     }

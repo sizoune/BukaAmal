@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -47,6 +49,7 @@ import com.studio.pattimura.bukaamal.Model.Identitas;
 import com.studio.pattimura.bukaamal.Model.userAuth;
 import com.studio.pattimura.bukaamal.Model.userProfile;
 import com.studio.pattimura.bukaamal.R;
+import com.studio.pattimura.bukaamal.Utility;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.io.File;
@@ -77,6 +80,8 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
     private File files;
     public static TabLayout tabLayout;
     private GalangDana g;
+    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    private String userChoosenTask;
 
     public IdentitasFragment() {
         // Required empty public constructor
@@ -131,7 +136,7 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(adapter);
 
-        if(g.getIdentitas()!=null){
+        if (g.getIdentitas() != null) {
             setIdentitas();
         }
 
@@ -154,15 +159,15 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
                 if (!isOnline()) {
                     Toast.makeText(this.getContext(), "Cek Koneksi Internet Anda", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(g.getBerita()!=null) {
-                        if(!g.getBerita().getStatus()) {
+                    if (g.getBerita() != null) {
+                        if (!g.getBerita().getStatus()) {
                             progressdialog.setMessage("Mohon tunggu...");
                             progressdialog.show();
                             Submit(foto);
-                        }else{
+                        } else {
                             Toast.makeText(this.getContext(), "Data Sudah Diverifikasi Tidak Bisa Di Ubah", Toast.LENGTH_SHORT).show();
                         }
-                    }else{
+                    } else {
                         progressdialog.setMessage("Mohon tunggu...");
                         progressdialog.show();
                         Submit(foto);
@@ -191,18 +196,26 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
+                boolean result = Utility.checkPermission(IdentitasFragment.this.getActivity());
                 if (options[item].equals("Ambil Foto")) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    // Choose file storage location
-                    File file = new File(Environment.getExternalStorageDirectory(), UUID.randomUUID().toString() + ".jpg");
-                    files = file;
-//                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                    namefile = Uri.fromFile(file).getLastPathSegment();
-                    startActivityForResult(intent, 0);
+                    if (result) {
+//                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                        // Choose file storage location
+//                        File file = new File(Environment.getExternalStorageDirectory(), UUID.randomUUID().toString() + ".jpg");
+//                        files = file;
+//                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+//                        namefile = Uri.fromFile(file).getLastPathSegment();
+//                        startActivityForResult(intent, 0);
+                        userChoosenTask = "Take Photo";
+                        if (result)
+                            cameraIntent();
+                    }
                 } else if (options[item].equals("Pilih dari Galeri")) {
-                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, 1);
+//                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                    startActivityForResult(intent, 1);
+                    userChoosenTask = "Choose from Library";
+                    if (result)
+                        galleryIntent();
 
                 } else if (options[item].equals("Batal")) {
                     dialog.dismiss();
@@ -213,32 +226,105 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
         alert.show();
     }
 
+    private void galleryIntent() {
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, SELECT_FILE);
+    }
+
+    private void cameraIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Choose file storage location
+        File file = new File(Environment.getExternalStorageDirectory(), UUID.randomUUID().toString() + ".jpg");
+        files = file;
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        namefile = Uri.fromFile(file).getLastPathSegment();
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0) {
-            if (resultCode == RESULT_OK) {
-
-                foto = Uri.fromFile(files);
-                Picasso.with(IdentitasFragment.this.getContext()).load(files).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
-            } else {
-                Toast.makeText(IdentitasFragment.this.getContext(), "Foto gagal diambil, silahkan coba lagi", Toast.LENGTH_SHORT).show();
-            }
-        } else if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                Cursor cursor = IdentitasFragment.this.getContext().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                cursor.moveToFirst();
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String filePath = cursor.getString(columnIndex);
-                cursor.close();
-                File file = new File(filePath);
-                foto = Uri.fromFile(file);
-                Picasso.with(IdentitasFragment.this.getContext()).load(file).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
-            } else {
-                Toast.makeText(IdentitasFragment.this.getContext(), "Foto gagal dipilih, silahkan coba lagi", Toast.LENGTH_SHORT).show();
-            }
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_FILE)
+                onSelectFromGalleryResult(data);
+            else if (requestCode == REQUEST_CAMERA)
+                onCaptureImageResult(data);
+        } else {
+            Toast.makeText(IdentitasFragment.this.getContext(), "Foto gagal diambil, silahkan coba lagi", Toast.LENGTH_SHORT).show();
         }
+//        if (requestCode == 0) {
+//            if (resultCode == RESULT_OK) {
+//
+//                foto = Uri.fromFile(files);
+////                picKtp = Drawable.createFromPath(foto.getPath());
+//                Picasso.with(BuatberitaFragment.this.getContext()).load(files).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+//            } else {
+//                Toast.makeText(BuatberitaFragment.this.getContext(), "Foto gagal diambil, silahkan coba lagi", Toast.LENGTH_SHORT).show();
+//            }
+//        } else if (requestCode == 1) {
+//            if (resultCode == RESULT_OK) {
+//                Uri selectedImage = data.getData();
+//                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+//                Cursor cursor = BuatberitaFragment.this.getContext().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+//                cursor.moveToFirst();
+//                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//                String filePath = cursor.getString(columnIndex);
+//                cursor.close();
+//                File file = new File(filePath);
+//                foto = Uri.fromFile(file);
+//                Picasso.with(BuatberitaFragment.this.getContext()).load(file).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+//            } else {
+//                Toast.makeText(BuatberitaFragment.this.getContext(), "Foto gagal dipilih, silahkan coba lagi", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+    }
+
+    private void onCaptureImageResult(Intent data) {
+//        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+//        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+
+//        File destination = new File(Environment.getExternalStorageDirectory(),
+//                System.currentTimeMillis() + ".jpg");
+        foto = Uri.fromFile(files);
+
+//        FileOutputStream fo;
+//        try {
+//            destination.createNewFile();
+//            fo = new FileOutputStream(destination);
+//            fo.write(bytes.toByteArray());
+//            fo.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        Picasso.with(IdentitasFragment.this.getContext()).load(files).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+
+        Bitmap bm = null;
+        if (data != null) {
+//            try {
+//                bm = MediaStore.Images.Media.getBitmap(BuatberitaFragment.this.getActivity().getApplicationContext().getContentResolver(), data.getData());
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = IdentitasFragment.this.getContext().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String filePath = cursor.getString(columnIndex);
+            cursor.close();
+            File file = new File(filePath);
+            foto = Uri.fromFile(file);
+            Picasso.with(IdentitasFragment.this.getContext()).load(file).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+        }
+
+
     }
 
     public void Submit(Uri fileUri) {
@@ -277,7 +363,7 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
                                             mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id)).child("identitas").child("id").setValue(userData.getUser_id());
                                             mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(id)).child("identitas").child("bank").setValue(sp.getSelectedItem().toString());
                                         } else {
-                                            if(g.getBerita()!=null){
+                                            if (g.getBerita() != null) {
                                                 userProfile.setRekening(norek.getText().toString());
                                                 userProfile.setKtp(urlgambar);
                                                 mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(g.getBerita().getId())).child("identitas").setValue(userProfile);
@@ -290,8 +376,7 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
                                                 mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getBerita().getId())).child("identitas").setValue(userProfile);
                                                 mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getBerita().getId())).child("identitas").child("id").setValue(userData.getUser_id());
                                                 mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getBerita().getId())).child("identitas").child("bank").setValue(sp.getSelectedItem().toString());
-                                            }
-                                            else {
+                                            } else {
                                                 userProfile.setRekening(norek.getText().toString());
                                                 userProfile.setKtp(urlgambar);
                                                 mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(g.getIdBerita())).child("identitas").setValue(userProfile);
@@ -341,21 +426,18 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    public void setIdentitas(){
+    public void setIdentitas() {
         nama.setText(g.getIdentitas().getNama());
         alamat.setText(g.getIdentitas().getAlamat());
         norek.setText(g.getIdentitas().getRekening());
         notel.setText(g.getIdentitas().getTelepon());
-        if(g.getIdentitas().getBank().equals("BCA")){
+        if (g.getIdentitas().getBank().equals("BCA")) {
             sp.setSelection(0);
-        }
-        else if(g.getIdentitas().getBank().equals("BNI")){
+        } else if (g.getIdentitas().getBank().equals("BNI")) {
             sp.setSelection(1);
-        }
-        else if(g.getIdentitas().getBank().equals("BRI")){
+        } else if (g.getIdentitas().getBank().equals("BRI")) {
             sp.setSelection(2);
-        }
-        else if(g.getIdentitas().getBank().equals("MANDIRI")){
+        } else if (g.getIdentitas().getBank().equals("MANDIRI")) {
             sp.setSelection(3);
         }
         mStorageRef = FirebaseStorage.getInstance().getReference(g.getIdentitas().getKtp());
@@ -366,6 +448,23 @@ public class IdentitasFragment extends Fragment implements View.OnClickListener 
             }
         });
         g.setIdentitasTrue(true);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (userChoosenTask.equals("Ambil Foto"))
+                        cameraIntent();
+                    else if (userChoosenTask.equals("Pilih Dari Galeri"))
+                        galleryIntent();
+                } else {
+//code for deny
+                    Toast.makeText(this.getContext(), "Akses Tidak Diizinkan", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
 
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -53,9 +54,14 @@ import com.studio.pattimura.bukaamal.Model.Berita;
 import com.studio.pattimura.bukaamal.Model.userAuth;
 import com.studio.pattimura.bukaamal.Model.userProfile;
 import com.studio.pattimura.bukaamal.R;
+import com.studio.pattimura.bukaamal.Utility;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -89,6 +95,8 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
     private File files;
     public static TabLayout tabLayout;
     private GalangDana g;
+    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    private String userChoosenTask;
 
     public BuatberitaFragment() {
         // Required empty public constructor
@@ -135,7 +143,7 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
         deadline = (EditText) view.findViewById(R.id.edDeadline);
         deadline.setOnClickListener(this);
 
-        if(g.getBerita()!=null){
+        if (g.getBerita() != null) {
             setBerita();
         }
 
@@ -192,15 +200,15 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
                 if (!isOnline()) {
                     Toast.makeText(this.getContext(), "Cek Koneksi Internet Anda", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(g.getBerita()!=null) {
-                        if(!g.getBerita().getStatus()) {
+                    if (g.getBerita() != null) {
+                        if (!g.getBerita().getStatus()) {
                             progressdialog.setMessage("Mohon tunggu...");
                             progressdialog.show();
                             Submit(foto);
-                        }else{
+                        } else {
                             Toast.makeText(this.getContext(), "Data Sudah Diverifikasi Tidak Bisa Di Ubah", Toast.LENGTH_SHORT).show();
                         }
-                    }else{
+                    } else {
                         progressdialog.setMessage("Mohon tunggu...");
                         progressdialog.show();
                         Submit(foto);
@@ -229,18 +237,26 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
+                boolean result = Utility.checkPermission(BuatberitaFragment.this.getActivity());
                 if (options[item].equals("Ambil Foto")) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    // Choose file storage location
-                    File file = new File(Environment.getExternalStorageDirectory(), UUID.randomUUID().toString() + ".jpg");
-                    files = file;
-//                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                    namefile = Uri.fromFile(file).getLastPathSegment();
-                    startActivityForResult(intent, 0);
+                    if (result) {
+//                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                        // Choose file storage location
+//                        File file = new File(Environment.getExternalStorageDirectory(), UUID.randomUUID().toString() + ".jpg");
+//                        files = file;
+//                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+//                        namefile = Uri.fromFile(file).getLastPathSegment();
+//                        startActivityForResult(intent, 0);
+                        userChoosenTask = "Take Photo";
+                        if (result)
+                            cameraIntent();
+                    }
                 } else if (options[item].equals("Pilih dari Galeri")) {
-                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, 1);
+//                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                    startActivityForResult(intent, 1);
+                    userChoosenTask = "Choose from Library";
+                    if (result)
+                        galleryIntent();
 
                 } else if (options[item].equals("Batal")) {
                     dialog.dismiss();
@@ -251,33 +267,105 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
         alert.show();
     }
 
+    private void galleryIntent() {
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, SELECT_FILE);
+    }
+
+    private void cameraIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Choose file storage location
+        File file = new File(Environment.getExternalStorageDirectory(), UUID.randomUUID().toString() + ".jpg");
+        files = file;
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        namefile = Uri.fromFile(file).getLastPathSegment();
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0) {
-            if (resultCode == RESULT_OK) {
-
-                foto = Uri.fromFile(files);
-//                picKtp = Drawable.createFromPath(foto.getPath());
-                Picasso.with(BuatberitaFragment.this.getContext()).load(files).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
-            } else {
-                Toast.makeText(BuatberitaFragment.this.getContext(), "Foto gagal diambil, silahkan coba lagi", Toast.LENGTH_SHORT).show();
-            }
-        } else if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                Cursor cursor = BuatberitaFragment.this.getContext().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                cursor.moveToFirst();
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String filePath = cursor.getString(columnIndex);
-                cursor.close();
-                File file = new File(filePath);
-                foto = Uri.fromFile(file);
-                Picasso.with(BuatberitaFragment.this.getContext()).load(file).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
-            } else {
-                Toast.makeText(BuatberitaFragment.this.getContext(), "Foto gagal dipilih, silahkan coba lagi", Toast.LENGTH_SHORT).show();
-            }
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_FILE)
+                onSelectFromGalleryResult(data);
+            else if (requestCode == REQUEST_CAMERA)
+                onCaptureImageResult(data);
+        } else {
+            Toast.makeText(BuatberitaFragment.this.getContext(), "Foto gagal diambil, silahkan coba lagi", Toast.LENGTH_SHORT).show();
         }
+//        if (requestCode == 0) {
+//            if (resultCode == RESULT_OK) {
+//
+//                foto = Uri.fromFile(files);
+////                picKtp = Drawable.createFromPath(foto.getPath());
+//                Picasso.with(BuatberitaFragment.this.getContext()).load(files).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+//            } else {
+//                Toast.makeText(BuatberitaFragment.this.getContext(), "Foto gagal diambil, silahkan coba lagi", Toast.LENGTH_SHORT).show();
+//            }
+//        } else if (requestCode == 1) {
+//            if (resultCode == RESULT_OK) {
+//                Uri selectedImage = data.getData();
+//                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+//                Cursor cursor = BuatberitaFragment.this.getContext().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+//                cursor.moveToFirst();
+//                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//                String filePath = cursor.getString(columnIndex);
+//                cursor.close();
+//                File file = new File(filePath);
+//                foto = Uri.fromFile(file);
+//                Picasso.with(BuatberitaFragment.this.getContext()).load(file).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+//            } else {
+//                Toast.makeText(BuatberitaFragment.this.getContext(), "Foto gagal dipilih, silahkan coba lagi", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+    }
+
+    private void onCaptureImageResult(Intent data) {
+//        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+//        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+
+//        File destination = new File(Environment.getExternalStorageDirectory(),
+//                System.currentTimeMillis() + ".jpg");
+        foto = Uri.fromFile(files);
+
+//        FileOutputStream fo;
+//        try {
+//            destination.createNewFile();
+//            fo = new FileOutputStream(destination);
+//            fo.write(bytes.toByteArray());
+//            fo.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        Picasso.with(BuatberitaFragment.this.getContext()).load(files).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+
+        Bitmap bm = null;
+        if (data != null) {
+//            try {
+//                bm = MediaStore.Images.Media.getBitmap(BuatberitaFragment.this.getActivity().getApplicationContext().getContentResolver(), data.getData());
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = BuatberitaFragment.this.getContext().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String filePath = cursor.getString(columnIndex);
+            cursor.close();
+            File file = new File(filePath);
+            foto = Uri.fromFile(file);
+            Picasso.with(BuatberitaFragment.this.getContext()).load(file).resize(imfoto.getWidth(), 500).centerCrop().into(imfoto);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+        }
+
+
     }
 
     public void Submit(Uri fileUri) {
@@ -302,7 +390,7 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
-                                        if(g.getBerita()!=null){
+                                        if (g.getBerita() != null) {
                                             berita = new Berita(g.getBerita().getId(), judul.getText().toString(), deadline.getText().toString(), sp.getSelectedItem().toString(), lokasi.getText().toString(), cerita.getText().toString(), urlgambar, false, false, Long.parseLong(dana.getText().toString()), 0);
                                             mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(g.getBerita().getId())).child("berita").setValue(berita);
                                             g.setBeritaTrue(true);
@@ -311,7 +399,7 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
                                             TabLayout.Tab tab = tabLayout.getTabAt(1);
                                             tab.select();
                                             mDatabase.getReference("admin").child("galang_dana").child("belum_terverifikasi").child(String.valueOf(g.getBerita().getId())).child("berita").setValue(berita);
-                                        }else {
+                                        } else {
                                             long val = dataSnapshot.getChildrenCount();
                                             berita = new Berita(id + val, judul.getText().toString(), deadline.getText().toString(), sp.getSelectedItem().toString(), lokasi.getText().toString(), cerita.getText().toString(), urlgambar, false, false, Long.parseLong(dana.getText().toString()), 0);
                                             mDatabase.getReference("user").child("profil").child(userData.getUser_id()).child("galang_dana").child(String.valueOf(id + val)).child("berita").setValue(berita);
@@ -360,20 +448,17 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    public void setBerita(){
+    public void setBerita() {
         judul.setText(g.getBerita().getJudul());
         dana.setText(String.valueOf(g.getBerita().getDana()));
         deadline.setText(g.getBerita().getDeadline());
-        if(g.getBerita().getKategori().equals("Bencana Alam")){
+        if (g.getBerita().getKategori().equals("Bencana Alam")) {
             sp.setSelection(0);
-        }
-        else if(g.getBerita().getKategori().equals("Penyakit")){
+        } else if (g.getBerita().getKategori().equals("Penyakit")) {
             sp.setSelection(1);
-        }
-        else if(g.getBerita().getKategori().equals("Modal UKM")){
+        } else if (g.getBerita().getKategori().equals("Modal UKM")) {
             sp.setSelection(2);
-        }
-        else if(g.getBerita().getKategori().equals("Yatim Piatu")){
+        } else if (g.getBerita().getKategori().equals("Yatim Piatu")) {
             sp.setSelection(3);
         }
         lokasi.setText(g.getBerita().getLokasi());
@@ -386,11 +471,28 @@ public class BuatberitaFragment extends Fragment implements DatePickerDialog.OnD
             }
         });
         g.setBeritaTrue(true);
-        if (g.getIdentitas()!=null)
+        if (g.getIdentitas() != null)
             g.setIdentitasTrue(true);
 
-        if(g.getBerita().getStatus())
+        if (g.getBerita().getStatus())
             g.setVerifikasiTrue(true);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (userChoosenTask.equals("Ambil Foto"))
+                        cameraIntent();
+                    else if (userChoosenTask.equals("Pilih Dari Galeri"))
+                        galleryIntent();
+                } else {
+//code for deny
+                    Toast.makeText(this.getContext(), "Akses Tidak Diizinkan", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
 
 }
